@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:drawable="@drawable/ic_filter_tilt_shift_red_100dp">
+
+    <target
+        android:name="rotation"
+        android:animation="@animator/animator_loading"/>
+
+</animated-vector>
