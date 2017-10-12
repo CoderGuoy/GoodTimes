@@ -7,16 +7,14 @@ import java.io.File;
 public class Constants {
 
     //================= URL =====================
-    //天狗
-    public static final String TG_URL = "http://www.tngou.net/api/";
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";
     //男神
     public static final String GG_URL = "http://g.xxxiao.com/";
-    //动图
-    public static final String DT_URL = "http://xxxiao.com/";
-    //段子
-    public static final String DZ_URL = "http://nbsw.cc/";
+    //新鲜
+    public static final String XX_URL = "http://nbsw.cc/";
+    //热推
+    public static final String RT_URL = "http://nbsw.cc/?resolved=unresolved";
 
     //================= PATH ====================
 
