@@ -18,7 +18,7 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.databinding.ActivityBaseMvvmBinding;
 import com.coder.guoy.goodtimes.utils.CommonUtils;
 import com.coder.guoy.goodtimes.utils.NetUtils;
-import com.coder.guoy.goodtimes.utils.PerfectClickListener;
+import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 
 

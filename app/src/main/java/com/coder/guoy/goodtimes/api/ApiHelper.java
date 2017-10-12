@@ -3,8 +3,6 @@ package com.coder.guoy.goodtimes.api;
 
 import com.coder.guoy.goodtimes.BuildConfig;
 import com.coder.guoy.goodtimes.Constants;
-import com.coder.guoy.goodtimes.api.bean.GankIoDataBean;
-import com.coder.guoy.goodtimes.utils.RxUtil;
 import com.coder.guoy.goodtimes.utils.SystemUtil;
 
 import java.io.File;
@@ -21,7 +19,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 
 
 /**
@@ -42,7 +39,6 @@ public class ApiHelper {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         apiservices = retrofit.create(ApiServices.class);
-
     }
 
     private void initOkHttpClicent() {
@@ -98,26 +94,10 @@ public class ApiHelper {
     }
 
     public static ApiHelper getInstance(String url) {
-//        if (INSTANCE == null) {
-//            synchronized (ApiHelper.class) {
-//                if (INSTANCE == null) {
         INSTANCE = new ApiHelper(url);
-//                }
-//            }
-//        }
         return INSTANCE;
     }
 
-    /**
-     *
-     * @param type 数据类型
-     * @param pre_page 请求个数
-     * @param page 第几页
-     * @return
-     */
-    public Observable<GankIoDataBean> getGankIoDataBean(String type, int pre_page, int page) {
-        return apiservices.getGankIoData(type, pre_page, page)
-                .compose(RxUtil.<GankIoDataBean>rxSchedulerHelper());
-    }
+
 
 }

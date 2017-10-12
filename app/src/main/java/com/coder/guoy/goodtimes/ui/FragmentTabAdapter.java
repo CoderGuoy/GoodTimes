@@ -1,9 +1,11 @@
-package com.coder.guoy.goodtimes;
+package com.coder.guoy.goodtimes.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
+
+import com.coder.guoy.goodtimes.R;
 
 import java.util.List;
 

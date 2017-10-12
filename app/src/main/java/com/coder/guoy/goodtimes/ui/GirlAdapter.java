@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.api.bean.HomeGirlBean;
+import com.coder.guoy.goodtimes.api.bean.GirlBean;
 import com.coder.guoy.goodtimes.databinding.ItemMenuclassifyBinding;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
@@ -22,13 +22,13 @@ import java.util.List;
  * @CreateTime:
  * @Descrpiton:
  */
-public class MenuClassifyAdapter extends RecyclerView.Adapter {
-    private List<HomeGirlBean> mList;
+public class GirlAdapter extends RecyclerView.Adapter {
+    private List<GirlBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemMenuclassifyBinding binding;
 
-    public MenuClassifyAdapter(Context context, List list) {
+    public GirlAdapter(Context context, List list) {
         mInflater = LayoutInflater.from(context);
         mList = list;
         mContext = context;

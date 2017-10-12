@@ -9,32 +9,32 @@ import android.os.Parcelable;
  * @CreateTime:2017/10/9
  * @Descrpiton:
  */
-public class HomeGirlBean implements Parcelable {
+public class GirlBean implements Parcelable {
     private String linkUrl;
     private String imageUrl;
     private String imgaeTitle;
 
-    public HomeGirlBean(String linkUrl, String imageUrl, String imgaeTitle) {
+    public GirlBean(String linkUrl, String imageUrl, String imgaeTitle) {
         this.linkUrl = linkUrl;
         this.imageUrl = imageUrl;
         this.imgaeTitle = imgaeTitle;
     }
 
-    protected HomeGirlBean(Parcel in) {
+    protected GirlBean(Parcel in) {
         linkUrl = in.readString();
         imageUrl = in.readString();
         imgaeTitle = in.readString();
     }
 
-    public static final Creator<HomeGirlBean> CREATOR = new Creator<HomeGirlBean>() {
+    public static final Creator<GirlBean> CREATOR = new Creator<GirlBean>() {
         @Override
-        public HomeGirlBean createFromParcel(Parcel in) {
-            return new HomeGirlBean(in);
+        public GirlBean createFromParcel(Parcel in) {
+            return new GirlBean(in);
         }
 
         @Override
-        public HomeGirlBean[] newArray(int size) {
-            return new HomeGirlBean[size];
+        public GirlBean[] newArray(int size) {
+            return new GirlBean[size];
         }
     };
 

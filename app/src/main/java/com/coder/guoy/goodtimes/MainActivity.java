@@ -9,6 +9,7 @@ import com.coder.guoy.goodtimes.ui.Fragment1;
 import com.coder.guoy.goodtimes.ui.Fragment2;
 import com.coder.guoy.goodtimes.ui.Fragment3;
 import com.coder.guoy.goodtimes.ui.Fragment4;
+import com.coder.guoy.goodtimes.ui.FragmentTabAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,9 +12,6 @@ import com.coder.guoy.goodtimes.R;
  * @Author:
  * @CreateTime:
  * @Descrpiton:
- * @UpDateAuthor:
- * @UpDateTime:
- * @UpDataWhat:
  */
 public class GlideUtils {
     public static void setImage(String url, ImageView imageview) {

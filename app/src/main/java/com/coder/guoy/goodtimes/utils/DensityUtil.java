@@ -6,9 +6,6 @@ import android.view.ViewGroup;
 import com.coder.guoy.goodtimes.App;
 
 
-/**
- * Created by Administrator on 2015/10/19.
- */
 public class DensityUtil {
 
     /**
