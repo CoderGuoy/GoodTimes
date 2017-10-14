@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -20,13 +21,15 @@
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="center"/>
-
+                android:scaleType="fitCenter"/>
+            <!--centerInside 填充不足-->
+            <!--centerCrop 高度填满了-->
+            <!--center 被剪裁-->
+            <!--fitCenter 不变形-->
             <TextView
                 android:id="@+id/item_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>

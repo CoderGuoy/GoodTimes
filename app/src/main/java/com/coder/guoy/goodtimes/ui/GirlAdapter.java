@@ -1,13 +1,15 @@
 package com.coder.guoy.goodtimes.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.GirlBean;
@@ -42,12 +44,14 @@ public class GirlAdapter extends RecyclerView.Adapter {
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-//        public LinearLayout layout;
+        public TextView textTitle;
+        public CardView cardView;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             imageView = binding.itemImage;
-//            layout = binding.itemLayout;
+            textTitle = binding.itemText;
+            cardView = binding.cardview;
         }
     }
 
@@ -60,8 +64,20 @@ public class GirlAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NormalViewHolder vh = (NormalViewHolder) holder;
-        Log.i("URL", mList.get(position).getImageUrl());
-        GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
+        final String imageUrl = mList.get(position).getImageUrl();
+        //设置图片
+        GlideUtils.setImage(imageUrl, vh.imageView);
+        //设置标题
+        vh.textTitle.setText(mList.get(position).getImgaeTitle());
+        //跳转至详细页
+        vh.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,ImageDeatilActivity.class);
+                intent.putExtra("imageUrl",imageUrl);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
 }
