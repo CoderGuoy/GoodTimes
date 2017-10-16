@@ -64,17 +64,23 @@ public class GirlAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NormalViewHolder vh = (NormalViewHolder) holder;
-        final String imageUrl = mList.get(position).getImageUrl();
         //设置图片
-        GlideUtils.setImage(imageUrl, vh.imageView);
+        final String imageUrl = mList.get(position).getImageUrl();
+        if (imageUrl != null) {
+            GlideUtils.setImage(imageUrl, vh.imageView);
+        }
         //设置标题
-        vh.textTitle.setText(mList.get(position).getImgaeTitle());
+        final String imageTitle = mList.get(position).getImgaeTitle();
+        if (imageTitle != null) {
+            vh.textTitle.setText(imageTitle);
+        }
         //跳转至详细页
         vh.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ImageDeatilActivity.class);
-                intent.putExtra("imageUrl",imageUrl);
+                Intent intent = new Intent(mContext, ImageDeatilActivity.class);
+                intent.putExtra("imageUrl", imageUrl);
+                intent.putExtra("imageTitle", imageTitle);
                 mContext.startActivity(intent);
             }
         });

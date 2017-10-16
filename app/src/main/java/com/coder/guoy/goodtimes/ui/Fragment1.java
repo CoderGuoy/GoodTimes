@@ -55,34 +55,21 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
                 try {
                     Document document = Jsoup.connect(Constants.MM_URL + Constants.NEW + 1).get();
                     //解析方式一
-                    Element imageList = document.getElementById("blog-grid");
-                    Elements imageLists = imageList.getElementsByAttributeValueContaining("class",
-                            "col-lg-4 col-md-4 three-columns post-box");
-                    for (Element imagelist : imageLists) {
-                        Element link = imagelist.select("a[href]").first();
-                        Element img = imagelist.select("img").first();
+//                    Element imageList = document.getElementById("blog-grid");
+//                    Elements imageLists = imageList.getElementsByAttributeValueContaining("class",
+//                            "col-lg-4 col-md-4 three-columns post-box");
+                    //解析方式二
+                    Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
+                    for (Element imageList : imageLists) {
+                        Element link = imageList.select("a[href]").first();
+                        Element img = imageList.select("img").first();
                         String linkUrl = link.attr("abs:href");
                         //图片地址
                         String imgUrl = img.attr("abs:src");
                         //图片标题
-                        String imgaeTitle = imagelist.select(".entry-title").text();
+                        String imgaeTitle = imageList.select(".entry-title").text();
                         list.add(new GirlBean(linkUrl, imgUrl, imgaeTitle));
                     }
-                    //解析方式二
-//                    Elements content = document.getElementsByClass("content");
-//                    Document contentDoc = Jsoup.parse(content.toString());
-//                    Elements contentGrid = contentDoc.getElementsByClass("row content-grid");
-//                    Document contentGridDoc = Jsoup.parse(contentGrid.toString());
-//                    Elements gridList = contentGridDoc.select("col-lg-4 col-md-4 three-columns post-box");
-//                    for (Element imageList : gridList) {
-//                        Document gridListDoc = Jsoup.parse(imageList.toString());
-//                        Element link = imageList.select("a[href]").first();
-//                        Element img = imageList.select("img").first();
-//                        String linkUrl = link.attr("abs:href");
-//                        String imgUrl = img.attr("abs:src");
-//                        String imgaeTitle = gridListDoc.select(".entry-title").text();
-//                        list.add(new GirlBean(linkUrl, imgUrl, imgaeTitle));
-//                    }
                     subscriber.onNext(list);
                 } catch (IOException e) {
                     subscriber.onError(e);
