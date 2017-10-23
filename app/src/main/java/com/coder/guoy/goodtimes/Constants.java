@@ -24,6 +24,8 @@ public class Constants {
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "code" + File.separator + "Menu";
 
+    //HOME
+    public static final String HOME = "page/";
     //最新套图+
     public static final String NEW = "/new/page/";
     //性感美女+
