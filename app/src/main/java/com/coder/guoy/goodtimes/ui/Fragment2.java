@@ -2,12 +2,12 @@ package com.coder.guoy.goodtimes.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 
 import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.api.bean.GirlBean;
+import com.coder.guoy.goodtimes.api.bean.EpisodeBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.Fragment2Binding;
 
@@ -27,9 +27,9 @@ import rx.schedulers.Schedulers;
 
 
 public class Fragment2 extends MvvmBaseFragment<Fragment2Binding> {
-    private List<GirlBean> mList = new ArrayList<>();
-    private StaggeredGridLayoutManager mLayoutManager;
-    private GirlAdapter adapter;
+    private List<EpisodeBean> mList = new ArrayList<>();
+    private LinearLayoutManager mLayoutManager;
+    private EpisodeAdapter adapter;
 
     @Override
     public int setContent() {
@@ -48,27 +48,23 @@ public class Fragment2 extends MvvmBaseFragment<Fragment2Binding> {
     }
 
     private void OpenSex() {
-        final Observable<List<GirlBean>> observable = Observable.create(new Observable.OnSubscribe<List<GirlBean>>() {
+        final Observable<List<EpisodeBean>> observable = Observable.create(new Observable.OnSubscribe<List<EpisodeBean>>() {
             @Override
-            public void call(Subscriber<? super List<GirlBean>> subscriber) {
-                List<GirlBean> list = new ArrayList<>();
+            public void call(Subscriber<? super List<EpisodeBean>> subscriber) {
+                List<EpisodeBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(Constants.XX_URL).get();
-                    //解析方式一
-//                    Element imageList = document.getElementById("blog-grid");
-//                    Elements imageLists = imageList.getElementsByAttributeValueContaining("class",
-//                            "col-lg-4 col-md-4 three-columns post-box");
-                    //解析方式二
-                    Elements imageLists = document.getElementsByClass("site-main");
-                    for (Element imageList : imageLists) {
-//                        Element link = imageList.select("a[href]").first();
-//                        Element img = imageList.select("img").first();
-//                        String linkUrl = link.attr("abs:href");
-//                        //图片地址
-//                        String imgUrl = img.attr("abs:src");
-//                        //图片标题
-                        String imgaeTitle = imageList.select(".entry-content").text();
-                        list.add(new GirlBean("", "", imgaeTitle));
+                    Elements mainLists = document.getElementsByClass("site-main");
+                    Elements articleLists = mainLists.select("article");
+                    for (Element imageList : articleLists) {
+                        String image = imageList.select("img").first().attr("abs:src");
+                        String author = imageList.select(".entry-author").text();
+                        String time = imageList.select(".entry-date").text();
+                        String title = imageList.select(".entry-title").text();
+                        String content = imageList.select(".entry-content").select("p").first().text();
+                        //评论
+//                        String commnet = imageList.select("blockquote").select("p").first().text();
+                        list.add(new EpisodeBean(image, author, title, time, content, ""));
                     }
                     subscriber.onNext(list);
                 } catch (IOException e) {
@@ -77,12 +73,9 @@ public class Fragment2 extends MvvmBaseFragment<Fragment2Binding> {
             }
         });
 
-        Subscriber<List<GirlBean>> subscriber = new Subscriber<List<GirlBean>>() {
+        Subscriber<List<EpisodeBean>> subscriber = new Subscriber<List<EpisodeBean>>() {
             @Override
-            public void onNext(List<GirlBean> beanList) {
-                Log.i("beanListLink2", beanList.get(0).getLinkUrl());
-                Log.i("beanListImage2", beanList.get(0).getImageUrl());
-                Log.i("beanListTitle2", beanList.get(0).getImgaeTitle());
+            public void onNext(List<EpisodeBean> beanList) {
                 mList = beanList;
                 initRecyclerView();
                 showContentView();
@@ -108,8 +101,8 @@ public class Fragment2 extends MvvmBaseFragment<Fragment2Binding> {
 
     // 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new GirlAdapter(getContext(), mList);
-        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        adapter = new EpisodeAdapter(getContext(), mList);
+        mLayoutManager = new LinearLayoutManager(getContext());
         bindingView.recyclerviewList2.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewList2.setAdapter(adapter);
     }

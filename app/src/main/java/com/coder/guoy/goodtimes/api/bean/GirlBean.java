@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * @Version:
  * @Author:Guoy
  * @CreateTime:2017/10/9
- * @Descrpiton:
+ * @Descrpiton:美眉
  */
 public class GirlBean implements Parcelable {
     private String linkUrl;

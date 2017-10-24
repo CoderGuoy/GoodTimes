@@ -21,7 +21,7 @@
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"/>
+                android:scaleType="center"/>
             <!--centerInside 填充不足-->
             <!--centerCrop 高度填满了-->
             <!--center 被剪裁-->
