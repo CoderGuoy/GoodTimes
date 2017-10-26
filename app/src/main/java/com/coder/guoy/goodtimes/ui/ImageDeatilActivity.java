@@ -1,37 +1,60 @@
 package com.coder.guoy.goodtimes.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
-import com.coder.guoy.goodtimes.databinding.ActivityImageDeatilBinding;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
-
-public class ImageDeatilActivity extends MvvmBaseActivity<ActivityImageDeatilBinding> {
+/**
+ * @Version:
+ * @Author:
+ * @CreateTime:
+ * @Descrpiton:图片详情页
+ */
+public class ImageDeatilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //取消标题栏
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //取消状态栏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_image_deatil);
-    }
-
-    @Override
-    protected void getData() {
-        super.getData();
+        transparentStatusBar();
+        setLayoutAnimation();
         initView();
     }
 
+    /**
+     * 透明状态栏
+     */
+    private void transparentStatusBar() {
+        View decorView = getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    /**
+     * 转场动画
+     */
+    private void setLayoutAnimation() {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.activity_image_deatil);
+        AlphaAnimation alpha = new AlphaAnimation(0, 1);
+        alpha.setDuration(300);
+        LayoutAnimationController controller = new LayoutAnimationController(alpha, 0.3f);
+        controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        layout.setLayoutAnimation(controller);
+    }
+
     private void initView() {
+        ImageView image = (ImageView) findViewById(R.id.imageview_detail);
         String imageUrl = getIntent().getStringExtra("imageUrl");
         //设置图片
-        GlideUtils.setImage(imageUrl, bindingView.image);
-        showContentView();
+        GlideUtils.setDetailImage(imageUrl, image);
     }
 }

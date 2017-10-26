@@ -1,8 +1,10 @@
 package com.coder.guoy.goodtimes;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.RadioGroup;
 
 import com.coder.guoy.goodtimes.ui.Fragment1;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        transparentStatusBar();
         mRadioGroup = (RadioGroup) findViewById(R.id.tabs_rg);
         fragments.add(new Fragment1());
         fragments.add(new Fragment2());
@@ -34,5 +37,16 @@ public class MainActivity extends AppCompatActivity {
             public void OnRgsExtraCheckedChanged(RadioGroup radioGroup, int checkedId, int index) {
             }
         });
+    }
+
+    /**
+     * 透明状态栏
+     */
+    private void transparentStatusBar() {
+        View decorView = getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 }

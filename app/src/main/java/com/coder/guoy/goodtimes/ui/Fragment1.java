@@ -30,6 +30,7 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
     private List<GirlBean> mList = new ArrayList<>();
     private StaggeredGridLayoutManager mLayoutManager;
     private GirlAdapter adapter;
+    private int page = 1;
 
     @Override
     public int setContent() {
@@ -44,21 +45,16 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
     @Override
     protected void getData() {
         super.getData();
-        OpenSex();
+        OpenSex(page);
     }
 
-    private void OpenSex() {
+    private void OpenSex(final int page) {
         final Observable<List<GirlBean>> observable = Observable.create(new Observable.OnSubscribe<List<GirlBean>>() {
             @Override
             public void call(Subscriber<? super List<GirlBean>> subscriber) {
                 List<GirlBean> list = new ArrayList<>();
                 try {
-                    Document document = Jsoup.connect(Constants.MM_URL + Constants.NEW + 1).get();
-                    //解析方式一
-//                    Element imageList = document.getElementById("blog-grid");
-//                    Elements imageLists = imageList.getElementsByAttributeValueContaining("class",
-//                            "col-lg-4 col-md-4 three-columns post-box");
-                    //解析方式二
+                    Document document = Jsoup.connect(Constants.MM_URL + Constants.COLLECTION + page).get();
                     Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
                     for (Element imageList : imageLists) {
                         Element link = imageList.select("a[href]").first();

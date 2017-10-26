@@ -20,4 +20,9 @@ public class GlideUtils {
                 .crossFade()                        //渐显动画
                 .into(imageview);
     }
+    public static void setDetailImage(String url, ImageView imageview) {
+        Glide.with(App.getInstance().getApplicationContext()).load(url)
+                .error(R.drawable.loadingfaile)     //加载失败显示的图片
+                .into(imageview);
+    }
 }

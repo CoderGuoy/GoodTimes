@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:background="@color/colorTheme"
         style="@style/MatchMatch">
 
         <android.support.v7.widget.RecyclerView

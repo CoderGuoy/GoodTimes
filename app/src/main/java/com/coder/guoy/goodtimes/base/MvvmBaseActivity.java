@@ -47,7 +47,7 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
         RelativeLayout mContainer = (RelativeLayout) mBaseBinding.getRoot().findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
-        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+//        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 
         // 设置透明状态栏
         StatusBarUtils.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);

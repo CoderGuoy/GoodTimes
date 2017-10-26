@@ -1,8 +1,11 @@
 package com.coder.guoy.goodtimes.ui;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -63,7 +66,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        NormalViewHolder vh = (NormalViewHolder) holder;
+        final NormalViewHolder vh = (NormalViewHolder) holder;
         //设置图片
         final String imageUrl = mList.get(position).getImageUrl();
         if (imageUrl != null) {
@@ -79,9 +82,11 @@ public class GirlAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ImageDeatilActivity.class);
+                Bundle options = ActivityOptions.makeSceneTransitionAnimation(
+                        (Activity) mContext, vh.imageView, "shareimage").toBundle();
                 intent.putExtra("imageUrl", imageUrl);
                 intent.putExtra("imageTitle", imageTitle);
-                mContext.startActivity(intent);
+                mContext.startActivity(intent,options);
             }
         });
     }

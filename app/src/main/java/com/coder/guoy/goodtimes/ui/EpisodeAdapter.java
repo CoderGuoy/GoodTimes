@@ -71,38 +71,36 @@ public class EpisodeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NormalViewHolder vh = (NormalViewHolder) holder;
-        //头像
-        String imageUrl = mList.get(position).getImageIcon();
-        if (imageUrl != null) {
-            GlideUtils.setImage(imageUrl, vh.imageIcon);
-        }
-        //作者
-        String author = mList.get(position).getAuthor();
-        if (author != null) {
-            vh.textAuthor.setText(author);
-        }
-        //时间
-        String time = mList.get(position).getTime();
-        if (time != null) {
-            vh.textTime.setText(time);
-        }
-        //标题
-        String title = mList.get(position).getTitle();
-        if (title != null) {
-            vh.textTitle.setText(title);
-        }
-        //内容
-        String content = mList.get(position).getContent();
-        if (content != null) {
-            vh.textContent.setText(content);
-        }
-        //评论
-        String comment = mList.get(position).getCommnet();
-        if (comment != null) {
-            vh.textComment.setVisibility(View.VISIBLE);
-            vh.textComment.setText(comment);
+        if (position == 0) {
+            vh.cardView.setVisibility(View.GONE);
         } else {
-            vh.textComment.setVisibility(View.GONE);
+            vh.cardView.setVisibility(View.VISIBLE);
+            //头像
+            GlideUtils.setImage(notNull(mList.get(position).getImageIcon()), vh.imageIcon);
+            //作者
+            vh.textAuthor.setText(notNull(mList.get(position).getAuthor()));
+            //时间
+            vh.textTime.setText(notNull(mList.get(position).getTime()));
+            //标题
+            vh.textTitle.setText(notNull(mList.get(position).getTitle()));
+            //内容
+            vh.textContent.setText(notNull(mList.get(position).getContent()));
+            //评论
+            String comment = mList.get(position).getCommnet();
+            if (comment != null) {
+                vh.textComment.setVisibility(View.VISIBLE);
+                vh.textComment.setText(comment);
+            } else {
+                vh.textComment.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private String notNull(String str) {
+        if (str == null) {
+            return "";
+        } else {
+            return str;
         }
     }
 
