@@ -54,16 +54,20 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
             public void call(Subscriber<? super List<GirlBean>> subscriber) {
                 List<GirlBean> list = new ArrayList<>();
                 try {
-                    Document document = Jsoup.connect(Constants.MM_URL + Constants.COLLECTION + page).get();
-                    Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
-                    for (Element imageList : imageLists) {
-                        Element link = imageList.select("a[href]").first();
-                        Element img = imageList.select("img").first();
-                        String linkUrl = link.attr("abs:href");
+                    Document document = Jsoup.connect(Constants.MOB_URl).get();
+                    Elements main_cont = document.getElementsByClass("main_cont");
+                    Document parse = Jsoup.parse(main_cont.toString());
+//                    Elements imageLists = parse.getElementsByClass("pic-meinv");
+                    Elements imageLists = parse.getElementsByClass("scroll-img-cont scroll-img-cont02");
+                    Document leftBar = Jsoup.parse(imageLists.toString());
+                    Elements li = leftBar.select("li");
+                    for (Element imageList : li) {
+                        //详细页连接
+                        String linkUrl = imageList.select("a").first().attr("href");
                         //图片地址
-                        String imgUrl = img.attr("abs:src");
+                        String imgUrl = imageList.select("img").first().attr("src");
                         //图片标题
-                        String imgaeTitle = imageList.select(".entry-title").text();
+                        String imgaeTitle = imageList.select("p").text();
                         list.add(new GirlBean(linkUrl, imgUrl, imgaeTitle));
                     }
                     subscriber.onNext(list);
@@ -76,9 +80,9 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
         Subscriber<List<GirlBean>> subscriber = new Subscriber<List<GirlBean>>() {
             @Override
             public void onNext(List<GirlBean> beanList) {
-                Log.i("beanListLink", beanList.get(0).getLinkUrl());
-                Log.i("beanListImage", beanList.get(0).getImageUrl());
-                Log.i("beanListTitle", beanList.get(0).getImgaeTitle());
+                Log.i("linkUrl", beanList.get(0).getLinkUrl());
+                Log.i("imgUrl", beanList.get(0).getImageUrl());
+                Log.i("imgaeTitle", beanList.get(0).getImgaeTitle());
                 mList = beanList;
                 initRecyclerView();
                 showContentView();

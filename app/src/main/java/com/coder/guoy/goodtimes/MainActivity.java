@@ -1,42 +1,46 @@
 package com.coder.guoy.goodtimes;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.RadioGroup;
 
-import com.coder.guoy.goodtimes.ui.Fragment1;
-import com.coder.guoy.goodtimes.ui.Fragment2;
-import com.coder.guoy.goodtimes.ui.Fragment3;
-import com.coder.guoy.goodtimes.ui.Fragment4;
-import com.coder.guoy.goodtimes.ui.FragmentTabAdapter;
+import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
+import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
+import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
+import com.coder.guoy.goodtimes.utils.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
-    private RadioGroup mRadioGroup;
-    public List<Fragment> fragments = new ArrayList<Fragment>();
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
-        mRadioGroup = (RadioGroup) findViewById(R.id.tabs_rg);
-        fragments.add(new Fragment1());
-        fragments.add(new Fragment2());
-        fragments.add(new Fragment3());
-        fragments.add(new Fragment4());
+        initView();
+        initDrawerlayout();
+    }
 
-        FragmentTabAdapter tabAdapter = new FragmentTabAdapter(this, fragments, R.id.tab_content, mRadioGroup);
-        tabAdapter.setOnRgsExtraCheckedChangedListener(new FragmentTabAdapter.OnRgsExtraCheckedChangedListener() {
-            @Override
-            public void OnRgsExtraCheckedChanged(RadioGroup radioGroup, int checkedId, int index) {
-            }
-        });
+    private void initView() {
+        binding.flTitleMenu.setOnClickListener(this);
+        binding.collapsingtollbar.setStatusBarScrimColor(0);
+    }
+
+    /**
+     * 初始化侧拉菜单
+     */
+    private void initDrawerlayout() {
+        View headerView = binding.navigationview.getHeaderView(0);
+        NavigationHeaderBinding bind = DataBindingUtil.bind(headerView);
+        bind.llNavVideo.setOnClickListener(listener);
+        bind.llNav2.setOnClickListener(listener);
+        bind.llNav3.setOnClickListener(listener);
+        bind.llNav4.setOnClickListener(listener);
+        bind.llNav5.setOnClickListener(listener);
     }
 
     /**
@@ -49,4 +53,42 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(option);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fl_title_menu:// 开启菜单
+                binding.drawerlayout.openDrawer(GravityCompat.START);
+                break;
+        }
+    }
+
+    private PerfectClickListener listener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(final View v) {
+            binding.drawerlayout.closeDrawer(GravityCompat.START);
+            binding.drawerlayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    switch (v.getId()) {
+                        case R.id.ll_nav_video:
+                            ToastUtil.show("敬请期待");
+                            break;
+                        case R.id.ll_nav_2:
+                            ToastUtil.show("敬请期待");
+                            break;
+                        case R.id.ll_nav_3:
+                            ToastUtil.show("敬请期待");
+                            break;
+                        case R.id.ll_nav_4:
+                            ToastUtil.show("敬请期待");
+                            break;
+                        case R.id.ll_nav_5:
+                            ToastUtil.show("敬请期待");
+                            break;
+                    }
+                }
+            }, 260);
+        }
+    };
 }

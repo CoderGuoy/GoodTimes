@@ -7,6 +7,8 @@ import java.io.File;
 public class Constants {
 
     //================= URL =====================
+    //电脑主题之家
+    public static final String MOB_URl = "http://www.win4000.com/mobile_detail_136941.html";
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";
     //男神

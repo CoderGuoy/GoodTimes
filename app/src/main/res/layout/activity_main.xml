@@ -1,63 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        style="@style/MatchMatch.Vertical"
-        android:background="@android:color/white"
-        tools:context="com.bonc.fragmenttabhost.MainActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            style="@style/MatchMatch.Vertical">
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawerlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
-            <FrameLayout
-                android:id="@+id/tab_content"
-                style="@style/MatchAuto"
-                />
-
-            <TextView
+            <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:background="#cbcbcb"/>
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true">
 
-            <RadioGroup
-                android:id="@+id/tabs_rg"
+                <android.support.design.widget.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true">
+
+                    <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/collapsingtollbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        app:contentScrim="@color/blue"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/model03"
+                            app:layout_collapseMode="parallax"/>
+
+                        <android.support.v7.widget.Toolbar
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            app:contentInsetStart="0dp"
+                            app:layout_collapseMode="pin"
+                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                            <FrameLayout
+                                android:id="@+id/fl_title_menu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:background="?android:selectableItemBackground"
+                                android:paddingLeft="18dp"
+                                android:paddingRight="18dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_title_menu"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/titlebar_menu"/>
+                            </FrameLayout>
+
+                            <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="@string/app_name"-->
+                            <!--android:textColor="@color/colorWrite"-->
+                            <!--android:textSize="18sp"/>-->
+                        </android.support.v7.widget.Toolbar>
+
+                    </android.support.design.widget.CollapsingToolbarLayout>
+                </android.support.design.widget.AppBarLayout>
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text"
+                        android:textSize="22sp"/>
+
+                </android.support.v4.widget.NestedScrollView>
+            </android.support.design.widget.CoordinatorLayout>
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/navigationview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:layout_marginTop="6dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="4">
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                app:headerLayout="@layout/navigation_header"/>
 
-                <RadioButton
-                    android:id="@+id/rb_government"
-                    style="@style/Botton_Tab_Style"
-                    android:checked="true"
-                    android:drawableTop="@drawable/tab1"
-                    android:text="@string/Tab1"/>
-
-                <RadioButton
-                    android:id="@+id/rb_resource"
-                    style="@style/Botton_Tab_Style"
-                    android:drawableTop="@drawable/tab2"
-                    android:text="@string/Tab2"/>
-
-                <RadioButton
-                    android:id="@+id/rb_advice"
-                    style="@style/Botton_Tab_Style"
-                    android:drawableTop="@drawable/tab3"
-                    android:text="@string/Tab3"/>
-
-                <RadioButton
-                    android:id="@+id/rb_internet"
-                    style="@style/Botton_Tab_Style"
-                    android:drawableTop="@drawable/tab4"
-                    android:text="@string/Tab4"/>
-            </RadioGroup>
-
-        </LinearLayout>
+        </android.support.v4.widget.DrawerLayout>
     </LinearLayout>
-
-
 </layout>

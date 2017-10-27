@@ -52,18 +52,11 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
                 List<GirlBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(Constants.MM_URL + Constants.XINGGAN + 1).get();
-                    //解析方式一
-//                    Element imageList = document.getElementById("blog-grid");
-//                    Elements imageLists = imageList.getElementsByAttributeValueContaining("class",
-//                            "col-lg-4 col-md-4 three-columns post-box");
-                    //解析方式二
                     Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
                     for (Element imageList : imageLists) {
-                        Element link = imageList.select("a[href]").first();
-                        Element img = imageList.select("img").first();
-                        String linkUrl = link.attr("abs:href");
+                        String linkUrl = imageList.select("a").first().attr("href");
                         //图片地址
-                        String imgUrl = img.attr("abs:src");
+                        String imgUrl = imageList.select("img").first().attr("src");
                         //图片标题
                         String imgaeTitle = imageList.select(".entry-title").text();
                         list.add(new GirlBean(linkUrl, imgUrl, imgaeTitle));
