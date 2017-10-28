@@ -1,10 +1,13 @@
 package com.coder.guoy.goodtimes;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.view.View;
 
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
@@ -27,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         binding.flTitleMenu.setOnClickListener(this);
-        binding.collapsingtollbar.setStatusBarScrimColor(0);
+        binding.imageHome.setImageResource(R.drawable.model03);
+        getBitmapColor();
     }
 
     /**
@@ -54,6 +58,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
+    /**
+     * Palette从图片(Bitmap)中提取颜色
+     */
+    private void getBitmapColor() {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.model03);
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                int color = 0;
+                Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
+                if (lightVibrantSwatch != null) {
+                    //获取有活力的亮色 颜色
+                    color = lightVibrantSwatch.getRgb();
+                }else {
+                    //获取有活力的 颜色
+                    color = vibrantSwatch.getRgb();
+                }
+                binding.collapsingtollbar.setContentScrimColor(color);
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
