@@ -21,7 +21,7 @@ import java.util.List;
  * @Version:
  * @Author:
  * @CreateTime:
- * @Descrpiton:
+ * @Descrpiton:段子
  */
 public class EpisodeAdapter extends RecyclerView.Adapter {
     private List<EpisodeBean> mList;

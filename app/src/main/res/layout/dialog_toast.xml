@@ -3,9 +3,7 @@
     android:id="@+id/tv_toast_msg"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:maxWidth="200dp"
     android:background="@drawable/dialog_toast_bg"
     android:gravity="center"
-    android:padding="8dp"
-    android:textColor="#ffffff"
-    android:textSize="14sp" />
+    android:padding="10dp"
+    android:textColor="#fff" />
