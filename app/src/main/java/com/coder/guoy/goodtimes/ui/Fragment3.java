@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.api.bean.GirlBean;
+import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.Fragment3Binding;
 
@@ -27,9 +27,9 @@ import rx.schedulers.Schedulers;
 
 
 public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
-    private List<GirlBean> mList = new ArrayList<>();
+    private List<ImageBean> mList = new ArrayList<>();
     private StaggeredGridLayoutManager mLayoutManager;
-    private GirlAdapter adapter;
+    private HomeImageAdapter adapter;
     @Override
     public int setContent() {
         return R.layout.fragment_3;
@@ -46,10 +46,10 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
     }
 
     private void OpenSex() {
-        final Observable<List<GirlBean>> observable = Observable.create(new Observable.OnSubscribe<List<GirlBean>>() {
+        final Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
-            public void call(Subscriber<? super List<GirlBean>> subscriber) {
-                List<GirlBean> list = new ArrayList<>();
+            public void call(Subscriber<? super List<ImageBean>> subscriber) {
+                List<ImageBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(Constants.MM_URL + Constants.XINGGAN + 1).get();
                     Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
@@ -59,7 +59,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
                         String imgUrl = imageList.select("img").first().attr("src");
                         //图片标题
                         String imgaeTitle = imageList.select(".entry-title").text();
-                        list.add(new GirlBean(linkUrl, imgUrl, imgaeTitle));
+                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
                     }
                     subscriber.onNext(list);
                 } catch (IOException e) {
@@ -68,9 +68,9 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
             }
         });
 
-        Subscriber<List<GirlBean>> subscriber = new Subscriber<List<GirlBean>>() {
+        Subscriber<List<ImageBean>> subscriber = new Subscriber<List<ImageBean>>() {
             @Override
-            public void onNext(List<GirlBean> beanList) {
+            public void onNext(List<ImageBean> beanList) {
                 Log.i("beanListLink", beanList.get(0).getLinkUrl());
                 Log.i("beanListImage", beanList.get(0).getImageUrl());
                 Log.i("beanListTitle", beanList.get(0).getImgaeTitle());
@@ -99,7 +99,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
 
     // 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new GirlAdapter(getContext(), mList);
+        adapter = new HomeImageAdapter(getContext(), mList);
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         bindingView.recyclerviewList3.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewList3.setAdapter(adapter);

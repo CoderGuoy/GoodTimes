@@ -20,6 +20,8 @@
     <color name="colorTabText">#585858</color>
     <!--白色-->
     <color name="colorWrite">#ffffff</color>
+    <!--黑色-->
+    <color name="colorBlack">#000000</color>
     <color name="color_333">#333</color>
 
 

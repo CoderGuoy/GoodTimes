@@ -6,9 +6,11 @@ import java.io.File;
 
 public class Constants {
 
-    //================= URL =====================
-    //电脑主题之家
-    public static final String MOB_URl = "http://www.win4000.com/mobile_detail_136941.html";
+    //================= 电脑主题之家URL =====================
+    public static final String BASE_URl = "http://www.win4000.com/";
+    //首页
+    public static final String HOME = BASE_URl + "retu.html";
+    //=================  =====================
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";
     //男神
@@ -17,19 +19,10 @@ public class Constants {
     public static final String XX_URL = "http://nbsw.cc/";
     //热推
     public static final String RT_URL = "http://nbsw.cc/?resolved=unresolved";
-
-    //================= PATH ====================
-
-    public static final String PATH_DATA = App.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
-
-    public static final String PATH_CACHE = PATH_DATA + "/NetCache";
-
-    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "code" + File.separator + "Menu";
-
     //HOME
-    public static final String HOME = "page/";
+//    public static final String HOME = "page/";
     //最新套图+
-    public static final String NEW = "/new/page/";
+//    public static final String NEW = "/new/page/";
     //性感美女+
     public static final String XINGGAN = "/cat/xinggan/page/";
     //少女萝莉+
@@ -52,4 +45,11 @@ public class Constants {
     public static final String MLXN = "/cat/2/page/";
     //花美鲜肉+
     public static final String HMXR = "/cat/3/page/";
+    //================= PATH ====================
+
+    public static final String PATH_DATA = App.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
+
+    public static final String PATH_CACHE = PATH_DATA + "/NetCache";
+
+    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "code" + File.separator + "Menu";
 }

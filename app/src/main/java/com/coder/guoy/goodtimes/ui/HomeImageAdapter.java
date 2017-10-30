@@ -15,25 +15,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.api.bean.GirlBean;
-import com.coder.guoy.goodtimes.databinding.ItemMenuclassifyBinding;
+import com.coder.guoy.goodtimes.api.bean.ImageBean;
+import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
 
 /**
- * @Version:
- * @Author:
- * @CreateTime:
- * @Descrpiton:
+ * @Version:V1.0
+ * @Author:CoderGuoy
+ * @CreateTime:2017年10月30日
+ * @Descrpiton:首页图片
  */
-public class GirlAdapter extends RecyclerView.Adapter {
-    private List<GirlBean> mList;
+public class HomeImageAdapter extends RecyclerView.Adapter {
+    private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
-    private ItemMenuclassifyBinding binding;
+    private ItemHomeBinding binding;
 
-    public GirlAdapter(Context context, List list) {
+    public HomeImageAdapter(Context context, List list) {
         mInflater = LayoutInflater.from(context);
         mList = list;
         mContext = context;
@@ -42,7 +42,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return mList.size();
+        return 4;
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
@@ -60,7 +60,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(mInflater, R.layout.item_menuclassify, parent, false);
+        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home, parent, false);
         return new NormalViewHolder(binding.getRoot());
     }
 
@@ -68,14 +68,12 @@ public class GirlAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final NormalViewHolder vh = (NormalViewHolder) holder;
         //设置图片
-        final String imageUrl = mList.get(position).getImageUrl();
-        if (imageUrl != null) {
-            GlideUtils.setImage(imageUrl, vh.imageView);
+        if (mList.get(position).getImageUrl() != null) {
+            GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
         }
         //设置标题
-        final String imageTitle = mList.get(position).getImgaeTitle();
-        if (imageTitle != null) {
-            vh.textTitle.setText(imageTitle);
+        if (mList.get(position).getImgaeTitle() != null) {
+            vh.textTitle.setText(mList.get(position).getImgaeTitle());
         }
         //跳转至详细页
         vh.cardView.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +82,8 @@ public class GirlAdapter extends RecyclerView.Adapter {
                 Intent intent = new Intent(mContext, ImageDeatilActivity.class);
                 Bundle options = ActivityOptions.makeSceneTransitionAnimation(
                         (Activity) mContext, vh.imageView, "shareimage").toBundle();
-                intent.putExtra("imageUrl", imageUrl);
-                intent.putExtra("imageTitle", imageTitle);
+                intent.putExtra("imageUrl", mList.get(position).getImageUrl());
+                intent.putExtra("imageTitle", mList.get(position).getImgaeTitle());
                 mContext.startActivity(intent,options);
             }
         });
