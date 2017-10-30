@@ -10,6 +10,7 @@ public class Constants {
     public static final String BASE_URl = "http://www.win4000.com/";
     //首页
     public static final String HOME = BASE_URl + "retu.html";
+    public static final String ANIME = BASE_URl + "wallpaper_192_0_0_1.html";
     //=================  =====================
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";

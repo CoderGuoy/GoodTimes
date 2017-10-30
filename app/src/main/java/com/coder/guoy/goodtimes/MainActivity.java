@@ -18,6 +18,7 @@ import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.HomeImageAdapter;
+import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
 import org.jsoup.Jsoup;
@@ -34,6 +35,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.coder.guoy.goodtimes.Constants.ANIME;
+import static com.coder.guoy.goodtimes.Constants.HOME;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
     //最新图片
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int festivalPage = 1;
     //旅游图片
     private int tourismPage = 4;
+    private String imageUrl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +59,100 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getNetData(Constants.HOME, newPage, binding.recyclerviewNew);
-        getNetData(Constants.HOME, moviePage, binding.recyclerviewMovie);
-        getNetData(Constants.HOME, makeUpsPage, binding.recyclerviewMakeups);
-        getNetData(Constants.HOME, festivalPage, binding.recyclerviewFestival);
-        getNetData(Constants.HOME, tourismPage, binding.recyclerviewTourism);
+        getBannerNetData(ANIME);
+        getNetData(HOME, newPage, binding.recyclerviewNew);
+        getNetData(HOME, moviePage, binding.recyclerviewMovie);
+        getNetData(HOME, makeUpsPage, binding.recyclerviewMakeups);
+        getNetData(HOME, festivalPage, binding.recyclerviewFestival);
+        getNetData(HOME, tourismPage, binding.recyclerviewTourism);
+    }
+
+    // TODO: 透明状态栏
+    private void transparentStatusBar() {
+        View decorView = getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     private void initView() {
         initDrawerlayout();
         binding.flTitleMenu.setOnClickListener(this);
-        binding.imageHome.setImageResource(R.drawable.model03);
-        getBitmapColor();
+    }
+
+    // TODO: 初始化侧拉菜单
+    private void initDrawerlayout() {
+        View headerView = binding.navigationview.getHeaderView(0);
+        NavigationHeaderBinding bind = DataBindingUtil.bind(headerView);
+        bind.llNavVideo.setOnClickListener(listener);
+        bind.llNav2.setOnClickListener(listener);
+        bind.llNav3.setOnClickListener(listener);
+        bind.llNav4.setOnClickListener(listener);
+        bind.llNav5.setOnClickListener(listener);
+    }
+
+    private void getBannerNetData(final String url) {
+        Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
+            @Override
+            public void call(Subscriber<? super List<ImageBean>> subscriber) {
+                List<ImageBean> list = new ArrayList<>();
+                try {
+                    Document document = Jsoup.connect(url).get();
+                    Elements main_cont = document.getElementsByClass("main_cont");
+                    Document parse = Jsoup.parse(main_cont.toString());
+                    Elements imageLists = parse.getElementsByClass("Left_bar");
+                    Elements li = imageLists.select("li");
+                    for (Element imageList : li) {
+                        //详细页连接
+                        String linkUrl = imageList.select("a").first().attr("href");
+
+                        //图片标题
+                        String imgaeTitle = imageList.select("p").text();
+
+                        Document document2 = Jsoup.connect(linkUrl).get();
+                        Elements main_cont2 = document2.getElementsByClass("pic_main");
+                        Document parse2 = Jsoup.parse(main_cont2.toString());
+                        Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
+                        //图片地址
+                        String imgUrl = imageLists2.select("img").first().attr("src");
+
+                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                    }
+                    subscriber.onNext(list);
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ImageBean>>() {
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+                        if (beanList.get(0).getImageUrl() != null) {
+                            imageUrl = beanList.get(0).getImageUrl();
+//                            GlideUtils.setImage(beanList.get(0).getImageUrl(), binding.imageHome);
+//                            getBitmapColor(beanList.get(0).getImageUrl());
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        GlideUtils.setImage(imageUrl, binding.imageHome);
+                        getBitmapColor(imageUrl);
+                        Log.i("onCompleted", "完成");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("onError:BannerNetData_", e.toString());
+                    }
+
+                });
     }
     //TODO: 获取网络数据
 
@@ -102,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
                     }
                     subscriber.onNext(list);
+                    subscriber.onCompleted();
                 } catch (IOException e) {
                     subscriber.onError(e);
                 }
@@ -124,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("onError", e.toString());
+                        Log.i("onError:NetData_", e.toString());
                     }
 
                 });
@@ -144,29 +232,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setNestedScrollingEnabled(false);
     }
 
-    // TODO: 初始化侧拉菜单
-    private void initDrawerlayout() {
-        View headerView = binding.navigationview.getHeaderView(0);
-        NavigationHeaderBinding bind = DataBindingUtil.bind(headerView);
-        bind.llNavVideo.setOnClickListener(listener);
-        bind.llNav2.setOnClickListener(listener);
-        bind.llNav3.setOnClickListener(listener);
-        bind.llNav4.setOnClickListener(listener);
-        bind.llNav5.setOnClickListener(listener);
-    }
-
-    // TODO: 透明状态栏
-    private void transparentStatusBar() {
-        View decorView = getWindow().getDecorView();
-        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        decorView.setSystemUiVisibility(option);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
-
-    // TODO: Palette从图片(Bitmap)中提取颜色
-    private void getBitmapColor() {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.model03);
+    // TODO: Palette从图片(Bitmap)中提取颜色(加载网络图片未成功)
+    private void getBitmapColor(String url) {
+        Bitmap bitmap = BitmapFactory.decodeFile(url);
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
