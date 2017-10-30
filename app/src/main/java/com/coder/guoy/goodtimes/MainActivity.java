@@ -72,14 +72,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (lightVibrantSwatch != null) {
                     //获取有活力的亮色 颜色
                     color = lightVibrantSwatch.getRgb();
-                }else {
+                } else {
                     //获取有活力的 颜色
                     color = vibrantSwatch.getRgb();
                 }
                 binding.collapsingtollbar.setContentScrimColor(color);
+                binding.textModel1.setTextColor(color);
+                binding.textModel1More.setBackgroundColor(color);
+                binding.textModel2.setTextColor(color);
+                binding.textModel2More.setBackgroundColor(color);
+                binding.textModel3.setTextColor(color);
+                binding.textModel3More.setBackgroundColor(color);
+                binding.textModel4.setTextColor(color);
+                binding.textModel4More.setBackgroundColor(color);
+                binding.textModel5.setTextColor(color);
+                binding.textModel5More.setBackgroundColor(color);
+
             }
         });
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
