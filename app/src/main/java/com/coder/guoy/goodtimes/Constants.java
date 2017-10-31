@@ -8,6 +8,7 @@ public class Constants {
 
     //================= 电脑主题之家URL =====================
     public static final String BASE_URl = "http://www.win4000.com/";
+    public static final String IMG_URl = "http://pic1.win4000.com/";
     //首页
     public static final String HOME = BASE_URl + "retu.html";
     public static final String ANIME = BASE_URl + "wallpaper_192_0_0_1.html";
@@ -52,5 +53,5 @@ public class Constants {
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
 
-    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "code" + File.separator + "Menu";
+    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "GoodTimes" + File.separator + "Menu";
 }

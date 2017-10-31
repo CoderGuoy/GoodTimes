@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.coder.guoy.goodtimes.api.ApiHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
@@ -30,13 +31,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 import static com.coder.guoy.goodtimes.Constants.ANIME;
 import static com.coder.guoy.goodtimes.Constants.HOME;
+import static com.coder.guoy.goodtimes.Constants.IMG_URl;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.llNav5.setOnClickListener(listener);
     }
 
+    // TODO: 为Banner图获取网络图片
     private void getBannerNetData(final String url) {
         Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
@@ -135,16 +140,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onNext(List<ImageBean> beanList) {
                         if (beanList.get(0).getImageUrl() != null) {
                             imageUrl = beanList.get(0).getImageUrl();
-//                            GlideUtils.setImage(beanList.get(0).getImageUrl(), binding.imageHome);
-//                            getBitmapColor(beanList.get(0).getImageUrl());
                         }
                     }
 
                     @Override
                     public void onCompleted() {
                         GlideUtils.setImage(imageUrl, binding.imageHome);
-                        getBitmapColor(imageUrl);
-                        Log.i("onCompleted", "完成");
+                        downloadPic(imageUrl);
+                        Log.i("onCompeted", "完成");
                     }
 
                     @Override
@@ -154,6 +157,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 });
     }
+
+    // TODO: 将输入流解码为位图
+    private void downloadPic(String url) {
+        //截取解析的URL地址，拼接后再使用
+        String picName = url.substring(24, url.length());
+        ApiHelper.getInstance(IMG_URl).downloadPic(picName)
+                .subscribeOn(Schedulers.newThread())
+                .map(new Func1<ResponseBody, Bitmap>() {
+                    @Override
+                    public Bitmap call(ResponseBody responseBody) {
+                        return BitmapFactory.decodeStream(responseBody.byteStream());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Bitmap>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Bitmap bitmap) {
+                        getBitmapColor(bitmap);
+                    }
+                });
+    }
+
+    // TODO: Palette从图片(Bitmap)中提取颜色
+    private void getBitmapColor(Bitmap bitmap) {
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                int color = 0;
+                Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
+                if (lightVibrantSwatch != null) {
+                    //获取有活力的亮色 颜色
+                    color = lightVibrantSwatch.getRgb();
+                } else {
+                    //获取有活力的 颜色
+                    color = vibrantSwatch.getRgb();
+                }
+                binding.collapsingtollbar.setContentScrimColor(color);
+                binding.textModel1.setTextColor(color);
+                binding.textModel1More.setBackgroundColor(color);
+                binding.textModel2.setTextColor(color);
+                binding.textModel2More.setBackgroundColor(color);
+                binding.textModel3.setTextColor(color);
+                binding.textModel3More.setBackgroundColor(color);
+                binding.textModel4.setTextColor(color);
+                binding.textModel4More.setBackgroundColor(color);
+                binding.textModel5.setTextColor(color);
+                binding.textModel5More.setBackgroundColor(color);
+            }
+        });
+    }
+
     //TODO: 获取网络数据
 
     /**
@@ -230,37 +295,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
-    }
-
-    // TODO: Palette从图片(Bitmap)中提取颜色(加载网络图片未成功)
-    private void getBitmapColor(String url) {
-        Bitmap bitmap = BitmapFactory.decodeFile(url);
-        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
-                int color = 0;
-                Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
-                if (lightVibrantSwatch != null) {
-                    //获取有活力的亮色 颜色
-                    color = lightVibrantSwatch.getRgb();
-                } else {
-                    //获取有活力的 颜色
-                    color = vibrantSwatch.getRgb();
-                }
-                binding.collapsingtollbar.setContentScrimColor(color);
-                binding.textModel1.setTextColor(color);
-                binding.textModel1More.setBackgroundColor(color);
-                binding.textModel2.setTextColor(color);
-                binding.textModel2More.setBackgroundColor(color);
-                binding.textModel3.setTextColor(color);
-                binding.textModel3More.setBackgroundColor(color);
-                binding.textModel4.setTextColor(color);
-                binding.textModel4More.setBackgroundColor(color);
-                binding.textModel5.setTextColor(color);
-                binding.textModel5More.setBackgroundColor(color);
-            }
-        });
     }
 
     @Override
