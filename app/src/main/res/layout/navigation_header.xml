@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -12,33 +13,53 @@
             android:background="@color/colorPageBg"
             android:orientation="vertical">
             <!--头布局-->
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:background="@drawable/model03"
-                android:gravity="bottom"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:paddingLeft="16dp">
-
+                android:layout_height="180dp">
 
                 <ImageView
                     android:id="@+id/image_head"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/head"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
 
-                <TextView
-                    android:id="@+id/textview_message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/MOTTO"
-                    android:textColor="@color/colorPageBg"
-                    android:textSize="17sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp">
 
-            </LinearLayout>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="2dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="true">
+
+                        <ImageView
+                            android:id="@+id/image_logo"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/logo"/>
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textview_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/Logo_text"
+                        android:textColor="@color/colorPageBg"
+                        android:textSize="17sp"/>
+
+                </LinearLayout>
+            </FrameLayout>
             <!--菜单布局-->
             <LinearLayout
                 android:id="@+id/ll_nav_video"

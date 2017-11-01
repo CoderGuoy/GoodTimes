@@ -2,14 +2,16 @@ package com.coder.guoy.goodtimes.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.FragmentHomeBinding;
+import com.coder.guoy.goodtimes.utils.RxBus;
+import com.coder.guoy.goodtimes.utils.RxBusBaseMessage;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,14 +25,31 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+
+import static com.coder.guoy.goodtimes.Constants.BASE_URl;
+import static com.coder.guoy.goodtimes.Constants.Home_Color;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ_JSBZ;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ_QCBZ;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ_YXBZ;
 
 
 public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
-    private List<ImageBean> mList = new ArrayList<>();
-    private StaggeredGridLayoutManager mLayoutManager;
-    private HomeImageAdapter adapter;
-    private int page = 1;
+    private String classType1 = "list_cont list_cont1 w1180";
+    private String classType2 = "list_cont list_cont2 w1180";
+    private String classType3 = "list_cont Left_list_cont";
+    private String imageType1 = "src";
+    private String imageType2 = "url";
+    private int Page0 = 0;
+    private int Page1 = 1;
+    private int Page2 = 2;
+    private int Page3 = 3;
+    private int Page4 = 4;
+    private int Page5 = 5;
+    private int Page6 = 6;
 
     @Override
     public int setContent() {
@@ -40,77 +59,132 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+    private void initData() {
+        RxBus.getDefault().toObservable(Home_Color, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage rxBusBaseMessage) {
+                        int color = (int) rxBusBaseMessage.getObject();
+                        bindingView.textModel1.setTextColor(color);
+                        bindingView.textModel1More.setBackgroundColor(color);
+                        bindingView.textModel2.setTextColor(color);
+                        bindingView.textModel2More.setBackgroundColor(color);
+                        bindingView.textModel3.setTextColor(color);
+                        bindingView.textModel3More.setBackgroundColor(color);
+                        bindingView.textModel4.setTextColor(color);
+                        bindingView.textModel4More.setBackgroundColor(color);
+                        bindingView.textModel5.setTextColor(color);
+                        bindingView.textModel5More.setBackgroundColor(color);
+                        bindingView.textModel6.setTextColor(color);
+                        bindingView.textModel6More.setBackgroundColor(color);
+                    }
+                });
     }
 
     @Override
     protected void getData() {
         super.getData();
-        OpenSex();
+        //精彩推荐
+        getNetData(BASE_URl, Page0, classType1, imageType1, bindingView.recyclerviewModel1);
+        //最新
+        getNetData(ZMBZ, Page0, classType1, imageType1, bindingView.recyclerviewModel2);
+        //游戏
+        getNetData(ZMBZ_YXBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel3);
+        //卡通
+        getNetData(ZMBZ_KTDM, Page0, classType3, imageType1, bindingView.recyclerviewModel4);
+        //军事
+        getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel5);
+        //汽车
+        getNetData(ZMBZ_QCBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel6);
     }
 
-    private void OpenSex() {
-        final Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
+//TODO: 获取网络数据
+
+    /**
+     * @param url          连接地址
+     * @param position     页面中数据源条目位置
+     * @param recyclerView 对应的控件
+     */
+    private void getNetData(final String url, final int position, final String classType,
+                            final String imageType,
+                            final RecyclerView recyclerView) {
+        Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
                 List<ImageBean> list = new ArrayList<>();
                 try {
-                    Document document = Jsoup.connect(Constants.TPDQ).get();
+                    Document document = Jsoup.connect(url).get();
                     Elements main_cont = document.getElementsByClass("main_cont");
                     Document parse = Jsoup.parse(main_cont.toString());
-//                    Elements imageLists = parse.getElementsByClass("pic-meinv");
-                    Elements imageLists = parse.getElementsByClass("scroll-img-cont scroll-img-cont02");
-                    Document leftBar = Jsoup.parse(imageLists.toString());
-                    Elements li = leftBar.select("li");
+                    Element imageLists = parse.getElementsByClass(classType).get(position);
+                    Elements li = imageLists.select("li");
                     for (Element imageList : li) {
                         //详细页连接
                         String linkUrl = imageList.select("a").first().attr("href");
-                        //图片地址
-                        String imgUrl = imageList.select("img").first().attr("src");
+                        if (!linkUrl.startsWith(BASE_URl)) {
+                            linkUrl = BASE_URl + linkUrl.substring(1);
+                        }
                         //图片标题
                         String imgaeTitle = imageList.select("p").text();
+
+                        Document document2 = Jsoup.connect(linkUrl).get();
+                        Elements main_cont2 = document2.getElementsByClass("pic_main");
+                        Document parse2 = Jsoup.parse(main_cont2.toString());
+                        Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
+                        //图片地址
+                        String imgUrl = imageLists2.select("img").first().attr(imageType);
+
                         list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
                     }
                     subscriber.onNext(list);
+                    subscriber.onCompleted();
                 } catch (IOException e) {
                     subscriber.onError(e);
                 }
             }
         });
 
-        Subscriber<List<ImageBean>> subscriber = new Subscriber<List<ImageBean>>() {
-            @Override
-            public void onNext(List<ImageBean> beanList) {
-                Log.i("linkUrl", beanList.get(0).getLinkUrl());
-                Log.i("imgUrl", beanList.get(0).getImageUrl());
-                Log.i("imgaeTitle", beanList.get(0).getImgaeTitle());
-                mList = beanList;
-                initRecyclerView();
-                showContentView();
-            }
-
-            @Override
-            public void onCompleted() {
-                Log.i("onCompleted", "完成");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.i("onError", e.toString());
-            }
-
-        };
-
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .subscribe(new Subscriber<List<ImageBean>>() {
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+//                        for (ImageBean lists : beanList) {
+//                            Log.i("LinkUrl", lists.getLinkUrl());
+//                            Log.i("ImageUrl", lists.getImageUrl());
+//                            Log.i("ImgaeTitle", lists.getImgaeTitle());
+//                        }
+                        initRecyclerView(beanList, recyclerView);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        Log.i("onCompleted", "完成");
+                        showContentView();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("onError", e.toString());
+                    }
+                });
     }
 
-    // 初始化RecyclerView的Adapter
-    private void initRecyclerView() {
-        adapter = new HomeImageAdapter(getContext(), mList);
-        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        bindingView.recyclerviewList.setLayoutManager(mLayoutManager);
-        bindingView.recyclerviewList.setAdapter(adapter);
+    // TODO: 初始化RecyclerView
+
+    /**
+     * @param beanList     数据列表
+     * @param recyclerView 对应的控件
+     */
+    private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
+        HomeImageAdapter adapter = new HomeImageAdapter(getContext(), beanList);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setNestedScrollingEnabled(false);
     }
 }

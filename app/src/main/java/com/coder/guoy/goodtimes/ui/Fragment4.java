@@ -19,6 +19,5 @@ public class Fragment4 extends MvvmBaseFragment<Fragment4Binding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        bindingView.textview.setText(getString(R.string.Tab4));
     }
 }

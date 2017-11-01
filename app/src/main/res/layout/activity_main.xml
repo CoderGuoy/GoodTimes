@@ -64,125 +64,24 @@
                 </android.support.design.widget.CollapsingToolbarLayout>
             </android.support.design.widget.AppBarLayout>
 
-            <android.support.v4.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tablayout_main"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    app:tabMode="scrollable"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/text_model_1"
-                            style="@style/Home_TextStyle"
-                            android:text="精彩推荐"/>
-
-                        <TextView
-                            android:id="@+id/text_model_1_more"
-                            style="@style/Home_MoreStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_new"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/text_model_2"
-                            style="@style/Home_TextStyle"
-                            android:text="精品合集"/>
-
-                        <TextView
-                            android:id="@+id/text_model_2_more"
-                            style="@style/Home_MoreStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_movie"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/text_model_3"
-                            style="@style/Home_TextStyle"
-                            android:text="美妆"/>
-
-                        <TextView
-                            android:id="@+id/text_model_3_more"
-                            style="@style/Home_MoreStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_makeups"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/text_model_4"
-                            style="@style/Home_TextStyle"
-                            android:text="节日"/>
-
-                        <TextView
-                            android:id="@+id/text_model_4_more"
-                            style="@style/Home_MoreStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_festival"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/text_model_5"
-                            style="@style/Home_TextStyle"
-                            android:text="旅游"/>
-
-                        <TextView
-                            android:id="@+id/text_model_5_more"
-                            style="@style/Home_MoreStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_tourism"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-                </LinearLayout>
-
-            </android.support.v4.widget.NestedScrollView>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
         </android.support.design.widget.CoordinatorLayout>
 
         <android.support.design.widget.NavigationView

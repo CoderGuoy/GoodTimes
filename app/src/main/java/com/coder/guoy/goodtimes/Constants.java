@@ -11,8 +11,56 @@ public class Constants {
     public static final String IMG_URl = "http://pic1.win4000.com/";
     //桌面壁纸
     public static final String ZMBZ = BASE_URl + "wallpaper.html";
+    //桌面壁纸-游戏壁纸
+    public static final String ZMBZ_YXBZ = BASE_URl + "wallpaper_191_0_0_1.html";
     //桌面壁纸-卡通动漫
     public static final String ZMBZ_KTDM = BASE_URl + "wallpaper_192_0_0_1.html";
+    //桌面壁纸-家居壁纸
+    public static final String ZMBZ_JJBZ = BASE_URl + "wallpaper_193_0_0_1.html";
+    //桌面壁纸-军事壁纸
+    public static final String ZMBZ_JSBZ = BASE_URl + "wallpaper_194_0_0_1.html";
+    //桌面壁纸-汽车壁纸
+    public static final String ZMBZ_QCBZ = BASE_URl + "wallpaper_195_0_0_1.html";
+    //桌面壁纸-广告壁纸
+    public static final String ZMBZ_GGBZ = BASE_URl + "wallpaper_196_0_0_1.html";
+    //桌面壁纸-设计创意
+    public static final String ZMBZ_SJCY = BASE_URl + "wallpaper_197_0_0_1.html";
+    //桌面壁纸-港台影视
+    public static final String ZMBZ_GTYS = BASE_URl + "wallpaper_198_0_0_1.html";
+    //桌面壁纸-欧美影视
+    public static final String ZMBZ_OMYS = BASE_URl + "wallpaper_199_0_0_1.html";
+    //桌面壁纸-日韩影视
+    public static final String ZMBZ_RHYS = BASE_URl + "wallpaper_200_0_0_1.html";
+    //桌面壁纸-大陆影视
+    public static final String ZMBZ_DLYS = BASE_URl + "wallpaper_201_0_0_1.html";
+    //桌面壁纸-港台明星
+    public static final String ZMBZ_DTMX = BASE_URl + "wallpaper_202_0_0_1.html";
+    //桌面壁纸-欧美明星
+    public static final String ZMBZ_OMMX = BASE_URl + "wallpaper_203_0_0_1.html";
+    //桌面壁纸-日韩明星
+    public static final String ZMBZ_RHMX = BASE_URl + "wallpaper_204_0_0_1.html";
+    //桌面壁纸-大陆明星
+    public static final String ZMBZ_DLMX = BASE_URl + "wallpaper_205_0_0_1.html";
+    //桌面壁纸-动物壁纸
+    public static final String ZMBZ_DLDM = BASE_URl + "wallpaper_206_0_0_1.html";
+    //桌面壁纸-高清壁纸
+    public static final String ZMBZ_DWBZ = BASE_URl + "wallpaper_207_0_0_1.html";
+    //桌面壁纸-风景壁纸
+    public static final String ZMBZ_FJBZ = BASE_URl + "wallpaper_208_0_0_1.html";
+    //桌面壁纸-植物壁纸
+    public static final String ZMBZ_ZWBZ = BASE_URl + "wallpaper_209_0_0_1.html";
+    //桌面壁纸-美女壁纸
+    public static final String ZMBZ_MVBZ = BASE_URl + "wallpaper_2285_0_0_1.html";
+    //桌面壁纸-日历壁纸
+    public static final String ZMBZ_RLBZ = BASE_URl + "wallpaper_2286_0_0_1.html";
+    //桌面壁纸-节日壁纸
+    public static final String ZMBZ_JRBZ = BASE_URl + "wallpaper_2287_0_0_1.html";
+    //桌面壁纸-体育壁纸
+    public static final String ZMBZ_TYBZ = BASE_URl + "wallpaper_2357_0_0_1.html";
+    //桌面壁纸-风格壁纸
+    public static final String ZMBZ_FGBZ = BASE_URl + "wallpaper_2358_0_0_1.html";
+    //桌面壁纸-美食壁纸
+    public static final String ZMBZ_MSBZ = BASE_URl + "wallpaper_2361_0_0_1.html";
     //图片大全
     public static final String TPDQ = BASE_URl + "retu.html";
     //=================  =====================
@@ -57,4 +105,6 @@ public class Constants {
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "GoodTimes" + File.separator + "Menu";
+    //=================  ====================
+    public static final int Home_Color = 100;
 }
