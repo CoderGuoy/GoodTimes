@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         initFragment();
         binding.flTitleMenu.setOnClickListener(this);
+        binding.imageMenu.setOnClickListener(this);
         binding.viewpager.setAdapter(new FragmentAdapter(this.getSupportFragmentManager()));
         binding.tablayoutMain.setupWithViewPager(binding.viewpager);
     }
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     color = Color.rgb(63, 81, 181);
                 }
                 binding.collapsingtollbar.setContentScrimColor(color);
-                RxBus.getDefault().post(Home_Color,color);
+                RxBus.getDefault().post(Home_Color, color);
             }
         });
     }
@@ -246,6 +247,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.fl_title_menu:// 开启菜单
                 binding.drawerlayout.openDrawer(GravityCompat.START);
+                break;
+            case R.id.image_menu:// 右侧功能菜单
+                getBannerNetData(ZMBZ_KTDM);
                 break;
         }
     }
