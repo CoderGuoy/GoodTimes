@@ -54,7 +54,7 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
                 List<ImageBean> list = new ArrayList<>();
                 try {
-                    Document document = Jsoup.connect(Constants.HOME).get();
+                    Document document = Jsoup.connect(Constants.TPDQ).get();
                     Elements main_cont = document.getElementsByClass("main_cont");
                     Document parse = Jsoup.parse(main_cont.toString());
 //                    Elements imageLists = parse.getElementsByClass("pic-meinv");

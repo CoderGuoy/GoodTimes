@@ -38,12 +38,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static com.coder.guoy.goodtimes.Constants.ANIME;
-import static com.coder.guoy.goodtimes.Constants.HOME;
+import static com.coder.guoy.goodtimes.Constants.BASE_URl;
 import static com.coder.guoy.goodtimes.Constants.IMG_URl;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
+    private String classType1 = "list_cont list_cont1 w1180";
+    private String classType2 = "list_cont list_cont2 w1180";
+    private String imageType1 = "src";
+    private String imageType2 = "url";
+    //精彩推荐
+    private int wonderfulPage = 0;
+    //最新壁纸
+    private int finePage = 0;
     //最新图片
     private int newPage = 0;
     //影视图片
@@ -59,16 +68,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerNetData(ANIME);
-        getNetData(HOME, newPage, binding.recyclerviewNew);
-        getNetData(HOME, moviePage, binding.recyclerviewMovie);
-        getNetData(HOME, makeUpsPage, binding.recyclerviewMakeups);
-        getNetData(HOME, festivalPage, binding.recyclerviewFestival);
-        getNetData(HOME, tourismPage, binding.recyclerviewTourism);
+        getBannerNetData(ZMBZ_KTDM);
+        //精彩推荐
+        getNetData(BASE_URl, wonderfulPage, classType1, imageType1, binding.recyclerviewNew);
+        //精品合集
+        getNetData(ZMBZ, finePage, classType1, imageType1, binding.recyclerviewMovie);
+        //美妆
+//        getNetData(TPDQ, makeUpsPage, classType2, imageType2, binding.recyclerviewMakeups);
+        //节日
+//        getNetData(TPDQ, festivalPage, classType2, imageType2, binding.recyclerviewFestival);
+        //旅游
+//        getNetData(TPDQ, tourismPage, classType2, imageType2, binding.recyclerviewTourism);
     }
 
     // TODO: 透明状态栏
@@ -138,8 +151,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
                     public void onNext(List<ImageBean> beanList) {
-                        if (beanList.get(0).getImageUrl() != null) {
-                            imageUrl = beanList.get(0).getImageUrl();
+                        //随即取集合内的一张图
+                        int position = (int) (Math.random() * beanList.size());
+                        if (beanList.get(position).getImageUrl() != null) {
+                            imageUrl = beanList.get(position).getImageUrl();
                         }
                     }
 
@@ -194,15 +209,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
-                int color = 0;
+                int color;
                 Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
                 Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
-                if (lightVibrantSwatch != null) {
+                if (vibrantSwatch != null) {
+                    //获取有活力的 颜色
+                    color = vibrantSwatch.getRgb();
+                } else if (lightVibrantSwatch != null) {
                     //获取有活力的亮色 颜色
                     color = lightVibrantSwatch.getRgb();
                 } else {
-                    //获取有活力的 颜色
-                    color = vibrantSwatch.getRgb();
+                    //都没获取到，用默认颜色
+                    color = Color.rgb(63, 81, 181);
                 }
                 binding.collapsingtollbar.setContentScrimColor(color);
                 binding.textModel1.setTextColor(color);
@@ -226,7 +244,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param position     页面中数据源条目位置
      * @param recyclerView 对应的控件
      */
-    private void getNetData(final String url, final int position, final RecyclerView recyclerView) {
+    private void getNetData(final String url, final int position, final String classType,
+                            final String imageType,
+                            final RecyclerView recyclerView) {
         Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
@@ -235,12 +255,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Document document = Jsoup.connect(url).get();
                     Elements main_cont = document.getElementsByClass("main_cont");
                     Document parse = Jsoup.parse(main_cont.toString());
-                    Element imageLists = parse.getElementsByClass("list_cont list_cont2 w1180").get(position);
+                    Element imageLists = parse.getElementsByClass(classType).get(position);
                     Elements li = imageLists.select("li");
                     for (Element imageList : li) {
                         //详细页连接
                         String linkUrl = imageList.select("a").first().attr("href");
-
+                        if (!linkUrl.startsWith(BASE_URl)) {
+                            linkUrl = BASE_URl + linkUrl.substring(1);
+                        }
                         //图片标题
                         String imgaeTitle = imageList.select("p").text();
 
@@ -249,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Document parse2 = Jsoup.parse(main_cont2.toString());
                         Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
                         //图片地址
-                        String imgUrl = imageLists2.select("img").first().attr("url");
+                        String imgUrl = imageLists2.select("img").first().attr(imageType);
 
                         list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
                     }
@@ -267,6 +289,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
                     public void onNext(List<ImageBean> beanList) {
+//                        for (ImageBean lists : beanList) {
+//                            Log.i("LinkUrl", lists.getLinkUrl());
+//                            Log.i("ImageUrl", lists.getImageUrl());
+//                            Log.i("ImgaeTitle", lists.getImgaeTitle());
+//                        }
                         initRecyclerView(beanList, recyclerView);
                     }
 
@@ -277,9 +304,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("onError:NetData_", e.toString());
+                        Log.e("onError", e.toString());
                     }
-
                 });
     }
 

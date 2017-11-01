@@ -9,9 +9,12 @@ public class Constants {
     //================= 电脑主题之家URL =====================
     public static final String BASE_URl = "http://www.win4000.com/";
     public static final String IMG_URl = "http://pic1.win4000.com/";
-    //首页
-    public static final String HOME = BASE_URl + "retu.html";
-    public static final String ANIME = BASE_URl + "wallpaper_192_0_0_1.html";
+    //桌面壁纸
+    public static final String ZMBZ = BASE_URl + "wallpaper.html";
+    //桌面壁纸-卡通动漫
+    public static final String ZMBZ_KTDM = BASE_URl + "wallpaper_192_0_0_1.html";
+    //图片大全
+    public static final String TPDQ = BASE_URl + "retu.html";
     //=================  =====================
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";

@@ -10,7 +10,6 @@
     <string name="MOTTO">刚则易折，柔则长存</string>
     <string name="pleasewait">敬请期待</string>
 
-
     <string name="text">1. Toolbar和ActionBar基本一样,Toolbar是可移动的，ActionBar不可动\n
 2. AppBarLayout是继承自LinearLayout，垂直的，他为了给里面的子View实现动作效果的（子View不一定是Toolbar）,
         一般在要实现动作效果的子View里面添加`app:layout_scrollFlags=""`属性就好了，里面的属性值按英文翻译

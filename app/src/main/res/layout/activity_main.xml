@@ -81,7 +81,7 @@
                         <TextView
                             android:id="@+id/text_model_1"
                             style="@style/Home_TextStyle"
-                            android:text="最新"/>
+                            android:text="精彩推荐"/>
 
                         <TextView
                             android:id="@+id/text_model_1_more"
@@ -102,7 +102,7 @@
                         <TextView
                             android:id="@+id/text_model_2"
                             style="@style/Home_TextStyle"
-                            android:text="影视"/>
+                            android:text="精品合集"/>
 
                         <TextView
                             android:id="@+id/text_model_2_more"
