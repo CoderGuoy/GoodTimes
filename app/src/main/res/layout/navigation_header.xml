@@ -62,7 +62,7 @@
             </FrameLayout>
             <!--菜单布局-->
             <LinearLayout
-                android:id="@+id/ll_nav_video"
+                android:id="@+id/ll_nav_1"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"

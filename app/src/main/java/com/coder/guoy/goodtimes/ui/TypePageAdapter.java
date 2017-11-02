@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
-import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
+import com.coder.guoy.goodtimes.databinding.ItemTypePageBinding;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -25,24 +25,26 @@ import java.util.List;
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年10月30日
- * @Descrpiton:首页图片
+ * @Descrpiton:
  */
-public class HomeImageAdapter extends RecyclerView.Adapter {
+public class TypePageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
-    private ItemHomeBinding binding;
+    private ItemTypePageBinding binding;
+    private int count;
 
-    public HomeImageAdapter(Context context, List list) {
+    public TypePageAdapter(Context context, List list, int count) {
         mInflater = LayoutInflater.from(context);
         mList = list;
         mContext = context;
+        this.count = count;
     }
 
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return 4;
+        return count;
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
@@ -60,7 +62,7 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home, parent, false);
+        binding = DataBindingUtil.inflate(mInflater, R.layout.item_type_page, parent, false);
         return new NormalViewHolder(binding.getRoot());
     }
 

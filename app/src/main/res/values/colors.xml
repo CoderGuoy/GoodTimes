@@ -14,6 +14,7 @@
     <color name="color_eeeeee">#eeeeee</color>
     <!--主题颜色-->
     <color name="colorTheme">#1E222A</color>
+    <color name="colorLogo">#87CEEB</color>
     <!--页面背景的颜色-->
     <color name="colorPageBg">#f2f4f5</color>
     <!--tab标签栏文字的颜色-->

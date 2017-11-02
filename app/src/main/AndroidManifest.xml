@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".ui.ImageDeatilActivity">
         </activity>
+        <activity android:name=".ui.TypePage1Activity">
+        </activity>
     </application>
 
 </manifest>

@@ -10,8 +10,6 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.FragmentHomeBinding;
-import com.coder.guoy.goodtimes.utils.RxBus;
-import com.coder.guoy.goodtimes.utils.RxBusBaseMessage;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,11 +23,9 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 import static com.coder.guoy.goodtimes.Constants.BASE_URl;
-import static com.coder.guoy.goodtimes.Constants.Home_Color;
 import static com.coder.guoy.goodtimes.Constants.ZMBZ;
 import static com.coder.guoy.goodtimes.Constants.ZMBZ_JSBZ;
 import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
@@ -59,29 +55,6 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
-    }
-
-    private void initData() {
-        RxBus.getDefault().toObservable(Home_Color, RxBusBaseMessage.class)
-                .subscribe(new Action1<RxBusBaseMessage>() {
-                    @Override
-                    public void call(RxBusBaseMessage rxBusBaseMessage) {
-                        int color = (int) rxBusBaseMessage.getObject();
-                        bindingView.textModel1.setTextColor(color);
-                        bindingView.textModel1More.setBackgroundColor(color);
-                        bindingView.textModel2.setTextColor(color);
-                        bindingView.textModel2More.setBackgroundColor(color);
-                        bindingView.textModel3.setTextColor(color);
-                        bindingView.textModel3More.setBackgroundColor(color);
-                        bindingView.textModel4.setTextColor(color);
-                        bindingView.textModel4More.setBackgroundColor(color);
-                        bindingView.textModel5.setTextColor(color);
-                        bindingView.textModel5More.setBackgroundColor(color);
-                        bindingView.textModel6.setTextColor(color);
-                        bindingView.textModel6More.setBackgroundColor(color);
-                    }
-                });
     }
 
     @Override
@@ -101,7 +74,7 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
         getNetData(ZMBZ_QCBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel6);
     }
 
-//TODO: 获取网络数据
+    //TODO: 获取网络数据
 
     /**
      * @param url          连接地址
@@ -163,8 +136,8 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
 
                     @Override
                     public void onCompleted() {
-                        Log.i("onCompleted", "完成");
                         showContentView();
+                        Log.i("onCompleted", "完成");
                     }
 
                     @Override
@@ -181,7 +154,7 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        HomeImageAdapter adapter = new HomeImageAdapter(getContext(), beanList);
+        TypePageAdapter adapter = new TypePageAdapter(getContext(), beanList, 4);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

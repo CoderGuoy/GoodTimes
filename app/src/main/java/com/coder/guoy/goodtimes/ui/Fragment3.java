@@ -29,7 +29,8 @@ import rx.schedulers.Schedulers;
 public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
     private List<ImageBean> mList = new ArrayList<>();
     private StaggeredGridLayoutManager mLayoutManager;
-    private HomeImageAdapter adapter;
+    private TypePageAdapter adapter;
+
     @Override
     public int setContent() {
         return R.layout.fragment_3;
@@ -39,6 +40,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
     @Override
     protected void getData() {
         super.getData();
@@ -99,7 +101,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
 
     // 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new HomeImageAdapter(getContext(), mList);
+        adapter = new TypePageAdapter(getContext(), mList, mList.size());
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         bindingView.recyclerviewList3.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewList3.setAdapter(adapter);
