@@ -20,7 +20,7 @@
         <item name="android:button">@null</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!--首页模块-->
+    <!--首页模块标题-->
     <style name="Home_TextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -45,6 +45,14 @@
         <item name="android:textColor">@color/colorWrite</item>
         <item name="android:background">@color/colorLogo</item>
         <item name="android:text">更多</item>
+    </style>
+    <!--首页模块标题2-->
+    <style name="Home_Model_Style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorWrite</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
 </resources>

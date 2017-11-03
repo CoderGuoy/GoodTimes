@@ -85,18 +85,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transparentStatusBar();
         initView();
         getBannerNetData(ZMBZ_KTDM);
-        //精彩推荐
-        getNetData(BASE_URl, Page0, classType1, imageType1, binding.recyclerviewModel1);
         //最新
         getNetData(ZMBZ, Page0, classType1, imageType1, binding.recyclerviewModel2);
         //游戏
         getNetData(ZMBZ_YXBZ, Page0, classType3, imageType1, binding.recyclerviewModel3);
-        //卡通
+        //动漫
         getNetData(ZMBZ_KTDM, Page0, classType3, imageType1, binding.recyclerviewModel4);
-        //军事
-        getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, binding.recyclerviewModel5);
         //汽车
         getNetData(ZMBZ_QCBZ, Page0, classType3, imageType1, binding.recyclerviewModel6);
+        //军事
+        getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, binding.recyclerviewModel5);
     }
 
     // TODO: 透明状态栏
@@ -294,16 +292,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
                 if (vibrantSwatch != null) {
                     //获取有活力的 颜色
                     color = vibrantSwatch.getRgb();
-                } else if (lightVibrantSwatch != null) {
-                    //获取有活力的亮色 颜色
-                    color = lightVibrantSwatch.getRgb();
                 } else {
                     //都没获取到，用默认颜色
-                    color = Color.rgb(63, 81, 181);//#3F51B5
                     color = Color.rgb(135, 206, 235);//#87CEEB
                 }
                 binding.collapsingtollbar.setContentScrimColor(color);
@@ -331,8 +324,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setTextColor(int color) {
-        binding.textModel1.setTextColor(color);
-        binding.textModel1More.setBackgroundColor(color);
         binding.textModel2.setTextColor(color);
         binding.textModel2More.setBackgroundColor(color);
         binding.textModel3.setTextColor(color);

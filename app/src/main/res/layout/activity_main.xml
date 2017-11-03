@@ -94,7 +94,6 @@
                         android:id="@+id/recyclerview_home_type"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:background="@color/colorWrite"/>
 
                     <LinearLayout
@@ -124,27 +123,28 @@
                             android:id="@+id/recyclerview_model_2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
-
-                        <RelativeLayout
+                        <!--精选手机壁纸-->
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_home_1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="130dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardCornerRadius="2dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/home_weim"/>
 
                             <TextView
-                                android:id="@+id/text_model_1"
-                                style="@style/Home_TextStyle"
-                                android:text="@string/home_model_1"/>
+                                style="@style/Home_Model_Style"
+                                android:text="@string/home_model_7"/>
 
-                            <TextView
-                                android:id="@+id/text_model_1_more"
-                                style="@style/Home_MoreStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </RelativeLayout>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerview_model_1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                        </android.support.v7.widget.CardView>
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -166,6 +166,28 @@
                             android:id="@+id/recyclerview_model_3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
+                        <!--优质创意设计-->
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_home_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="130dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardCornerRadius="2dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="130dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/home_cysj"/>
+
+                            <TextView
+                                style="@style/Home_Model_Style"
+                                android:text="@string/home_model_8"/>
+
+                        </android.support.v7.widget.CardView>
 
 
                         <RelativeLayout
@@ -186,6 +208,49 @@
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerview_model_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <!--时尚唯美家居-->
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_home_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="130dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardCornerRadius="2dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="130dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/home_jj"/>
+
+                            <TextView
+                                style="@style/Home_Model_Style"
+                                android:text="@string/home_model_9"/>
+
+                        </android.support.v7.widget.CardView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_6"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_6"/>
+
+                            <TextView
+                                android:id="@+id/text_model_6_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_6"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 
@@ -210,26 +275,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/text_model_6"
-                                style="@style/Home_TextStyle"
-                                android:text="@string/home_model_6"/>
-
-                            <TextView
-                                android:id="@+id/text_model_6_more"
-                                style="@style/Home_MoreStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </RelativeLayout>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerview_model_6"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
                     </LinearLayout>
                 </LinearLayout>
 
