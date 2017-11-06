@@ -10,6 +10,7 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.Fragment3Binding;
+import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

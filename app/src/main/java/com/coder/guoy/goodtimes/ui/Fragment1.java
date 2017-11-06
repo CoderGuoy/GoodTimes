@@ -10,6 +10,7 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.FragmentHomeBinding;
+import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -126,11 +127,6 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
                     public void onNext(List<ImageBean> beanList) {
-//                        for (ImageBean lists : beanList) {
-//                            Log.i("LinkUrl", lists.getLinkUrl());
-//                            Log.i("ImageUrl", lists.getImageUrl());
-//                            Log.i("ImgaeTitle", lists.getImgaeTitle());
-//                        }
                         initRecyclerView(beanList, recyclerView);
                     }
 

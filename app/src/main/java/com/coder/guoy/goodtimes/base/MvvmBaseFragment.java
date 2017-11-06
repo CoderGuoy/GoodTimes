@@ -14,8 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.utils.NetUtils;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
+import com.coder.guoy.goodtimes.utils.NetUtils;
+
+import rx.Subscription;
 
 
 /**
@@ -38,6 +40,7 @@ public abstract class MvvmBaseFragment<SV extends ViewDataBinding> extends Fragm
     protected RelativeLayout mContainer;
     // 动画
     private Animatable mAnimationDrawable;
+    protected Subscription subscription;
 
     @Nullable
     @Override
@@ -46,7 +49,7 @@ public abstract class MvvmBaseFragment<SV extends ViewDataBinding> extends Fragm
         bindingView = DataBindingUtil.inflate(getActivity().getLayoutInflater(), setContent(), null, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingView.getRoot().setLayoutParams(params);
-        mContainer = (RelativeLayout) ll.findViewById(R.id.container);
+        mContainer = ll.findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
         return ll;
     }
@@ -130,7 +133,7 @@ public abstract class MvvmBaseFragment<SV extends ViewDataBinding> extends Fragm
 
     /**
      * 进行网络请求时，不用重写showContentView
-     *
+     * <p>
      * 不进行网络请求时，需要手动添加showContentView
      */
     protected void getData() {
@@ -191,6 +194,18 @@ public abstract class MvvmBaseFragment<SV extends ViewDataBinding> extends Fragm
         }
         if (bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unsubscribe();
+    }
+
+    protected void unsubscribe() {
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
         }
     }
 }

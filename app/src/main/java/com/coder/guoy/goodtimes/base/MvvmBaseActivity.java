@@ -16,10 +16,12 @@ import android.widget.RelativeLayout;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.databinding.ActivityBaseMvvmBinding;
+import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.utils.CommonUtils;
 import com.coder.guoy.goodtimes.utils.NetUtils;
-import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.utils.StatusBarUtils;
+
+import rx.Subscription;
 
 
 /**
@@ -35,6 +37,7 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
     private View refresh;//加载失败
     private ActivityBaseMvvmBinding mBaseBinding;
     private Animatable mAnimationDrawable;
+    protected Subscription subscription;
 
 
     @Override
@@ -152,6 +155,18 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unsubscribe();
+    }
+
+    protected void unsubscribe() {
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
     }
 
 

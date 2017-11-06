@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.ui.adapter;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemTypePageBinding;
+import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -44,7 +45,12 @@ public class TypePageAdapter extends RecyclerView.Adapter {
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return count;
+        return mList == null ? 0 : mList.size() < count ? mList.size() : count;
+    }
+
+    public void setItems(List<ImageBean> mList) {
+        this.mList = mList;
+        notifyDataSetChanged();
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
@@ -86,7 +92,7 @@ public class TypePageAdapter extends RecyclerView.Adapter {
                         (Activity) mContext, vh.imageView, "shareimage").toBundle();
                 intent.putExtra("imageUrl", mList.get(position).getImageUrl());
                 intent.putExtra("imageTitle", mList.get(position).getImgaeTitle());
-                mContext.startActivity(intent,options);
+                mContext.startActivity(intent, options);
             }
         });
     }

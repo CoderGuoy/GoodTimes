@@ -19,9 +19,10 @@ import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.ui.HomeTypeAdapter;
+import com.coder.guoy.goodtimes.ui.CacheActivity;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
-import com.coder.guoy.goodtimes.ui.TypePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //RecyclerView列数
     private int col_2 = 2;
     private int col_3 = 3;
+    private TypePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -316,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // TODO: 图片列表
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        TypePageAdapter adapter = new TypePageAdapter(this, beanList, 4);
+        adapter = new TypePageAdapter(this, beanList, 4);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -343,7 +345,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
-                getBannerNetData(ZMBZ_KTDM);
                 break;
         }
     }
@@ -357,10 +358,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     switch (v.getId()) {
                         case R.id.ll_nav_1:
-                            startActivity(new Intent(MainActivity.this, TypePage1Activity.class));
+                            startActivity(new Intent(MainActivity.this, CacheActivity.class));
                             break;
                         case R.id.ll_nav_2:
-                            ToastUtil.show("敬请期待");
+                            startActivity(new Intent(MainActivity.this, TypePage1Activity.class));
                             break;
                         case R.id.ll_nav_3:
                             ToastUtil.show("敬请期待");

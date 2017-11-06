@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.ui.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
