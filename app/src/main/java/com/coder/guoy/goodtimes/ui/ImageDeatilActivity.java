@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
+
 /**
  * @Version:
  * @Author:
@@ -43,7 +44,7 @@ public class ImageDeatilActivity extends AppCompatActivity {
      * 转场动画
      */
     private void setLayoutAnimation() {
-        LinearLayout layout = (LinearLayout) findViewById(R.id.activity_image_deatil);
+        LinearLayout layout = findViewById(R.id.activity_image_deatil);
         AlphaAnimation alpha = new AlphaAnimation(0, 1);
         alpha.setDuration(300);
         LayoutAnimationController controller = new LayoutAnimationController(alpha, 0.3f);
@@ -52,7 +53,7 @@ public class ImageDeatilActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        ImageView image = (ImageView) findViewById(R.id.imageview_detail);
+        ImageView image = findViewById(R.id.imageview_detail);
         String imageUrl = getIntent().getStringExtra("imageUrl");
         //设置图片
         GlideUtils.setDetailImage(imageUrl, image);

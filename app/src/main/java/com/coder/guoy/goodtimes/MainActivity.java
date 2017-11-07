@@ -19,7 +19,7 @@ import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.ui.CacheActivity;
+import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
 import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
 import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
@@ -99,6 +99,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, binding.recyclerviewModel5);
     }
 
+    private void initView() {
+        initRecyclerView(images, titles, binding.recyclerviewHomeType);
+        binding.flTitleMenu.setOnClickListener(this);
+        binding.imageMenu.setOnClickListener(this);
+    }
+
     // TODO: 透明状态栏
     private void transparentStatusBar() {
         View decorView = getWindow().getDecorView();
@@ -106,12 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(option);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
-
-    private void initView() {
-        initRecyclerView(images, titles, binding.recyclerviewHomeType);
-        binding.flTitleMenu.setOnClickListener(this);
-        binding.imageMenu.setOnClickListener(this);
     }
 
     // TODO: 为Banner图获取网络图片
@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 });
     }
+
     //TODO: 获取网络数据
 
     /**
@@ -364,13 +365,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, TypePage1Activity.class));
                             break;
                         case R.id.ll_nav_3:
-                            ToastUtil.show("敬请期待");
+                            ToastUtil.show(getString(R.string.pleasewait));
                             break;
                         case R.id.ll_nav_4:
-                            ToastUtil.show("敬请期待");
+                            ToastUtil.show(getString(R.string.pleasewait));
                             break;
                         case R.id.ll_nav_5:
-                            ToastUtil.show("敬请期待");
+                            ToastUtil.show(getString(R.string.pleasewait));
                             break;
                     }
                 }

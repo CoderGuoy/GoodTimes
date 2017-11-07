@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.cache;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
-import com.coder.guoy.goodtimes.cache.Data;
 import com.coder.guoy.goodtimes.databinding.ActivityCacheBinding;
 import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
 import com.coder.guoy.goodtimes.utils.ToastUtil;

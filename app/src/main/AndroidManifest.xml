@@ -30,7 +30,7 @@
         </activity>
         <activity android:name=".ui.TypePage1Activity">
         </activity>
-        <activity android:name=".ui.CacheActivity"/>
+        <activity android:name=".cache.CacheActivity"/>
     </application>
 
 </manifest>
