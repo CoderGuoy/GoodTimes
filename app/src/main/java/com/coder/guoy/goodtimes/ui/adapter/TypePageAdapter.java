@@ -78,6 +78,7 @@ public class TypePageAdapter extends RecyclerView.Adapter {
         //设置图片
         if (mList.get(position).getImageUrl() != null) {
             GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
+//            GlideUtils.progressImage(mList.get(position).getImageUrl(),vh.imageView);
         }
         //设置标题
         if (mList.get(position).getImgaeTitle() != null) {

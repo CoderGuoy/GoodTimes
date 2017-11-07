@@ -20,6 +20,7 @@ import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.cache.CacheActivity;
+import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
 import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
 import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
@@ -365,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, TypePage1Activity.class));
                             break;
                         case R.id.ll_nav_3:
-                            ToastUtil.show(getString(R.string.pleasewait));
+                            startActivity(new Intent(MainActivity.this, ProgressImageAcitivty.class));
                             break;
                         case R.id.ll_nav_4:
                             ToastUtil.show(getString(R.string.pleasewait));
