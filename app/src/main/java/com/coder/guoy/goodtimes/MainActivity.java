@@ -20,6 +20,7 @@ import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.cache.CacheActivity;
+import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
 import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
@@ -73,12 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int Page4 = 4;
     private int Page5 = 5;
     private int Page6 = 6;
-    //RecyclerView展示条目数量
-    private int count_4 = 4;
-    private int count_9 = 9;
-    //RecyclerView列数
-    private int col_2 = 2;
-    private int col_3 = 3;
     private TypePageAdapter adapter;
 
     @Override
@@ -161,12 +156,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         int position = (int) (Math.random() * beanList.size());
                         if (beanList.get(position).getImageUrl() != null) {
                             imageUrl = beanList.get(position).getImageUrl();
+                            Log.i("Banner_imageUrl", imageUrl);
                         }
                     }
 
                     @Override
                     public void onCompleted() {
-                        GlideUtils.setImage(imageUrl, binding.imageHome);
+                        GlideUtils.progressImage(imageUrl, binding.imageHome, binding.progressHome);
                         initDrawerlayout(imageUrl);
                         downloadPic(imageUrl);
                         Log.i("onCompeted", "完成");
@@ -369,7 +365,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, ProgressImageAcitivty.class));
                             break;
                         case R.id.ll_nav_4:
-                            ToastUtil.show(getString(R.string.pleasewait));
+                            startActivity(new Intent(MainActivity.this, DataActivity.class));
                             break;
                         case R.id.ll_nav_5:
                             ToastUtil.show(getString(R.string.pleasewait));

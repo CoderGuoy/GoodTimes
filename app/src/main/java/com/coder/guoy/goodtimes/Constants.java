@@ -5,8 +5,14 @@ import android.os.Environment;
 import java.io.File;
 
 public class Constants {
+    //https://www.meitulu.com/
+    //http://www.182fl.com/		福利社
+    //https://www.zhuangbi.info/hot
+    //=================   zol  =====================
+    public static final String ZOL_URl = "http://desk.zol.com.cn/";
+    public static final String WMPIC_URl = "http://www.wmpic.me/";
 
-    //================= 电脑主题之家URL =====================
+    //================= win400 =====================
     public static final String BASE_URl = "http://www.win4000.com/";
     public static final String IMG_URl = "http://pic1.win4000.com/";
     //桌面壁纸
@@ -63,7 +69,7 @@ public class Constants {
     public static final String ZMBZ_MSBZ = BASE_URl + "wallpaper_2361_0_0_1.html";
     //图片大全
     public static final String TPDQ = BASE_URl + "retu.html";
-    //=================  =====================
+    //=================福利=====================
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";
     //男神

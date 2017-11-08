@@ -11,12 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemTypePageBinding;
+import com.coder.guoy.goodtimes.progress.CircleProgressView;
+import com.coder.guoy.goodtimes.progress.GlideImageView;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
@@ -54,13 +55,15 @@ public class TypePageAdapter extends RecyclerView.Adapter {
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
+        public GlideImageView imageView;
+        public CircleProgressView progressView;
         public TextView textTitle;
         public CardView cardView;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             imageView = binding.itemImage;
+            progressView = binding.itemProgress;
             textTitle = binding.itemText;
             cardView = binding.cardview;
         }
@@ -77,8 +80,8 @@ public class TypePageAdapter extends RecyclerView.Adapter {
         final NormalViewHolder vh = (NormalViewHolder) holder;
         //设置图片
         if (mList.get(position).getImageUrl() != null) {
-            GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
-//            GlideUtils.progressImage(mList.get(position).getImageUrl(),vh.imageView);
+//            GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
+            GlideUtils.progressImage(mList.get(position).getImageUrl(), vh.imageView, vh.progressView);
         }
         //设置标题
         if (mList.get(position).getImgaeTitle() != null) {

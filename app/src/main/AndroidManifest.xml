@@ -26,13 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ImageDeatilActivity">
-        </activity>
-        <activity android:name=".ui.TypePage1Activity">
-        </activity>
+        <activity android:name=".ui.ImageDeatilActivity"/>
+        <activity android:name=".ui.TypePage1Activity"/>
         <activity android:name=".cache.CacheActivity"/>
-        <activity android:name=".ui.ProgressImageAcitivty">
-        </activity>
+        <activity android:name=".ui.ProgressImageAcitivty"/>
+        <activity android:name=".ui.DataActivity"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerlayout"
@@ -22,13 +23,32 @@
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-                    <ImageView
-                        android:id="@+id/image_home"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="220dp"
-                        android:background="@color/colorLogo"
-                        android:scaleType="centerCrop"
-                        app:layout_collapseMode="parallax"/>
+                        android:layout_height="220dp">
+
+                        <com.coder.guoy.goodtimes.progress.GlideImageView
+                            android:id="@+id/image_home"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorLogo"
+                            android:scaleType="centerCrop"
+                            app:layout_collapseMode="parallax"
+                            tools:layout_editor_absoluteX="8dp"
+                            tools:layout_editor_absoluteY="58dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.coder.guoy.goodtimes.progress.CircleProgressView
+                                android:id="@+id/progress_home"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"/>
+                        </RelativeLayout>
+
+                    </FrameLayout>
 
                     <android.support.v7.widget.Toolbar
                         android:layout_width="match_parent"

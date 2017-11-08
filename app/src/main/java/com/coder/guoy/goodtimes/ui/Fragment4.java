@@ -9,7 +9,7 @@ import android.util.Log;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
-import com.coder.guoy.goodtimes.databinding.FragmentHomeBinding;
+import com.coder.guoy.goodtimes.databinding.Fragment4Binding;
 import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
 
 import org.jsoup.Jsoup;
@@ -28,13 +28,9 @@ import rx.schedulers.Schedulers;
 
 import static com.coder.guoy.goodtimes.Constants.BASE_URl;
 import static com.coder.guoy.goodtimes.Constants.ZMBZ;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_JSBZ;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_QCBZ;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_YXBZ;
 
 
-public class Fragment4 extends MvvmBaseFragment<FragmentHomeBinding> {
+public class Fragment4 extends MvvmBaseFragment<Fragment4Binding> {
     private String classType1 = "list_cont list_cont1 w1180";
     private String classType2 = "list_cont list_cont2 w1180";
     private String classType3 = "list_cont Left_list_cont";
@@ -50,7 +46,7 @@ public class Fragment4 extends MvvmBaseFragment<FragmentHomeBinding> {
 
     @Override
     public int setContent() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_4;
     }
 
     @Override
@@ -61,18 +57,19 @@ public class Fragment4 extends MvvmBaseFragment<FragmentHomeBinding> {
     @Override
     protected void getData() {
         super.getData();
+        showContentView();
         //精彩推荐
-        getNetData(BASE_URl, Page0, classType1, imageType1, bindingView.recyclerviewModel1);
+//        getNetData(BASE_URl, Page0, classType1, imageType1, bindingView.recyclerviewModel1);
         //最新
         getNetData(ZMBZ, Page0, classType1, imageType1, bindingView.recyclerviewModel2);
         //游戏
-        getNetData(ZMBZ_YXBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel3);
-        //卡通
-        getNetData(ZMBZ_KTDM, Page0, classType3, imageType1, bindingView.recyclerviewModel4);
-        //军事
-        getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel5);
-        //汽车
-        getNetData(ZMBZ_QCBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel6);
+//        getNetData(ZMBZ_YXBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel3);
+//        //卡通
+//        getNetData(ZMBZ_KTDM, Page0, classType3, imageType1, bindingView.recyclerviewModel4);
+//        //军事
+//        getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel5);
+//        //汽车
+//        getNetData(ZMBZ_QCBZ, Page0, classType3, imageType1, bindingView.recyclerviewModel6);
     }
 
     //TODO: 获取网络数据
@@ -132,7 +129,6 @@ public class Fragment4 extends MvvmBaseFragment<FragmentHomeBinding> {
 
                     @Override
                     public void onCompleted() {
-                        showContentView();
                         Log.i("onCompleted", "完成");
                     }
 
@@ -150,7 +146,7 @@ public class Fragment4 extends MvvmBaseFragment<FragmentHomeBinding> {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        TypePageAdapter adapter = new TypePageAdapter(getContext(), beanList, 4);
+        TypePageAdapter adapter = new TypePageAdapter(getContext(), beanList, beanList.size());
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
