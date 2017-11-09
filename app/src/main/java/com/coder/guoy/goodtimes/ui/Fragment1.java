@@ -150,7 +150,7 @@ public class Fragment1 extends MvvmBaseFragment<FragmentHomeBinding> {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        TypePageAdapter adapter = new TypePageAdapter(getContext(), beanList, 4);
+        TypePageAdapter adapter = new TypePageAdapter(getContext());
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

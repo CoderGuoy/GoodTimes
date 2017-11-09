@@ -60,13 +60,13 @@ public class GlideUtils {
     }
 
     public static void setImage(String url, ImageView imageview) {
+        RequestOptions options = new RequestOptions().placeholder(R.color.placeholder_color)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(App.getInstance().getApplicationContext())
                 .load(url)
-//                .placeholder(R.drawable.loading)
-//                .error(R.drawable.loadingfaile)
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                .thumbnail(0.1f)
+                .apply(options)
+                .thumbnail(0.1f)
                 .into(imageview);
     }
 

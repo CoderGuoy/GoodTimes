@@ -16,10 +16,10 @@ import android.view.View;
 
 import com.coder.guoy.goodtimes.api.ApiHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
+import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
@@ -44,13 +44,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static com.coder.guoy.goodtimes.Constants.BASE_URl;
 import static com.coder.guoy.goodtimes.Constants.IMG_URl;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_JSBZ;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_QCBZ;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_YXBZ;
+import static com.coder.guoy.goodtimes.Constants.ZOL_PC_DM;
+import static com.coder.guoy.goodtimes.Constants.ZOL_PC_MV;
+import static com.coder.guoy.goodtimes.Constants.ZOL_URl;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
@@ -62,18 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String[] titles = {"手机壁纸", "壁纸专题", "图片专题", "明星图片", "图片大全",
             "美女图片", "精选合集", "分类1", "分类2", "分类3",};
     private int color;
-    private String classType1 = "list_cont list_cont1 w1180";
-    private String classType2 = "list_cont list_cont2 w1180";
-    private String classType3 = "list_cont Left_list_cont";
-    private String imageType1 = "src";
-    private String imageType2 = "url";
-    private int Page0 = 0;
-    private int Page1 = 1;
-    private int Page2 = 2;
-    private int Page3 = 3;
-    private int Page4 = 4;
-    private int Page5 = 5;
-    private int Page6 = 6;
     private TypePageAdapter adapter;
 
     @Override
@@ -82,23 +67,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerNetData(ZMBZ_KTDM);
-        //最新
-        getNetData(ZMBZ, Page0, classType1, imageType1, binding.recyclerviewModel2);
+        getBannerNetData(ZOL_PC_DM);
+        //美女
+        getNetData(ZOL_PC_MV);
         //游戏
-        getNetData(ZMBZ_YXBZ, Page0, classType3, imageType1, binding.recyclerviewModel3);
-        //动漫
-        getNetData(ZMBZ_KTDM, Page0, classType3, imageType1, binding.recyclerviewModel4);
-        //汽车
-        getNetData(ZMBZ_QCBZ, Page0, classType3, imageType1, binding.recyclerviewModel6);
-        //军事
-        getNetData(ZMBZ_JSBZ, Page0, classType3, imageType1, binding.recyclerviewModel5);
+//        getNetData(ZOL_PC_YX);
+//        //动漫
+//        getNetData(ZOL_PC_DM);
+//        //汽车
+//        getNetData(ZOL_PC_QC);
+//        //影视
+//        getNetData(ZOL_PC_YS);
     }
 
     private void initView() {
-        initRecyclerView(images, titles, binding.recyclerviewHomeType);
         binding.flTitleMenu.setOnClickListener(this);
         binding.imageMenu.setOnClickListener(this);
+        initRecyclerView(images, titles, binding.recyclerviewHomeType);
+        initRecyclerView(binding.recyclerviewModel2);
+        initRecyclerView(binding.recyclerviewModel3);
+        initRecyclerView(binding.recyclerviewModel4);
+        initRecyclerView(binding.recyclerviewModel5);
+        initRecyclerView(binding.recyclerviewModel6);
     }
 
     // TODO: 透明状态栏
@@ -118,25 +108,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 List<ImageBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(url).get();
-                    Elements main_cont = document.getElementsByClass("main_cont");
-                    Document parse = Jsoup.parse(main_cont.toString());
-                    Elements imageLists = parse.getElementsByClass("Left_bar");
-                    Elements li = imageLists.select("li");
+                    Elements li = document.getElementsByClass("photo-list-padding");
                     for (Element imageList : li) {
                         //详细页连接
-                        String linkUrl = imageList.select("a").first().attr("href");
-
-                        //图片标题
-                        String imgaeTitle = imageList.select("p").text();
-
+                        String linkUrl = imageList.select("a").attr("href");
+                        if (!linkUrl.startsWith(ZOL_URl)) {
+                            linkUrl = ZOL_URl + linkUrl.substring(1);
+                        }
+                        //原图
                         Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements main_cont2 = document2.getElementsByClass("pic_main");
-                        Document parse2 = Jsoup.parse(main_cont2.toString());
-                        Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
-                        //图片地址
-                        String imgUrl = imageLists2.select("img").first().attr("src");
+                        Elements main_cont2 = document2.getElementsByClass("photo");
+                        String imgUrl = main_cont2.select("img").first().attr("src");
 
-                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                        list.add(new ImageBean("", imgUrl, ""));
                     }
                     subscriber.onNext(list);
                     subscriber.onCompleted();
@@ -145,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -162,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onCompleted() {
+                        downloadPic(imageUrl);
                         GlideUtils.progressImage(imageUrl, binding.imageHome, binding.progressHome);
                         initDrawerlayout(imageUrl);
-                        downloadPic(imageUrl);
                         Log.i("onCompeted", "完成");
                     }
 
@@ -177,42 +160,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //TODO: 获取网络数据
-
-    /**
-     * @param url          连接地址
-     * @param position     页面中数据源条目位置
-     * @param recyclerView 对应的控件
-     */
-    private void getNetData(final String url, final int position,
-                            final String classType, final String imageType,
-                            final RecyclerView recyclerView) {
+    private void getNetData(final String url) {
         Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
                 List<ImageBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(url).get();
-                    Elements main_cont = document.getElementsByClass("main_cont");
-                    Document parse = Jsoup.parse(main_cont.toString());
-                    Element imageLists = parse.getElementsByClass(classType).get(position);
-                    Elements li = imageLists.select("li");
+                    Elements li = document.getElementsByClass("photo-list-padding");
                     for (Element imageList : li) {
                         //详细页连接
-                        String linkUrl = imageList.select("a").first().attr("href");
-                        if (!linkUrl.startsWith(BASE_URl)) {
-                            linkUrl = BASE_URl + linkUrl.substring(1);
+                        String linkUrl = imageList.select("a").attr("href");
+                        if (!linkUrl.startsWith(ZOL_URl)) {
+                            linkUrl = ZOL_URl + linkUrl.substring(1);
                         }
                         //图片标题
-                        String imgaeTitle = imageList.select("p").text();
+                        String imageTitle = imageList.select("img").attr("title");
 
+                        //原图
                         Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements main_cont2 = document2.getElementsByClass("pic_main");
-                        Document parse2 = Jsoup.parse(main_cont2.toString());
-                        Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
-                        //图片地址
-                        String imgUrl = imageLists2.select("img").first().attr(imageType);
+                        Elements main_cont2 = document2.getElementsByClass("photo");
+                        String imgUrl = main_cont2.select("img").first().attr("src");
 
-                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                        list.add(new ImageBean(linkUrl, imgUrl, imageTitle));
                     }
                     subscriber.onNext(list);
                     subscriber.onCompleted();
@@ -228,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
                     public void onNext(List<ImageBean> beanList) {
-                        initRecyclerView(beanList, recyclerView);
+                        adapter.setNewData(beanList);
                     }
 
                     @Override
@@ -315,8 +285,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // TODO: 图片列表
-    private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        adapter = new TypePageAdapter(this, beanList, 4);
+    private void initRecyclerView(RecyclerView recyclerView) {
+        adapter = new TypePageAdapter(this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -343,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
+                getBannerNetData(ZOL_PC_DM);
                 break;
         }
     }

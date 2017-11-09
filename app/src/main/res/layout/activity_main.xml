@@ -21,7 +21,7 @@
                     android:id="@+id/collapsingtollbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -258,27 +258,6 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:id="@+id/text_model_6"
-                                style="@style/Home_TextStyle"
-                                android:text="@string/home_model_6"/>
-
-                            <TextView
-                                android:id="@+id/text_model_6_more"
-                                style="@style/Home_MoreStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </RelativeLayout>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerview_model_6"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
                                 android:id="@+id/text_model_5"
                                 style="@style/Home_TextStyle"
                                 android:text="@string/home_model_5"/>
@@ -292,6 +271,27 @@
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerview_model_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_6"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_6"/>
+
+                            <TextView
+                                android:id="@+id/text_model_6_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_6"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 

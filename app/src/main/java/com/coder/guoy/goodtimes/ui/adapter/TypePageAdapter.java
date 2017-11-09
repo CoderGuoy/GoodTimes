@@ -16,11 +16,11 @@ import android.widget.TextView;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemTypePageBinding;
-import com.coder.guoy.goodtimes.progress.CircleProgressView;
 import com.coder.guoy.goodtimes.progress.GlideImageView;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,36 +34,51 @@ public class TypePageAdapter extends RecyclerView.Adapter {
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemTypePageBinding binding;
-    private int count;
+//    private int count;
 
-    public TypePageAdapter(Context context, List list, int count) {
+    public TypePageAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
-        mList = list;
         mContext = context;
-        this.count = count;
+//        mList = list;
+//        this.count = count;
     }
 
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size() < count ? mList.size() : count;
+        return mList == null ? 0 : mList.size();
     }
 
-    public void setItems(List<ImageBean> mList) {
+    public void setNewData(List data) {
+        mList = data == null ? new ArrayList<>() : data;
+        notifyDataSetChanged();
+    }
+
+    public void addData(List data) {
+        mList.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void removeAll(List data) {
+        mList.removeAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void removeItems(List mList) {
         this.mList = mList;
         notifyDataSetChanged();
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
         public GlideImageView imageView;
-        public CircleProgressView progressView;
+        //        public CircleProgressView progressView;
         public TextView textTitle;
         public CardView cardView;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             imageView = binding.itemImage;
-            progressView = binding.itemProgress;
+//            progressView = binding.itemProgress;
             textTitle = binding.itemText;
             cardView = binding.cardview;
         }
@@ -80,8 +95,8 @@ public class TypePageAdapter extends RecyclerView.Adapter {
         final NormalViewHolder vh = (NormalViewHolder) holder;
         //设置图片
         if (mList.get(position).getImageUrl() != null) {
-//            GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
-            GlideUtils.progressImage(mList.get(position).getImageUrl(), vh.imageView, vh.progressView);
+            GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
+//            GlideUtils.progressImage(mList.get(position).getImageUrl(), vh.imageView, vh.progressView);
         }
         //设置标题
         if (mList.get(position).getImgaeTitle() != null) {

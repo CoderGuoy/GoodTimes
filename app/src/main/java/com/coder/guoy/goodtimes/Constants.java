@@ -8,9 +8,16 @@ public class Constants {
     //https://www.meitulu.com/
     //http://www.182fl.com/		福利社
     //https://www.zhuangbi.info/hot
+    public static final String WMPIC_URl = "http://www.wmpic.me/";
     //=================   zol  =====================
     public static final String ZOL_URl = "http://desk.zol.com.cn/";
-    public static final String WMPIC_URl = "http://www.wmpic.me/";
+
+    public static final String ZOL_PC_MV = ZOL_URl + "meinv/";
+    public static final String ZOL_PC_DM = ZOL_URl + "dongman/";
+    public static final String ZOL_PC_YX = ZOL_URl + "youxi/";
+    public static final String ZOL_PC_QC = ZOL_URl + "qiche/";
+    public static final String ZOL_PC_YS = ZOL_URl + "yingshi/";
+
 
     //================= win400 =====================
     public static final String BASE_URl = "http://www.win4000.com/";

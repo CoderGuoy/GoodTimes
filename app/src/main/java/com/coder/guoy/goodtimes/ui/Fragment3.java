@@ -102,7 +102,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
 
     // 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new TypePageAdapter(getContext(), mList, mList.size());
+        adapter = new TypePageAdapter(getContext());
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         bindingView.recyclerviewList3.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewList3.setAdapter(adapter);

@@ -39,19 +39,21 @@ public class DataActivity extends AppCompatActivity {
     private long startTime = 0;
     private String zol = "photo-list-padding";
     private String wmpic = "item_box";
+    private TypePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bindingView = DataBindingUtil.setContentView(this, R.layout.fragment_4);
+        initRecyclerView(bindingView.recyclerviewModel2);
         //zol
-        getNetData(ZOL_URl + "meinv/", zol, bindingView.recyclerviewModel2);
+        getNetData(ZOL_URl + "meinv/", zol);
         //wmpic
 //        getNetData(WMPIC_URl + "tupian/wmpic/", wmpic, bindingView.recyclerviewModel2);
     }
 
     //TODO: 获取网络数据
-    private void getNetData(final String url, final String classType, final RecyclerView recyclerView) {
+    private void getNetData(final String url, final String classType) {
         startTime = System.currentTimeMillis();
         Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
@@ -69,13 +71,11 @@ public class DataActivity extends AppCompatActivity {
                         //图片标题
                         String imageTitle = imageList.select("img").attr("title");
 
-                        //缩略图
-                        String imgUrl_thumbnail = imageList.select("img").attr("src");
+                        //原图
                         Document document2 = Jsoup.connect(linkUrl).get();
                         Elements main_cont2 = document2.getElementsByClass("photo");
-                        //原图
                         String imgUrl = main_cont2.select("img").first().attr("src");
-                        Log.i("fragment4_list", linkUrl + ";" + imageTitle + ";" + imgUrl);
+
                         list.add(new ImageBean(linkUrl, imgUrl,imageTitle));
                     }
                     subscriber.onNext(list);
@@ -94,7 +94,7 @@ public class DataActivity extends AppCompatActivity {
                     public void onNext(List<ImageBean> beanList) {
                         int time = (int) (System.currentTimeMillis() - startTime);
                         Log.i("time", time + "ms");
-                        initRecyclerView(beanList, recyclerView);
+                        adapter.setNewData(beanList);
                     }
 
                     @Override
@@ -112,11 +112,10 @@ public class DataActivity extends AppCompatActivity {
     // TODO: 初始化RecyclerView
 
     /**
-     * @param beanList     数据列表
      * @param recyclerView 对应的控件
      */
-    private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        TypePageAdapter adapter = new TypePageAdapter(this, beanList, beanList.size());
+    private void initRecyclerView(RecyclerView recyclerView) {
+        adapter = new TypePageAdapter(this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

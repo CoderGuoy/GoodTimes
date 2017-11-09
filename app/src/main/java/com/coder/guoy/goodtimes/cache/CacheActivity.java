@@ -89,7 +89,7 @@ public class CacheActivity extends AppCompatActivity implements View.OnClickList
 
     // TODO: 图片列表
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        adapter = new TypePageAdapter(this, beanList, beanList.size());
+        adapter = new TypePageAdapter(this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -108,12 +108,12 @@ public class CacheActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_1:
                 Data.getInstance().clearMemoryCache();
                 ToastUtil.show("内存缓存已清空");
-                adapter.setItems(null);
+                adapter.removeItems(null);
                 break;
             case R.id.btn_2:
                 Data.getInstance().clearMemoryAndDiskCache();
                 ToastUtil.show("内存缓存和磁盘缓存已清空");
-                adapter.setItems(null);
+                adapter.removeItems(null);
                 break;
             case R.id.btn_3:
                 getNetData(ZMBZ, Page0, classType1, imageType1, binding.recyclerviewModel2);

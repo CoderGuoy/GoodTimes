@@ -146,7 +146,7 @@ public class Fragment4 extends MvvmBaseFragment<Fragment4Binding> {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        TypePageAdapter adapter = new TypePageAdapter(getContext(), beanList, beanList.size());
+        TypePageAdapter adapter = new TypePageAdapter(getContext());
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

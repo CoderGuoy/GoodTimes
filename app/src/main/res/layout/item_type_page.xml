@@ -17,27 +17,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
+            <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="130dp">-->
+
+            <com.coder.guoy.goodtimes.progress.GlideImageView
+                android:id="@+id/item_image"
                 android:layout_width="match_parent"
-                android:layout_height="130dp">
+                android:layout_height="130dp"
+                android:scaleType="centerCrop"/>
 
-                <com.coder.guoy.goodtimes.progress.GlideImageView
-                    android:id="@+id/item_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"/>
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.coder.guoy.goodtimes.progress.CircleProgressView
-                        android:id="@+id/item_progress"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </FrameLayout>
+            <!--<com.coder.guoy.goodtimes.progress.CircleProgressView-->
+            <!--android:id="@+id/item_progress"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_centerInParent="true"/>-->
+            <!--</RelativeLayout>-->
+            <!--</FrameLayout>-->
 
             <TextView
                 android:id="@+id/item_text"
