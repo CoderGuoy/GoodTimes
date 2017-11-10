@@ -10,7 +10,7 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.Fragment3Binding;
-import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,7 +30,7 @@ import rx.schedulers.Schedulers;
 public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
     private List<ImageBean> mList = new ArrayList<>();
     private StaggeredGridLayoutManager mLayoutManager;
-    private TypePageAdapter adapter;
+    private HomePageAdapter adapter;
 
     @Override
     public int setContent() {
@@ -102,7 +102,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
 
     // 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new TypePageAdapter(getContext());
+        adapter = new HomePageAdapter(getContext());
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         bindingView.recyclerviewList3.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewList3.setAdapter(adapter);

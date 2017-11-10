@@ -10,14 +10,27 @@ public class Constants {
     //https://www.zhuangbi.info/hot
     public static final String WMPIC_URl = "http://www.wmpic.me/";
     //=================   zol  =====================
-    public static final String ZOL_URl = "http://desk.zol.com.cn/";
-
-    public static final String ZOL_PC_MV = ZOL_URl + "meinv/";
-    public static final String ZOL_PC_DM = ZOL_URl + "dongman/";
-    public static final String ZOL_PC_YX = ZOL_URl + "youxi/";
-    public static final String ZOL_PC_QC = ZOL_URl + "qiche/";
-    public static final String ZOL_PC_YS = ZOL_URl + "yingshi/";
-
+    //桌面壁纸
+    public static final String ZOL_PC_URl = "http://desk.zol.com.cn/";
+    public static final String ZOL_PC_DM = ZOL_PC_URl + "dongman/";
+    //手机壁纸
+    public static final String ZOL_URl = "http://sj.zol.com.cn/";
+    public static final String ZOL_FJ = ZOL_URl + "bizhi/fengjing/";
+    public static final String ZOL_MV = ZOL_URl + "bizhi/meinv/";
+    public static final String ZOL_DM = ZOL_URl + "bizhi/dongman/";
+    public static final String ZOL_CY = ZOL_URl + "bizhi/chuangyi/";
+    public static final String ZOL_AQ = ZOL_URl + "bizhi/aiqing/";
+    public static final String ZOL_KT = ZOL_URl + "bizhi/katong/";
+    public static final String ZOL_KA = ZOL_URl + "bizhi/keai/";
+    public static final String ZOL_MX = ZOL_URl + "bizhi/mingxing/";
+    public static final String ZOL_YX = ZOL_URl + "bizhi/youxi/";
+    public static final String ZOL_CM = ZOL_URl + "bizhi/chemo/";
+    public static final String ZOL_TY = ZOL_URl + "bizhi/tiyu/";
+    public static final String ZOL_JR = ZOL_URl + "bizhi/jieri/";
+    public static final String ZOL_YS = ZOL_URl + "bizhi/yingshi/";
+    public static final String ZOL_JZ = ZOL_URl + "bizhi/jianzhu/";
+    public static final String ZOL_DW = ZOL_URl + "bizhi/dongwu/";
+    public static final String ZOL_ZW = ZOL_URl + "bizhi/zhiwu/";
 
     //================= win400 =====================
     public static final String BASE_URl = "http://www.win4000.com/";

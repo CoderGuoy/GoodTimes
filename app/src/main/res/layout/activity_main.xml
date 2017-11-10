@@ -23,32 +23,13 @@
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                    <FrameLayout
+                    <ImageView
+                        android:id="@+id/image_home"
                         android:layout_width="match_parent"
-                        android:layout_height="220dp">
-
-                        <com.coder.guoy.goodtimes.progress.GlideImageView
-                            android:id="@+id/image_home"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorLogo"
-                            android:scaleType="centerCrop"
-                            app:layout_collapseMode="parallax"
-                            tools:layout_editor_absoluteX="8dp"
-                            tools:layout_editor_absoluteY="58dp"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <com.coder.guoy.goodtimes.progress.CircleProgressView
-                                android:id="@+id/progress_home"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_centerInParent="true"/>
-                        </RelativeLayout>
-
-                    </FrameLayout>
+                        android:layout_height="220dp"
+                        android:background="@color/colorLogo"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax"/>
 
                     <android.support.v7.widget.Toolbar
                         android:layout_width="match_parent"
@@ -128,6 +109,27 @@
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/text_model_1"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_1"/>
+
+                            <TextView
+                                android:id="@+id/text_model_1_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
                                 android:id="@+id/text_model_2"
                                 style="@style/Home_TextStyle"
                                 android:text="@string/home_model_2"/>
@@ -143,28 +145,6 @@
                             android:id="@+id/recyclerview_model_2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
-                        <!--精选手机壁纸-->
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/cardview_home_1"
-                            android:layout_width="match_parent"
-                            android:layout_height="130dp"
-                            android:clickable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            app:cardCornerRadius="2dp"
-                            app:cardPreventCornerOverlap="false"
-                            app:cardUseCompatPadding="true">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/home_weim"/>
-
-                            <TextView
-                                style="@style/Home_Model_Style"
-                                android:text="@string/home_model_7"/>
-
-                        </android.support.v7.widget.CardView>
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -186,29 +166,6 @@
                             android:id="@+id/recyclerview_model_3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
-                        <!--优质创意设计-->
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/cardview_home_2"
-                            android:layout_width="match_parent"
-                            android:layout_height="130dp"
-                            android:clickable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            app:cardCornerRadius="2dp"
-                            app:cardPreventCornerOverlap="false"
-                            app:cardUseCompatPadding="true">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="130dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/home_cysj"/>
-
-                            <TextView
-                                style="@style/Home_Model_Style"
-                                android:text="@string/home_model_8"/>
-
-                        </android.support.v7.widget.CardView>
-
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -230,28 +187,6 @@
                             android:id="@+id/recyclerview_model_4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
-                        <!--时尚唯美家居-->
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/cardview_home_3"
-                            android:layout_width="match_parent"
-                            android:layout_height="130dp"
-                            android:clickable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            app:cardCornerRadius="2dp"
-                            app:cardPreventCornerOverlap="false"
-                            app:cardUseCompatPadding="true">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="130dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/home_jj"/>
-
-                            <TextView
-                                style="@style/Home_Model_Style"
-                                android:text="@string/home_model_9"/>
-
-                        </android.support.v7.widget.CardView>
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -292,6 +227,216 @@
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerview_model_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_7"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_7"/>
+
+                            <TextView
+                                android:id="@+id/text_model_7_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_8"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_8"/>
+
+                            <TextView
+                                android:id="@+id/text_model_8_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_9"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_9"/>
+
+                            <TextView
+                                android:id="@+id/text_model_9_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_10"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_10"/>
+
+                            <TextView
+                                android:id="@+id/text_model_10_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_11"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_11"/>
+
+                            <TextView
+                                android:id="@+id/text_model_11_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_12"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_12"/>
+
+                            <TextView
+                                android:id="@+id/text_model_12_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_12"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_13"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_13"/>
+
+                            <TextView
+                                android:id="@+id/text_model_13_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_14"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_14"/>
+
+                            <TextView
+                                android:id="@+id/text_model_14_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_15"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_15"/>
+
+                            <TextView
+                                android:id="@+id/text_model_15_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_15"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/text_model_16"
+                                style="@style/Home_TextStyle"
+                                android:text="@string/home_model_16"/>
+
+                            <TextView
+                                android:id="@+id/text_model_16_more"
+                                style="@style/Home_MoreStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview_model_16"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 

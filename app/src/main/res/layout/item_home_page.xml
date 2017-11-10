@@ -24,7 +24,7 @@
             <com.coder.guoy.goodtimes.progress.GlideImageView
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="200dp"
                 android:scaleType="centerCrop"/>
 
             <!--<RelativeLayout-->
@@ -44,7 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textColor="@color/colorBlack"/>
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"/>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

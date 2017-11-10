@@ -20,7 +20,6 @@ import com.coder.guoy.goodtimes.progress.GlideImageView;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,28 +28,25 @@ import java.util.List;
  * @CreateTime:2017年10月30日
  * @Descrpiton:
  */
-public class TypePageAdapter extends RecyclerView.Adapter {
+public class HomePageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemTypePageBinding binding;
-//    private int count;
 
-    public TypePageAdapter(Context context) {
+    public HomePageAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
-//        mList = list;
-//        this.count = count;
     }
 
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        return mList == null ? 0 : mList.size() > 9 ? 9 : mList.size();
     }
 
     public void setNewData(List data) {
-        mList = data == null ? new ArrayList<>() : data;
+        mList = data;
         notifyDataSetChanged();
     }
 
@@ -71,14 +67,12 @@ public class TypePageAdapter extends RecyclerView.Adapter {
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
         public GlideImageView imageView;
-        //        public CircleProgressView progressView;
         public TextView textTitle;
         public CardView cardView;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             imageView = binding.itemImage;
-//            progressView = binding.itemProgress;
             textTitle = binding.itemText;
             cardView = binding.cardview;
         }
@@ -86,7 +80,7 @@ public class TypePageAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(mInflater, R.layout.item_type_page, parent, false);
+        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home_page, parent, false);
         return new NormalViewHolder(binding.getRoot());
     }
 

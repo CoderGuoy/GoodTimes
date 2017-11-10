@@ -10,7 +10,7 @@ import android.util.Log;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.Fragment4Binding;
-import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,7 +39,7 @@ public class DataActivity extends AppCompatActivity {
     private long startTime = 0;
     private String zol = "photo-list-padding";
     private String wmpic = "item_box";
-    private TypePageAdapter adapter;
+    private HomePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class DataActivity extends AppCompatActivity {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(RecyclerView recyclerView) {
-        adapter = new TypePageAdapter(this);
+        adapter = new HomePageAdapter(this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

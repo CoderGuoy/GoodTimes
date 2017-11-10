@@ -24,7 +24,7 @@ import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
 import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
-import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -44,22 +44,36 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
+import static com.coder.guoy.goodtimes.Constants.BASE_URl;
 import static com.coder.guoy.goodtimes.Constants.IMG_URl;
-import static com.coder.guoy.goodtimes.Constants.ZOL_PC_DM;
-import static com.coder.guoy.goodtimes.Constants.ZOL_PC_MV;
+import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
+import static com.coder.guoy.goodtimes.Constants.ZOL_AQ;
+import static com.coder.guoy.goodtimes.Constants.ZOL_CM;
+import static com.coder.guoy.goodtimes.Constants.ZOL_CY;
+import static com.coder.guoy.goodtimes.Constants.ZOL_DM;
+import static com.coder.guoy.goodtimes.Constants.ZOL_DW;
+import static com.coder.guoy.goodtimes.Constants.ZOL_FJ;
+import static com.coder.guoy.goodtimes.Constants.ZOL_JR;
+import static com.coder.guoy.goodtimes.Constants.ZOL_JZ;
+import static com.coder.guoy.goodtimes.Constants.ZOL_KA;
+import static com.coder.guoy.goodtimes.Constants.ZOL_KT;
+import static com.coder.guoy.goodtimes.Constants.ZOL_MV;
+import static com.coder.guoy.goodtimes.Constants.ZOL_MX;
+import static com.coder.guoy.goodtimes.Constants.ZOL_TY;
 import static com.coder.guoy.goodtimes.Constants.ZOL_URl;
+import static com.coder.guoy.goodtimes.Constants.ZOL_YS;
+import static com.coder.guoy.goodtimes.Constants.ZOL_YX;
+import static com.coder.guoy.goodtimes.Constants.ZOL_ZW;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
-    private String imageUrl = null;
     private int[] images = {R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
             R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
             R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
             R.drawable.home_type1,};
-    private String[] titles = {"手机壁纸", "壁纸专题", "图片专题", "明星图片", "图片大全",
-            "美女图片", "精选合集", "分类1", "分类2", "分类3",};
+    private String[] titles = {"分类", "分类", "分类", "分类", "分类",
+            "分类", "分类", "分类", "分类", "分类",};
     private int color;
-    private TypePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,28 +81,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerNetData(ZOL_PC_DM);
-        //美女
-        getNetData(ZOL_PC_MV);
-        //游戏
-//        getNetData(ZOL_PC_YX);
-//        //动漫
-//        getNetData(ZOL_PC_DM);
-//        //汽车
-//        getNetData(ZOL_PC_QC);
-//        //影视
-//        getNetData(ZOL_PC_YS);
+        getBannerNetData(ZMBZ_KTDM);
+        getNetData(ZOL_FJ, initRecyclerView(binding.recyclerviewModel1));
+        getNetData(ZOL_MV, initRecyclerView(binding.recyclerviewModel2));
+        getNetData(ZOL_DM, initRecyclerView(binding.recyclerviewModel3));
+        getNetData(ZOL_CY, initRecyclerView(binding.recyclerviewModel4));
+        getNetData(ZOL_AQ, initRecyclerView(binding.recyclerviewModel5));
+        getNetData(ZOL_KT, initRecyclerView(binding.recyclerviewModel6));
+        getNetData(ZOL_KA, initRecyclerView(binding.recyclerviewModel7));
+        getNetData(ZOL_MX, initRecyclerView(binding.recyclerviewModel8));
+        getNetData(ZOL_YX, initRecyclerView(binding.recyclerviewModel9));
+        getNetData(ZOL_CM, initRecyclerView(binding.recyclerviewModel10));
+        getNetData(ZOL_TY, initRecyclerView(binding.recyclerviewModel11));
+        getNetData(ZOL_JR, initRecyclerView(binding.recyclerviewModel12));
+        getNetData(ZOL_YS, initRecyclerView(binding.recyclerviewModel13));
+        getNetData(ZOL_JZ, initRecyclerView(binding.recyclerviewModel14));
+        getNetData(ZOL_DW, initRecyclerView(binding.recyclerviewModel15));
+        getNetData(ZOL_ZW, initRecyclerView(binding.recyclerviewModel16));
     }
 
     private void initView() {
         binding.flTitleMenu.setOnClickListener(this);
         binding.imageMenu.setOnClickListener(this);
         initRecyclerView(images, titles, binding.recyclerviewHomeType);
-        initRecyclerView(binding.recyclerviewModel2);
-        initRecyclerView(binding.recyclerviewModel3);
-        initRecyclerView(binding.recyclerviewModel4);
-        initRecyclerView(binding.recyclerviewModel5);
-        initRecyclerView(binding.recyclerviewModel6);
     }
 
     // TODO: 透明状态栏
@@ -108,19 +123,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 List<ImageBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(url).get();
-                    Elements li = document.getElementsByClass("photo-list-padding");
+                    Elements main_cont = document.getElementsByClass("main_cont");
+                    Document parse = Jsoup.parse(main_cont.toString());
+                    Element imageLists = parse.getElementsByClass("list_cont Left_list_cont").get(0);
+                    Elements li = imageLists.select("li");
                     for (Element imageList : li) {
                         //详细页连接
-                        String linkUrl = imageList.select("a").attr("href");
-                        if (!linkUrl.startsWith(ZOL_URl)) {
-                            linkUrl = ZOL_URl + linkUrl.substring(1);
+                        String linkUrl = imageList.select("a").first().attr("href");
+                        if (!linkUrl.startsWith(BASE_URl)) {
+                            linkUrl = BASE_URl + linkUrl.substring(1);
                         }
-                        //原图
-                        Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements main_cont2 = document2.getElementsByClass("photo");
-                        String imgUrl = main_cont2.select("img").first().attr("src");
+                        //图片标题
+                        String imgaeTitle = imageList.select("p").text();
 
-                        list.add(new ImageBean("", imgUrl, ""));
+                        Document document2 = Jsoup.connect(linkUrl).get();
+                        Elements main_cont2 = document2.getElementsByClass("pic_main");
+                        Document parse2 = Jsoup.parse(main_cont2.toString());
+                        Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
+                        //图片地址
+                        String imgUrl = imageLists2.select("img").first().attr("src");
+
+                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
                     }
                     subscriber.onNext(list);
                     subscriber.onCompleted();
@@ -135,20 +158,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
                     public void onNext(List<ImageBean> beanList) {
+                        String imageUrl = null;
                         //随即取集合内的一张图
                         int position = (int) (Math.random() * beanList.size());
                         if (beanList.get(position).getImageUrl() != null) {
                             imageUrl = beanList.get(position).getImageUrl();
                             Log.i("Banner_imageUrl", imageUrl);
                         }
+                        GlideUtils.setImage(imageUrl, binding.imageHome);
+                        downloadPic(imageUrl);
+                        initDrawerlayout(imageUrl);
                     }
 
                     @Override
                     public void onCompleted() {
-                        downloadPic(imageUrl);
-                        GlideUtils.progressImage(imageUrl, binding.imageHome, binding.progressHome);
-                        initDrawerlayout(imageUrl);
-                        Log.i("onCompeted", "完成");
                     }
 
                     @Override
@@ -160,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //TODO: 获取网络数据
-    private void getNetData(final String url) {
+    private void getNetData(final String url, final HomePageAdapter adapter) {
         Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
@@ -179,10 +202,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         //原图
                         Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements main_cont2 = document2.getElementsByClass("photo");
-                        String imgUrl = main_cont2.select("img").first().attr("src");
+                        Elements wrapper = document2.getElementsByClass("wrapper mt15");
+                        String wrapperUrl = wrapper.select("a").get(1).attr("href");
+                        if (!wrapperUrl.startsWith(ZOL_URl)) {
+                            wrapperUrl = ZOL_URl + wrapperUrl.substring(1);
+                        }
+                        Document document3 = Jsoup.connect(wrapperUrl).get();
+                        String imgUrl = document3.select("img").first().attr("src");
 
-                        list.add(new ImageBean(linkUrl, imgUrl, imageTitle));
+                        list.add(new ImageBean(wrapperUrl, imgUrl, imageTitle));
                     }
                     subscriber.onNext(list);
                     subscriber.onCompleted();
@@ -203,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onCompleted() {
-                        Log.i("onCompleted", "完成");
                     }
 
                     @Override
@@ -285,15 +312,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // TODO: 图片列表
-    private void initRecyclerView(RecyclerView recyclerView) {
-        adapter = new TypePageAdapter(this);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+    private HomePageAdapter initRecyclerView(RecyclerView recyclerView) {
+        HomePageAdapter adapter = new HomePageAdapter(this);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
+        return adapter;
     }
 
     private void setTextColor(int color) {
+        binding.textModel1.setTextColor(color);
+        binding.textModel1More.setBackgroundColor(color);
         binding.textModel2.setTextColor(color);
         binding.textModel2More.setBackgroundColor(color);
         binding.textModel3.setTextColor(color);
@@ -304,6 +334,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.textModel5More.setBackgroundColor(color);
         binding.textModel6.setTextColor(color);
         binding.textModel6More.setBackgroundColor(color);
+        binding.textModel7.setTextColor(color);
+        binding.textModel7More.setBackgroundColor(color);
+        binding.textModel8.setTextColor(color);
+        binding.textModel8More.setBackgroundColor(color);
+        binding.textModel9.setTextColor(color);
+        binding.textModel9More.setBackgroundColor(color);
+        binding.textModel10.setTextColor(color);
+        binding.textModel10More.setBackgroundColor(color);
+        binding.textModel11.setTextColor(color);
+        binding.textModel11More.setBackgroundColor(color);
+        binding.textModel12.setTextColor(color);
+        binding.textModel12More.setBackgroundColor(color);
+        binding.textModel13.setTextColor(color);
+        binding.textModel13More.setBackgroundColor(color);
+        binding.textModel14.setTextColor(color);
+        binding.textModel14More.setBackgroundColor(color);
+        binding.textModel15.setTextColor(color);
+        binding.textModel15More.setBackgroundColor(color);
+        binding.textModel16.setTextColor(color);
+        binding.textModel16More.setBackgroundColor(color);
     }
 
     @Override
@@ -313,7 +363,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
-                getBannerNetData(ZOL_PC_DM);
                 break;
         }
     }

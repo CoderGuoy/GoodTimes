@@ -10,7 +10,7 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.Fragment4Binding;
-import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -146,7 +146,7 @@ public class Fragment4 extends MvvmBaseFragment<Fragment4Binding> {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        TypePageAdapter adapter = new TypePageAdapter(getContext());
+        HomePageAdapter adapter = new HomePageAdapter(getContext());
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

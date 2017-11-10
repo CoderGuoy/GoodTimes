@@ -12,7 +12,7 @@ import android.view.View;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityCacheBinding;
-import com.coder.guoy.goodtimes.ui.adapter.TypePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class CacheActivity extends AppCompatActivity implements View.OnClickList
     private String imageType1 = "src";
     private String imageType2 = "url";
     private int Page0 = 0;
-    private TypePageAdapter adapter;
+    private HomePageAdapter adapter;
     private long startTime;
     protected Subscription subscription;
 
@@ -89,7 +89,7 @@ public class CacheActivity extends AppCompatActivity implements View.OnClickList
 
     // TODO: 图片列表
     private void initRecyclerView(List<ImageBean> beanList, RecyclerView recyclerView) {
-        adapter = new TypePageAdapter(this);
+        adapter = new HomePageAdapter(this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
