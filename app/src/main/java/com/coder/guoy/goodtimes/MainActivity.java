@@ -23,8 +23,8 @@ import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.TypePage1Activity;
-import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
 import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
+import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -44,27 +44,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static com.coder.guoy.goodtimes.Constants.BASE_URl;
-import static com.coder.guoy.goodtimes.Constants.IMG_URl;
-import static com.coder.guoy.goodtimes.Constants.ZMBZ_KTDM;
-import static com.coder.guoy.goodtimes.Constants.ZOL_AQ;
-import static com.coder.guoy.goodtimes.Constants.ZOL_CM;
-import static com.coder.guoy.goodtimes.Constants.ZOL_CY;
-import static com.coder.guoy.goodtimes.Constants.ZOL_DM;
-import static com.coder.guoy.goodtimes.Constants.ZOL_DW;
-import static com.coder.guoy.goodtimes.Constants.ZOL_FJ;
-import static com.coder.guoy.goodtimes.Constants.ZOL_JR;
-import static com.coder.guoy.goodtimes.Constants.ZOL_JZ;
-import static com.coder.guoy.goodtimes.Constants.ZOL_KA;
-import static com.coder.guoy.goodtimes.Constants.ZOL_KT;
-import static com.coder.guoy.goodtimes.Constants.ZOL_MV;
-import static com.coder.guoy.goodtimes.Constants.ZOL_MX;
-import static com.coder.guoy.goodtimes.Constants.ZOL_TY;
-import static com.coder.guoy.goodtimes.Constants.ZOL_URl;
-import static com.coder.guoy.goodtimes.Constants.ZOL_YS;
-import static com.coder.guoy.goodtimes.Constants.ZOL_YX;
-import static com.coder.guoy.goodtimes.Constants.ZOL_ZW;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
     private int[] images = {R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
@@ -81,23 +60,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerNetData(ZMBZ_KTDM);
-        getNetData(ZOL_FJ, initRecyclerView(binding.recyclerviewModel1));
-        getNetData(ZOL_MV, initRecyclerView(binding.recyclerviewModel2));
-        getNetData(ZOL_DM, initRecyclerView(binding.recyclerviewModel3));
-        getNetData(ZOL_CY, initRecyclerView(binding.recyclerviewModel4));
-        getNetData(ZOL_AQ, initRecyclerView(binding.recyclerviewModel5));
-        getNetData(ZOL_KT, initRecyclerView(binding.recyclerviewModel6));
-        getNetData(ZOL_KA, initRecyclerView(binding.recyclerviewModel7));
-        getNetData(ZOL_MX, initRecyclerView(binding.recyclerviewModel8));
-        getNetData(ZOL_YX, initRecyclerView(binding.recyclerviewModel9));
-        getNetData(ZOL_CM, initRecyclerView(binding.recyclerviewModel10));
-        getNetData(ZOL_TY, initRecyclerView(binding.recyclerviewModel11));
-        getNetData(ZOL_JR, initRecyclerView(binding.recyclerviewModel12));
-        getNetData(ZOL_YS, initRecyclerView(binding.recyclerviewModel13));
-        getNetData(ZOL_JZ, initRecyclerView(binding.recyclerviewModel14));
-        getNetData(ZOL_DW, initRecyclerView(binding.recyclerviewModel15));
-        getNetData(ZOL_ZW, initRecyclerView(binding.recyclerviewModel16));
+        getBannerNetData(Constants.ZMBZ_KTDM);
+        getNetData(Constants.ZOL_FJ, initRecyclerView(binding.recyclerviewModel1));
+        getNetData(Constants.ZOL_MV, initRecyclerView(binding.recyclerviewModel2));
+        getNetData(Constants.ZOL_DM, initRecyclerView(binding.recyclerviewModel3));
+        getNetData(Constants.ZOL_CY, initRecyclerView(binding.recyclerviewModel4));
+        getNetData(Constants.ZOL_AQ, initRecyclerView(binding.recyclerviewModel5));
+        getNetData(Constants.ZOL_KT, initRecyclerView(binding.recyclerviewModel6));
+        getNetData(Constants.ZOL_KA, initRecyclerView(binding.recyclerviewModel7));
+        getNetData(Constants.ZOL_MX, initRecyclerView(binding.recyclerviewModel8));
+        getNetData(Constants.ZOL_YX, initRecyclerView(binding.recyclerviewModel9));
+        getNetData(Constants.ZOL_CM, initRecyclerView(binding.recyclerviewModel10));
+        getNetData(Constants.ZOL_TY, initRecyclerView(binding.recyclerviewModel11));
+        getNetData(Constants.ZOL_JR, initRecyclerView(binding.recyclerviewModel12));
+        getNetData(Constants.ZOL_YS, initRecyclerView(binding.recyclerviewModel13));
+        getNetData(Constants.ZOL_JZ, initRecyclerView(binding.recyclerviewModel14));
+        getNetData(Constants.ZOL_DW, initRecyclerView(binding.recyclerviewModel15));
+        getNetData(Constants.ZOL_ZW, initRecyclerView(binding.recyclerviewModel16));
     }
 
     private void initView() {
@@ -130,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (Element imageList : li) {
                         //详细页连接
                         String linkUrl = imageList.select("a").first().attr("href");
-                        if (!linkUrl.startsWith(BASE_URl)) {
-                            linkUrl = BASE_URl + linkUrl.substring(1);
+                        if (!linkUrl.startsWith(Constants.BASE_URl)) {
+                            linkUrl = Constants.BASE_URl + linkUrl.substring(1);
                         }
                         //图片标题
                         String imgaeTitle = imageList.select("p").text();
@@ -194,8 +173,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (Element imageList : li) {
                         //详细页连接
                         String linkUrl = imageList.select("a").attr("href");
-                        if (!linkUrl.startsWith(ZOL_URl)) {
-                            linkUrl = ZOL_URl + linkUrl.substring(1);
+                        if (!linkUrl.startsWith(Constants.ZOL_URl)) {
+                            linkUrl = Constants.ZOL_URl + linkUrl.substring(1);
                         }
                         //图片标题
                         String imageTitle = imageList.select("img").attr("title");
@@ -204,8 +183,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Document document2 = Jsoup.connect(linkUrl).get();
                         Elements wrapper = document2.getElementsByClass("wrapper mt15");
                         String wrapperUrl = wrapper.select("a").get(1).attr("href");
-                        if (!wrapperUrl.startsWith(ZOL_URl)) {
-                            wrapperUrl = ZOL_URl + wrapperUrl.substring(1);
+                        if (!wrapperUrl.startsWith(Constants.ZOL_URl)) {
+                            wrapperUrl = Constants.ZOL_URl + wrapperUrl.substring(1);
                         }
                         Document document3 = Jsoup.connect(wrapperUrl).get();
                         String imgUrl = document3.select("img").first().attr("src");
@@ -256,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void downloadPic(String url) {
         //截取解析的URL地址，拼接后再使用
         String picName = url.substring(24, url.length());
-        ApiHelper.getInstance(IMG_URl).downloadPic(picName)
+        ApiHelper.getInstance(Constants.IMG_URl).downloadPic(picName)
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<ResponseBody, Bitmap>() {
                     @Override
