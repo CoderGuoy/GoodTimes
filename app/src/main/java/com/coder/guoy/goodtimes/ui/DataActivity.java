@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.Fragment4Binding;
@@ -26,8 +27,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.coder.guoy.goodtimes.Constants.ZOL_URl;
-
 /**
  * @Version:
  * @Author:
@@ -46,10 +45,8 @@ public class DataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bindingView = DataBindingUtil.setContentView(this, R.layout.fragment_4);
         initRecyclerView(bindingView.recyclerviewModel2);
-        //zol
-        getNetData(ZOL_URl + "meinv/", zol);
-        //wmpic
-//        getNetData(WMPIC_URl + "tupian/wmpic/", wmpic, bindingView.recyclerviewModel2);
+
+        getNetData(Constants.WMPIC_URl + "meinv/", zol);
     }
 
     //TODO: 获取网络数据
@@ -65,8 +62,8 @@ public class DataActivity extends AppCompatActivity {
                     for (Element imageList : li) {
                         //详细页连接
                         String linkUrl = imageList.select("a").attr("href");
-                        if (!linkUrl.startsWith(ZOL_URl)) {
-                            linkUrl = ZOL_URl + linkUrl.substring(1);
+                        if (!linkUrl.startsWith(Constants.ZOL_URl)) {
+                            linkUrl = Constants.ZOL_URl + linkUrl.substring(1);
                         }
                         //图片标题
                         String imageTitle = imageList.select("img").attr("title");
