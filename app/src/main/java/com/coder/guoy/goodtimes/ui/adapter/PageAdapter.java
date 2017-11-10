@@ -25,16 +25,16 @@ import java.util.List;
 /**
  * @Version:V1.0
  * @Author:CoderGuoy
- * @CreateTime:2017年10月30日
+ * @CreateTime:2017年11月10日
  * @Descrpiton:
  */
-public class HomePageAdapter extends RecyclerView.Adapter {
+public class PageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemHomePageBinding binding;
 
-    public HomePageAdapter(Context context) {
+    public PageAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
@@ -42,7 +42,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size() > 9 ? 9 : mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     public void setNewData(List data) {

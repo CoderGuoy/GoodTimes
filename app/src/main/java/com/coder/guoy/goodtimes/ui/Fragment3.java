@@ -28,7 +28,6 @@ import rx.schedulers.Schedulers;
 
 
 public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
-    private List<ImageBean> mList = new ArrayList<>();
     private StaggeredGridLayoutManager mLayoutManager;
     private HomePageAdapter adapter;
 
@@ -40,6 +39,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initRecyclerView();
     }
 
     @Override
@@ -65,6 +65,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
                         list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
                     }
                     subscriber.onNext(list);
+                    subscriber.onCompleted();
                 } catch (IOException e) {
                     subscriber.onError(e);
                 }
@@ -77,13 +78,12 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
                 Log.i("beanListLink", beanList.get(0).getLinkUrl());
                 Log.i("beanListImage", beanList.get(0).getImageUrl());
                 Log.i("beanListTitle", beanList.get(0).getImgaeTitle());
-                mList = beanList;
-                initRecyclerView();
-                showContentView();
+                adapter.setNewData(beanList);
             }
 
             @Override
             public void onCompleted() {
+                showContentView();
                 Log.i("onCompleted", "完成");
             }
 
