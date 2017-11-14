@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ImageDeatilActivity"/>
-        <activity android:name=".ui.TypePage1Activity"/>
+        <activity android:name=".ui.girl.GirlActivity"/>
         <activity android:name=".cache.CacheActivity"/>
         <activity android:name=".ui.ProgressImageAcitivty"/>
         <activity android:name=".ui.DataActivity"/>

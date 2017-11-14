@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.coder.guoy.goodtimes.api.ApiHelper;
+import com.coder.guoy.goodtimes.api.GirlHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
@@ -22,9 +23,9 @@ import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
-import com.coder.guoy.goodtimes.ui.TypePage1Activity;
-import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
-import com.coder.guoy.goodtimes.ui.adapter.HomeTypeAdapter;
+import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
+import com.coder.guoy.goodtimes.ui.home.HomePageAdapter;
+import com.coder.guoy.goodtimes.ui.home.HomeTypeAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerNetData(Constants.ZMBZ_KTDM);
+//        getBannerNetData(Constants.ZMBZ_KTDM);
+        getBannerMMData(Constants.WALLPAPER,1);
         getNetData(Constants.ZOL_FJ, initRecyclerView(binding.recyclerviewModel1));
         getNetData(Constants.ZOL_MV, initRecyclerView(binding.recyclerviewModel2));
         getNetData(Constants.ZOL_DM, initRecyclerView(binding.recyclerviewModel3));
@@ -161,6 +163,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
+    private void getBannerMMData(String url,int page){
+        GirlHelper.GirlHelper(url, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ImageBean>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+                        String imageUrl = null;
+                        //随即取集合内的一张图
+                        int position = (int) (Math.random() * beanList.size());
+                        if (beanList.get(position).getImageUrl() != null) {
+                            imageUrl = beanList.get(position).getImageUrl();
+                            Log.i("Banner_imageUrl", imageUrl);
+                        }
+                        GlideUtils.setImage(imageUrl, binding.imageHome);
+                        downloadPic(imageUrl);
+                        initDrawerlayout(imageUrl);
+                    }
+                });
+    }
+
     //TODO: 获取网络数据
     private void getNetData(final String url, final HomePageAdapter adapter) {
         Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
@@ -234,8 +267,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // TODO: 将输入流解码为位图
     private void downloadPic(String url) {
         //截取解析的URL地址，拼接后再使用
-        String picName = url.substring(24, url.length());
-        ApiHelper.getInstance(Constants.IMG_URl).downloadPic(picName)
+        String picName = url.substring(20, url.length());
+        ApiHelper.getInstance(Constants.MM_URL).downloadPic(picName)
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<ResponseBody, Bitmap>() {
                     @Override
@@ -358,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, CacheActivity.class));
                             break;
                         case R.id.ll_nav_2:
-                            startActivity(new Intent(MainActivity.this, TypePage1Activity.class));
+                            startActivity(new Intent(MainActivity.this, GirlActivity.class));
                             break;
                         case R.id.ll_nav_3:
                             startActivity(new Intent(MainActivity.this, ProgressImageAcitivty.class));

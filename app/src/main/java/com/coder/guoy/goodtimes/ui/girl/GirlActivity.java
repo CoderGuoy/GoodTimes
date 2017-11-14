@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.ui.girl;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,23 +7,26 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
-import com.coder.guoy.goodtimes.databinding.ActivityTypePage1Binding;
+import com.coder.guoy.goodtimes.databinding.ActivityGirlBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @Version:V1.0
  * @Author:CoderGuoy
- * @CreateTime:
+ * @CreateTime:2017年11月14日
  * @Descrpiton:
  */
-public class TypePage1Activity extends MvvmBaseActivity<ActivityTypePage1Binding> {
-    private String[] fragmentTitile = {"热门", "影视", "明星", "高清", "体育", "美食"};
+public class GirlActivity extends MvvmBaseActivity<ActivityGirlBinding> {
+    private String[] fragmentTitile = {"最新套图", "性感美女", "少女萝莉", "美乳香臀", "丝袜美腿",
+            "性感特写", "欧美女神", "女神合集", "美女壁纸"};
     private List<Fragment> fragments = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_type_page1);
+        setContentView(R.layout.activity_girl);
         initView();
     }
 
@@ -36,12 +39,15 @@ public class TypePage1Activity extends MvvmBaseActivity<ActivityTypePage1Binding
 
     // TODO: 初始化Fragment
     private void initFragment() {
-        fragments.add(new Fragment1());
-        fragments.add(new Fragment2());
-        fragments.add(new Fragment3());
-        fragments.add(new Fragment4());
-        fragments.add(new Fragment4());
-        fragments.add(new Fragment4());
+        fragments.add(new FragmentGirl1());
+        fragments.add(new FragmentGirl2());
+        fragments.add(new FragmentGirl3());
+        fragments.add(new FragmentGirl4());
+        fragments.add(new FragmentGirl5());
+        fragments.add(new FragmentGirl6());
+        fragments.add(new FragmentGirl7());
+        fragments.add(new FragmentGirl8());
+        fragments.add(new FragmentGirl9());
     }
 
     private class FragmentAdapter extends FragmentPagerAdapter {

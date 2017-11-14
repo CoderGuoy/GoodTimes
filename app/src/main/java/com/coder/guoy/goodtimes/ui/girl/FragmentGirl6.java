@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.ui.girl;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,8 +9,7 @@ import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
-import com.coder.guoy.goodtimes.databinding.Fragment3Binding;
-import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
+import com.coder.guoy.goodtimes.databinding.FragmentGirlBinding;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -27,13 +26,13 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
+public class FragmentGirl6 extends MvvmBaseFragment<FragmentGirlBinding> {
     private StaggeredGridLayoutManager mLayoutManager;
-    private HomePageAdapter adapter;
+    private GirlAdapter adapter;
 
     @Override
     public int setContent() {
-        return R.layout.fragment_3;
+        return R.layout.fragment_girl;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
                 List<ImageBean> list = new ArrayList<>();
                 try {
-                    Document document = Jsoup.connect(Constants.MM_URL + Constants.XINGGAN + 1).get();
+                    Document document = Jsoup.connect(Constants.MM_URL + Constants.XGTX + 1).get();
                     Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
                     for (Element imageList : imageLists) {
                         String linkUrl = imageList.select("a").first().attr("href");
@@ -102,7 +101,7 @@ public class Fragment3 extends MvvmBaseFragment<Fragment3Binding> {
 
     // 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new HomePageAdapter(getContext());
+        adapter = new GirlAdapter(getContext());
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         bindingView.recyclerviewList3.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewList3.setAdapter(adapter);

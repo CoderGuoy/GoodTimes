@@ -60,20 +60,14 @@ public class GlideUtils {
     }
 
     public static void setImage(String url, ImageView imageview) {
-        RequestOptions options = new RequestOptions().placeholder(R.color.placeholder_color)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(App.getInstance().getApplicationContext())
                 .load(url)
-                .apply(options)
-                .thumbnail(0.1f)
                 .into(imageview);
     }
 
     public static void setDetailImage(String url, ImageView imageview) {
         Glide.with(App.getInstance().getApplicationContext())
                 .load(url)
-//                .error(R.drawable.loadingfaile)     //加载失败显示的图片
                 .into(imageview);
     }
 }

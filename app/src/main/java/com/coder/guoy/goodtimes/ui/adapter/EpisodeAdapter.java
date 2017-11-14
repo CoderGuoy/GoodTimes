@@ -71,28 +71,28 @@ public class EpisodeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NormalViewHolder vh = (NormalViewHolder) holder;
-        if (position == 0) {
-            vh.cardView.setVisibility(View.GONE);
+//        if (position == 0) {
+//            vh.cardView.setVisibility(View.GONE);
+//        } else {
+//            vh.cardView.setVisibility(View.VISIBLE);
+        //头像
+        GlideUtils.setImage(notNull(mList.get(position).getImageIcon()), vh.imageIcon);
+        //作者
+        vh.textAuthor.setText(notNull(mList.get(position).getAuthor()));
+        //时间
+        vh.textTime.setText(notNull(mList.get(position).getTime()));
+        //标题
+        vh.textTitle.setText(notNull(mList.get(position).getTitle()));
+        //内容
+        vh.textContent.setText(notNull(mList.get(position).getContent()));
+        //评论
+        String comment = mList.get(position).getCommnet();
+        if (comment != null) {
+            vh.textComment.setVisibility(View.VISIBLE);
+            vh.textComment.setText(comment);
         } else {
-            vh.cardView.setVisibility(View.VISIBLE);
-            //头像
-            GlideUtils.setImage(notNull(mList.get(position).getImageIcon()), vh.imageIcon);
-            //作者
-            vh.textAuthor.setText(notNull(mList.get(position).getAuthor()));
-            //时间
-            vh.textTime.setText(notNull(mList.get(position).getTime()));
-            //标题
-            vh.textTitle.setText(notNull(mList.get(position).getTitle()));
-            //内容
-            vh.textContent.setText(notNull(mList.get(position).getContent()));
-            //评论
-            String comment = mList.get(position).getCommnet();
-            if (comment != null) {
-                vh.textComment.setVisibility(View.VISIBLE);
-                vh.textComment.setText(comment);
-            } else {
-                vh.textComment.setVisibility(View.GONE);
-            }
+            vh.textComment.setVisibility(View.GONE);
+//            }
         }
     }
 

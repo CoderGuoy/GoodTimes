@@ -4,12 +4,12 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        style="@style/MatchMatch">
+        style="@style/MatchMatch.Vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_list3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"/>
 
+    </LinearLayout>
 </layout>

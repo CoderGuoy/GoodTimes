@@ -53,10 +53,9 @@ public class Constants {
     public static final String XX_URL = "http://nbsw.cc/";
     //热推
     public static final String RT_URL = "http://nbsw.cc/?resolved=unresolved";
-    //HOME
-//    public static final String HOME = "page/";
+
     //最新套图+
-//    public static final String NEW = "/new/page/";
+    public static final String NEW = "/new/page/";
     //性感美女+
     public static final String XINGGAN = "/cat/xinggan/page/";
     //少女萝莉+

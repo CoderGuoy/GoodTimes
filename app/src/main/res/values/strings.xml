@@ -25,9 +25,12 @@
 
     <string name="Error_Timeout">网络连接超时，请重试</string>
     <string name="Error_Faile">加载失败,点击重试</string>
+    <string name="NO_MORE">没有更多数据了</string>
+    <string name="NO_DATA">暂无数据</string>
     <string name="Loading">努力加载中...</string>
     <string name="Logo_text">最新、最热、高清美图</string>
     <string name="pleasewait">敬请期待</string>
+    <string name="pleaseanother">美图木有了，看看别的吧</string>
 
     <string name="transitional_image">the image of transition</string>
     <string name="image_index">%1$d/%2$d</string>

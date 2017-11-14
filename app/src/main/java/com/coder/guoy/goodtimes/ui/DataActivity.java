@@ -11,7 +11,7 @@ import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.Fragment4Binding;
-import com.coder.guoy.goodtimes.ui.adapter.HomePageAdapter;
+import com.coder.guoy.goodtimes.ui.home.HomePageAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
