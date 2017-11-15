@@ -75,10 +75,13 @@ public class GirlAdapter extends RecyclerView.Adapter {
             manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-//                    Log.i("position", position + "");
-//                    Log.i("ItemCount", getItemCount() + "");
-//                    Log.i("SpanCount", manager.getSpanCount() + "");
-                    // TODO: 2017/11/14 问题解决了，但是很诡异
+                    // TODO: 2017/11/14 return的返回值是RecyclerView列数的比重
+                    /**
+                     * 动态设置adapter中每个条目所占列数的比重
+                     * 假设 GridLayoutManager 设置为4(SpanCount)列
+                     * return 1 为只占4分之一，默认所占的列数
+                     * return 4 (manager.getSpanCount()),为占一整行
+                     */
                     return (position == getItemCount() - 1) ? manager.getSpanCount() : 1;
                 }
             });
