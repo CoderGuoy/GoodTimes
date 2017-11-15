@@ -16,7 +16,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/animated_google_show"/>
+                android:src="@drawable/animated_logo"/>
 
         </RelativeLayout>
     </LinearLayout>

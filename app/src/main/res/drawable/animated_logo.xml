@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:drawable="@drawable/vector_logo">
+
+    <target
+        android:name="bar_left"
+        android:animation="@animator/animator_logo_leftbar"/>
+
+    <target
+        android:name="bar_right"
+        android:animation="@animator/animator_logo_rightbar"/>
+
+    <target
+        android:name="point_left"
+        android:animation="@animator/animator_logo_leftpoint"/>
+
+    <target
+        android:name="point_right"
+        android:animation="@animator/animator_logo_rightpoint"/>
+
+</animated-vector>
