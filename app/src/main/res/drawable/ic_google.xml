@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="100dp"
+        android:height="100dp"
+        android:viewportHeight="100"
+        android:viewportWidth="100">
+
+    <group android:name="blue">
+        <path
+            android:fillColor="@color/google_blue"
+            android:pathData="M 40,25
+        A 10,10,0,1,1,60,25
+        A 10,10,0,1,1,40,25"/>
+    </group>
+
+    <group android:name="red">
+        <path
+            android:fillColor="@color/google_red"
+            android:pathData="M 65,50
+        A 10,10,0,1,1,85,50
+        A 10,10,0,1,1,65,50"/>
+    </group>
+
+    <group android:name="green">
+        <path
+            android:fillColor="@color/google_green"
+            android:pathData="M 40,75
+        A 10,10,0,1,1,60,75
+        A 10,10,0,1,1,40,75"/>
+    </group>
+
+    <group android:name="yello">
+        <path
+            android:fillColor="@color/google_yello"
+            android:pathData="M 15,50
+        A 10,10,0,1,1,35,50
+        A 10,10,0,1,1,15,50"/>
+    </group>
+
+</vector>

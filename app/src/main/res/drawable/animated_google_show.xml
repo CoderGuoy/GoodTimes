@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:drawable="@drawable/ic_google">
+
+    <target
+        android:name="blue"
+        android:animation="@animator/animator_google_blue"/>
+
+    <target
+        android:name="red"
+        android:animation="@animator/animator_google_red"/>
+
+    <target
+        android:name="green"
+        android:animation="@animator/animator_google_green"/>
+
+    <target
+        android:name="yello"
+        android:animation="@animator/animator_google_yello"/>
+
+</animated-vector>

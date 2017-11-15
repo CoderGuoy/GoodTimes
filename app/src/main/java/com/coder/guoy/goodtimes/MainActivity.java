@@ -21,13 +21,13 @@ import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
+import com.coder.guoy.goodtimes.ui.AnimatedActivity;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
 import com.coder.guoy.goodtimes.ui.home.HomePageAdapter;
 import com.coder.guoy.goodtimes.ui.home.HomeTypeAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
-import com.coder.guoy.goodtimes.utils.ToastUtil;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -400,7 +400,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, DataActivity.class));
                             break;
                         case R.id.ll_nav_5:
-                            ToastUtil.show(getString(R.string.pleasewait));
+                            startActivity(new Intent(MainActivity.this, AnimatedActivity.class));
                             break;
                     }
                 }

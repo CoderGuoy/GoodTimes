@@ -31,6 +31,8 @@
         <activity android:name=".cache.CacheActivity"/>
         <activity android:name=".ui.ProgressImageAcitivty"/>
         <activity android:name=".ui.DataActivity"/>
+        <activity android:name=".ui.AnimatedActivity">
+        </activity>
     </application>
 
 </manifest>

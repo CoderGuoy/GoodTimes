@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:ordering="sequentially">
+    <!--    <objectAnimator
+            android:duration="500"
+            android:propertyName="translateX"
+            android:valueFrom="0"
+            android:valueTo="25"
+            android:valueType="floatType"/>
+
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="translateY"
+            android:valueFrom="0"
+            android:valueTo="25"
+            android:valueType="floatType"/>-->
+    <set android:ordering="together">
+
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="translateX"
+            android:valueFrom="0"
+            android:valueTo="12"
+            android:valueType="floatType"/>
+
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="translateY"
+            android:valueFrom="0"
+            android:valueTo="25"
+            android:valueType="floatType"/>
+
+    </set>
+    <set android:ordering="together">
+
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="translateX"
+            android:valueFrom="12"
+            android:valueTo="0"
+            android:valueType="floatType"/>
+
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="translateY"
+            android:valueFrom="25"
+            android:valueTo="50"
+            android:valueType="floatType"/>
+
+    </set>
+
+</set>
