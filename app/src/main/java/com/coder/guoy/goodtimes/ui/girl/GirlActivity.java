@@ -19,7 +19,7 @@ import java.util.List;
  * @Descrpiton:
  */
 public class GirlActivity extends MvvmBaseActivity<ActivityGirlBinding> {
-    private String[] fragmentTitile = {"最新套图", "性感美女", "少女萝莉", "美乳香臀", "丝袜美腿",
+    private String[] fragmentTitile = {"最新美图", "性感美女", "少女萝莉", "美乳香臀", "丝袜美腿",
             "性感特写", "欧美女神", "女神合集", "美女壁纸"};
     private List<Fragment> fragments = new ArrayList<>();
 

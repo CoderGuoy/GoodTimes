@@ -25,21 +25,13 @@ import com.coder.guoy.goodtimes.ui.AnimatedActivity;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
-import com.coder.guoy.goodtimes.ui.home.HomePageAdapter;
-import com.coder.guoy.goodtimes.ui.home.HomeTypeAdapter;
+import com.coder.guoy.goodtimes.ui.girl.GirlAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
+import com.coder.guoy.goodtimes.utils.ToastUtil;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -47,13 +39,10 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
-    private int[] images = {R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
-            R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
-            R.drawable.home_type1, R.drawable.home_type1, R.drawable.home_type1,
-            R.drawable.home_type1,};
-    private String[] titles = {"分类", "分类", "分类", "分类", "分类",
-            "分类", "分类", "分类", "分类", "分类",};
+    private GridLayoutManager mLayoutManager;
+    private GirlAdapter adapter;
     private int color;
+    private int PAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,28 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transparentStatusBar();
         initView();
         getBannerMMData(Constants.WALLPAPER,1);
-        getNetData(Constants.ZOL_FJ, initRecyclerView(binding.recyclerviewModel1));
-        getNetData(Constants.ZOL_MV, initRecyclerView(binding.recyclerviewModel2));
-        getNetData(Constants.ZOL_DM, initRecyclerView(binding.recyclerviewModel3));
-        getNetData(Constants.ZOL_CY, initRecyclerView(binding.recyclerviewModel4));
-        getNetData(Constants.ZOL_AQ, initRecyclerView(binding.recyclerviewModel5));
-        getNetData(Constants.ZOL_KT, initRecyclerView(binding.recyclerviewModel6));
-        getNetData(Constants.ZOL_KA, initRecyclerView(binding.recyclerviewModel7));
-        getNetData(Constants.ZOL_MX, initRecyclerView(binding.recyclerviewModel8));
-        getNetData(Constants.ZOL_YX, initRecyclerView(binding.recyclerviewModel9));
-        getNetData(Constants.ZOL_CM, initRecyclerView(binding.recyclerviewModel10));
-        getNetData(Constants.ZOL_TY, initRecyclerView(binding.recyclerviewModel11));
-        getNetData(Constants.ZOL_JR, initRecyclerView(binding.recyclerviewModel12));
-        getNetData(Constants.ZOL_YS, initRecyclerView(binding.recyclerviewModel13));
-        getNetData(Constants.ZOL_JZ, initRecyclerView(binding.recyclerviewModel14));
-        getNetData(Constants.ZOL_DW, initRecyclerView(binding.recyclerviewModel15));
-        getNetData(Constants.ZOL_ZW, initRecyclerView(binding.recyclerviewModel16));
+        getNetData(Constants.NEW, PAGE);
     }
 
     private void initView() {
         binding.flTitleMenu.setOnClickListener(this);
         binding.imageMenu.setOnClickListener(this);
-        initRecyclerView(images, titles, binding.recyclerviewHomeType);
+        initRecyclerView(binding.recyclerviewModel1);
     }
 
     // TODO: 透明状态栏
@@ -127,59 +101,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //TODO: 获取网络数据
-    private void getNetData(final String url, final HomePageAdapter adapter) {
-        Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
-            @Override
-            public void call(Subscriber<? super List<ImageBean>> subscriber) {
-                List<ImageBean> list = new ArrayList<>();
-                try {
-                    Document document = Jsoup.connect(url).get();
-                    Elements li = document.getElementsByClass("photo-list-padding");
-                    for (Element imageList : li) {
-                        //详细页连接
-                        String linkUrl = imageList.select("a").attr("href");
-                        if (!linkUrl.startsWith(Constants.ZOL_URl)) {
-                            linkUrl = Constants.ZOL_URl + linkUrl.substring(1);
-                        }
-                        //图片标题
-                        String imageTitle = imageList.select("img").attr("title");
-
-                        //原图
-                        Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements wrapper = document2.getElementsByClass("wrapper mt15");
-                        String wrapperUrl = wrapper.select("a").get(1).attr("href");
-                        if (!wrapperUrl.startsWith(Constants.ZOL_URl)) {
-                            wrapperUrl = Constants.ZOL_URl + wrapperUrl.substring(1);
-                        }
-                        Document document3 = Jsoup.connect(wrapperUrl).get();
-                        String imgUrl = document3.select("img").first().attr("src");
-
-                        list.add(new ImageBean(wrapperUrl, imgUrl, imageTitle));
-                    }
-                    subscriber.onNext(list);
-                    subscriber.onCompleted();
-                } catch (IOException e) {
-                    subscriber.onError(e);
-                }
-            }
-        });
-
-        observable
+    private void getNetData(String url, int page) {
+        GirlHelper.GirlHelper(url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
-                    public void onNext(List<ImageBean> beanList) {
-                        adapter.setNewData(beanList);
-                    }
-
-                    @Override
                     public void onCompleted() {
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("onError", e.toString());
+
+                    }
+
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+                        adapter.setNewData(beanList);
                     }
                 });
     }
@@ -240,64 +179,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //都没获取到，用默认颜色
                     color = Color.rgb(229, 67, 124);//#E5437C
                 }
+                //设置幕布颜色
                 binding.collapsingtollbar.setContentScrimColor(color);
-                setTextColor(color);
+                //设置模块文字颜色
+                binding.textModel1.setTextColor(color);
             }
         });
     }
 
-    // TODO: 首页分类列表
-    private void initRecyclerView(int[] images, String[] titles, RecyclerView recyclerView) {
-        HomeTypeAdapter adapter = new HomeTypeAdapter(this, images, titles, 10);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 5);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setNestedScrollingEnabled(false);
-    }
-
     // TODO: 图片列表
-    private HomePageAdapter initRecyclerView(RecyclerView recyclerView) {
-        HomePageAdapter adapter = new HomePageAdapter(this);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 3);
+    private void initRecyclerView(RecyclerView recyclerView) {
+        adapter = new GirlAdapter(this);
+        mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(mOnScrollListener);
         recyclerView.setNestedScrollingEnabled(false);
-        return adapter;
     }
 
-    private void setTextColor(int color) {
-        binding.textModel1.setTextColor(color);
-        binding.textModel1More.setBackgroundColor(color);
-        binding.textModel2.setTextColor(color);
-        binding.textModel2More.setBackgroundColor(color);
-        binding.textModel3.setTextColor(color);
-        binding.textModel3More.setBackgroundColor(color);
-        binding.textModel4.setTextColor(color);
-        binding.textModel4More.setBackgroundColor(color);
-        binding.textModel5.setTextColor(color);
-        binding.textModel5More.setBackgroundColor(color);
-        binding.textModel6.setTextColor(color);
-        binding.textModel6More.setBackgroundColor(color);
-        binding.textModel7.setTextColor(color);
-        binding.textModel7More.setBackgroundColor(color);
-        binding.textModel8.setTextColor(color);
-        binding.textModel8More.setBackgroundColor(color);
-        binding.textModel9.setTextColor(color);
-        binding.textModel9More.setBackgroundColor(color);
-        binding.textModel10.setTextColor(color);
-        binding.textModel10More.setBackgroundColor(color);
-        binding.textModel11.setTextColor(color);
-        binding.textModel11More.setBackgroundColor(color);
-        binding.textModel12.setTextColor(color);
-        binding.textModel12More.setBackgroundColor(color);
-        binding.textModel13.setTextColor(color);
-        binding.textModel13More.setBackgroundColor(color);
-        binding.textModel14.setTextColor(color);
-        binding.textModel14More.setBackgroundColor(color);
-        binding.textModel15.setTextColor(color);
-        binding.textModel15More.setBackgroundColor(color);
-        binding.textModel16.setTextColor(color);
-        binding.textModel16More.setBackgroundColor(color);
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        private int lastVisibleItem;
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+        }
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE && adapter.isFadeTips() == false
+                    && lastVisibleItem + 1 == adapter.getItemCount()) {
+                PAGE++;
+                upNetData(Constants.NEW, PAGE);
+            }
+        }
+    };
+
+    private void upNetData(String url, int page) {
+        GirlHelper.GirlHelper(url, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ImageBean>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+                        if (beanList.size() > 0 && beanList != null) {
+                            adapter.addData(beanList, true);
+                        } else {
+                            adapter.addData(null, false);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -307,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
+                ToastUtil.show("弹出菜单，未实现");
                 break;
         }
     }

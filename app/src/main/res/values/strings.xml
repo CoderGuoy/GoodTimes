@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">图酷</string>
+    <string name="app_name">美图看看</string>
     <string name="navigation_header1">Cache</string>
     <string name="navigation_header2">Tablayout</string>
     <string name="navigation_header3">Progress</string>
     <string name="navigation_header4">Data</string>
     <string name="navigation_header5">5</string>
 
-    <string name="home_model_1">风景</string>
+    <string name="home_model_1">最新美图</string>
     <string name="home_model_2">美女</string>
     <string name="home_model_3">动漫</string>
     <string name="home_model_4">创意</string>

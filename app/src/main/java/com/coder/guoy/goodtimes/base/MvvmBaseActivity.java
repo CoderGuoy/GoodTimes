@@ -19,7 +19,9 @@ import android.widget.RelativeLayout;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.databinding.ActivityBaseMvvmBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
+import com.coder.guoy.goodtimes.utils.CommonUtils;
 import com.coder.guoy.goodtimes.utils.NetUtils;
+import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 
 import rx.Subscription;
 
@@ -58,7 +60,7 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
 //        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 
         // 设置透明状态栏
-//        StatusBarUtils.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
+        StatusBarUtils.setColor(this, CommonUtils.getColor(R.color.colorLogo), 0);
         // 加载动画
         imgProgress = findViewById(R.id.img_progress);
         refresh = findViewById(R.id.ll_error_refresh);

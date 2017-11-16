@@ -73,26 +73,12 @@ public class FragmentGirl1 extends MvvmBaseFragment<FragmentGirlBinding> {
     }
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
-        private boolean loading = true;
-        private int previousTotal = 0;
-        private int visibleItemCount;
-        private int totalItemCount;
         private int lastVisibleItem;
-        private int firstVisibleItem;
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            visibleItemCount = recyclerView.getChildCount();
-            totalItemCount = mLayoutManager.getItemCount();
             lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-            firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
-//            Log.i("previousTotal", previousTotal + "");
-//            Log.i("visibleItemCount", visibleItemCount + "");
-//            Log.i("totalItemCount", totalItemCount + "");
-//            Log.i("lastVisibleItem", lastVisibleItem + "");
-//            Log.i("firstVisibleItem", firstVisibleItem + "");
-//            Log.i("onScrolled", "==========================");
         }
 
         @Override
