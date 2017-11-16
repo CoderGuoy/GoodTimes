@@ -54,23 +54,23 @@ public class Constants {
     //热推
     public static final String RT_URL = "http://nbsw.cc/?resolved=unresolved";
 
-    //最新套图+
+    //最新套图_Girl1
     public static final String NEW = "/new/page/";
-    //性感美女+
+    //性感美女_Girl2
     public static final String XINGGAN = "/cat/xinggan/page/";
-    //少女萝莉+
+    //少女萝莉_Girl3
     public static final String SHAONV = "/cat/shaonv/page/";
-    //美乳香臀+
+    //美乳香臀_Girl4
     public static final String MRXT = "/cat/mrxt/page/";
-    //丝袜美腿+
+    //丝袜美腿_Girl5
     public static final String SWMT = "/cat/swmt/page/";
-    //性感特写+
+    //性感特写_Girl6
     public static final String XGTX = "/cat/xgtx/page/";
-    //欧美女神+
+    //欧美女神_Girl7
     public static final String OUMEI = "/cat/oumei/page/";
-    //女神合集+
+    //女神合集_Girl8
     public static final String COLLECTION = "/cat/collection/page/";
-    //美女壁纸+
+    //美女壁纸_Girl9
     public static final String WALLPAPER = "/cat/wallpaper/page";
     //肌肉猛男+
     public static final String JRMN = "/cat/1/page/";

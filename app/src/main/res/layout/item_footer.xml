@@ -6,26 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/img_progress"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/animated_loading"/>
-
-        <TextView
-            android:id="@+id/item_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="底部控件"
-            >
-        </TextView>
+            android:src="@drawable/animated_logo"/>
     </LinearLayout>
 </layout>

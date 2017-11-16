@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-//        getBannerNetData(Constants.ZMBZ_KTDM);
         getBannerMMData(Constants.WALLPAPER,1);
         getNetData(Constants.ZOL_FJ, initRecyclerView(binding.recyclerviewModel1));
         getNetData(Constants.ZOL_MV, initRecyclerView(binding.recyclerviewModel2));
@@ -96,73 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // TODO: 为Banner图获取网络图片
-    private void getBannerNetData(final String url) {
-        Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
-            @Override
-            public void call(Subscriber<? super List<ImageBean>> subscriber) {
-                List<ImageBean> list = new ArrayList<>();
-                try {
-                    Document document = Jsoup.connect(url).get();
-                    Elements main_cont = document.getElementsByClass("main_cont");
-                    Document parse = Jsoup.parse(main_cont.toString());
-                    Element imageLists = parse.getElementsByClass("list_cont Left_list_cont").get(0);
-                    Elements li = imageLists.select("li");
-                    for (Element imageList : li) {
-                        //详细页连接
-                        String linkUrl = imageList.select("a").first().attr("href");
-                        if (!linkUrl.startsWith(Constants.BASE_URl)) {
-                            linkUrl = Constants.BASE_URl + linkUrl.substring(1);
-                        }
-                        //图片标题
-                        String imgaeTitle = imageList.select("p").text();
-
-                        Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements main_cont2 = document2.getElementsByClass("pic_main");
-                        Document parse2 = Jsoup.parse(main_cont2.toString());
-                        Elements imageLists2 = parse2.getElementsByClass("pic-meinv");
-                        //图片地址
-                        String imgUrl = imageLists2.select("img").first().attr("src");
-
-                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
-                    }
-                    subscriber.onNext(list);
-                    subscriber.onCompleted();
-                } catch (IOException e) {
-                    subscriber.onError(e);
-                }
-            }
-        });
-        observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<ImageBean>>() {
-                    @Override
-                    public void onNext(List<ImageBean> beanList) {
-                        String imageUrl = null;
-                        //随即取集合内的一张图
-                        int position = (int) (Math.random() * beanList.size());
-                        if (beanList.get(position).getImageUrl() != null) {
-                            imageUrl = beanList.get(position).getImageUrl();
-                            Log.i("Banner_imageUrl", imageUrl);
-                        }
-                        GlideUtils.setImage(imageUrl, binding.imageHome);
-                        downloadPic(imageUrl);
-                        initDrawerlayout(imageUrl);
-                    }
-
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i("onError:BannerNetData:", e.toString());
-                    }
-
-                });
-    }
-
     private void getBannerMMData(String url,int page){
         GirlHelper.GirlHelper(url, page)
                 .subscribeOn(Schedulers.io())
@@ -306,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     color = vibrantSwatch.getRgb();
                 } else {
                     //都没获取到，用默认颜色
-                    color = Color.rgb(135, 206, 235);//#87CEEB
+                    color = Color.rgb(229, 67, 124);//#E5437C
                 }
                 binding.collapsingtollbar.setContentScrimColor(color);
                 setTextColor(color);

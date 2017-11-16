@@ -42,29 +42,14 @@
                         android:textSize="15sp"/>
                 </LinearLayout>
 
-                <!--加载中..-->
-                <LinearLayout
-                    android:id="@+id/ll_progress_bar"
+                <!--加载中-->
+                <ImageView
+                    android:id="@+id/img_progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:gravity="center_vertical">
+                    android:src="@drawable/animated_logo"/>
 
-                    <ImageView
-                        android:id="@+id/img_progress"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/animated_loading"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="努力加载中..."
-                        android:textColor="@color/colorTabText"
-                        android:textSize="14sp"/>
-
-                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
 

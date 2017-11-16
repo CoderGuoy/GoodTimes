@@ -24,6 +24,7 @@ import com.coder.guoy.goodtimes.databinding.ItemGirlBinding;
 import com.coder.guoy.goodtimes.progress.GlideImageView;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
+import com.coder.guoy.goodtimes.utils.ToastUtil;
 
 import java.util.List;
 
@@ -124,13 +125,11 @@ public class GirlAdapter extends RecyclerView.Adapter {
 
     // TODO: 底部footView的ViewHolder
     private class FootViewHolder extends RecyclerView.ViewHolder {
-        public TextView footText;
         public LinearLayout footLayout;
         public ImageView image;
 
         public FootViewHolder(View itemView) {
             super(itemView);
-            footText = footBinding.itemTextview;
             footLayout = footBinding.layoutFoot;
             image = footBinding.imgProgress;
         }
@@ -179,7 +178,6 @@ public class GirlAdapter extends RecyclerView.Adapter {
                 fadeTips = false;
                 if (mList.size() > 0) {
                     // 如果查询数据发现增加之后，就显示正在加载更多
-                    vh.footText.setText("正在加载更多...");
                     //显示加载动画
                     vh.image.setVisibility(View.VISIBLE);
                     animationDrawable = (Animatable) vh.image.getDrawable();
@@ -189,14 +187,14 @@ public class GirlAdapter extends RecyclerView.Adapter {
                 if (mList.size() < 8 & mList.size() > 0) {
                     //显示没有更多数据了
                     vh.footLayout.setVisibility(View.VISIBLE);
-                    vh.footText.setText(mContext.getString(R.string.NO_MORE));
+                    ToastUtil.show(mContext.getString(R.string.NO_MORE));
                     //隐藏加载动画
                     vh.image.setVisibility(View.GONE);
                 }
             } else {
                 if (mList.size() > 0) {//请求数据为空（非首次）
                     // 如果查询数据发现并没有增加时，就显示没有更多数据了
-                    vh.footText.setText(mContext.getString(R.string.NO_MORE));
+                    ToastUtil.show(mContext.getString(R.string.NO_MORE));
                     //隐藏加载动画
                     vh.image.setVisibility(View.GONE);
                     // 将fadeTips设置true

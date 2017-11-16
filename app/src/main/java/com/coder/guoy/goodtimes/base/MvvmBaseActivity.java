@@ -4,22 +4,22 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.Color;
 import android.graphics.drawable.Animatable;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.databinding.ActivityBaseMvvmBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.utils.CommonUtils;
 import com.coder.guoy.goodtimes.utils.NetUtils;
-import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 
 import rx.Subscription;
 
@@ -33,12 +33,17 @@ import rx.Subscription;
 
 public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
     protected SV bindingView;// 布局view
-    private LinearLayout llProgressBar;//努力加载中...
+    private ImageView imgProgress;//努力加载中...
     private View refresh;//加载失败
     private ActivityBaseMvvmBinding mBaseBinding;
     private Animatable mAnimationDrawable;
     protected Subscription subscription;
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        transparentStatusBar();
+    }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -47,19 +52,18 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
         //content
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingView.getRoot().setLayoutParams(params);
-        RelativeLayout mContainer = (RelativeLayout) mBaseBinding.getRoot().findViewById(R.id.container);
+        RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
 //        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 
         // 设置透明状态栏
-        StatusBarUtils.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
-        llProgressBar = getView(R.id.ll_progress_bar);
-        refresh = getView(R.id.ll_error_refresh);
-
+//        StatusBarUtils.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         // 加载动画
-        ImageView img = getView(R.id.img_progress);
-        mAnimationDrawable = (Animatable) img.getDrawable();
+        imgProgress = findViewById(R.id.img_progress);
+        refresh = findViewById(R.id.ll_error_refresh);
+
+        mAnimationDrawable = (Animatable) imgProgress.getDrawable();
 
         // 默认进入页面就开启动画
         if (!mAnimationDrawable.isRunning()) {
@@ -75,10 +79,6 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
         });
         bindingView.getRoot().setVisibility(View.GONE);
         onRefresh();
-    }
-
-    protected <T extends View> T getView(int id) {
-        return (T) findViewById(id);
     }
 
     /**
@@ -104,8 +104,8 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
      * 显示进度条
      */
     protected void showLoading() {
-        if (llProgressBar.getVisibility() != View.VISIBLE) {
-            llProgressBar.setVisibility(View.VISIBLE);
+        if (imgProgress.getVisibility() != View.VISIBLE) {
+            imgProgress.setVisibility(View.VISIBLE);
         }
         // 开始动画
         if (!mAnimationDrawable.isRunning()) {
@@ -120,8 +120,8 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
     }
 
     protected void showContentView() {
-        if (llProgressBar.getVisibility() != View.GONE) {
-            llProgressBar.setVisibility(View.GONE);
+        if (imgProgress.getVisibility() != View.GONE) {
+            imgProgress.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
@@ -136,8 +136,8 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
     }
 
     protected void showError() {
-        if (llProgressBar.getVisibility() != View.GONE) {
-            llProgressBar.setVisibility(View.GONE);
+        if (imgProgress.getVisibility() != View.GONE) {
+            imgProgress.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
@@ -195,5 +195,12 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
         config.setToDefaults();
         res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
+    }
+    // TODO: 透明状态栏
+    private void transparentStatusBar() {
+        View decorView = getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 }
