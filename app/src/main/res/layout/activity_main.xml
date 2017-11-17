@@ -7,7 +7,7 @@
         android:id="@+id/drawerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_eeeeee">
+        android:background="@color/colorWrite">
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -87,6 +87,152 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWrite"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type1"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type1"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_1"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type2"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type2"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_2"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type3"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type3"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_3"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type4"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type4"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_4"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type5"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type5"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_5"/>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWrite"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type6"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type6"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_6"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type7"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type7"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_7"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type8"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type8"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_8"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type9"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type9"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_9"/>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardview_type10"
+                            style="@style/Home_CardStyle"
+                            app:cardCornerRadius="25dp"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardUseCompatPadding="true">
+
+                            <TextView
+                                android:id="@+id/text_type10"
+                                style="@style/Home_TypeStyle"
+                                android:text="@string/home_model_10"/>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/colorWrite"
                         android:orientation="vertical">
@@ -98,7 +244,7 @@
                             <TextView
                                 android:id="@+id/text_model_1"
                                 style="@style/Home_TextStyle"
-                                android:text="@string/home_model_1"/>
+                                android:text="@string/home_text_1"/>
 
                         </RelativeLayout>
 

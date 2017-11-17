@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui.adapter;
+package com.coder.guoy.goodtimes.ui;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
-import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -25,16 +24,16 @@ import java.util.List;
 /**
  * @Version:V1.0
  * @Author:CoderGuoy
- * @CreateTime:2017年11月10日
- * @Descrpiton:首页
+ * @CreateTime:2017年10月30日
+ * @Descrpiton:
  */
-public class HomeAdapter extends RecyclerView.Adapter {
+public class HomePageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemHomeBinding binding;
 
-    public HomeAdapter(Context context) {
+    public HomePageAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
@@ -42,7 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        return mList == null ? 0 : mList.size() > 9 ? 9 : mList.size();
     }
 
     public void setNewData(List data) {
@@ -90,6 +89,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         //设置图片
         if (mList.get(position).getImageUrl() != null) {
             GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
+//            GlideUtils.progressImage(mList.get(position).getImageUrl(), vh.imageView, vh.progressView);
         }
         //设置标题
         if (mList.get(position).getImgaeTitle() != null) {

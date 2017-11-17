@@ -23,11 +23,10 @@ import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.AnimatedActivity;
 import com.coder.guoy.goodtimes.ui.DataActivity;
+import com.coder.guoy.goodtimes.ui.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
-import com.coder.guoy.goodtimes.ui.adapter.HomeAdapter;
 import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
-import com.coder.guoy.goodtimes.utils.ToastUtil;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ import rx.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
     private GridLayoutManager mLayoutManager;
-    private HomeAdapter adapter;
+    private HomeImageAdapter imageAdapter;//图片列表
     private int color;
     private int PAGE = 1;
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerMMData(Constants.WALLPAPER,1);
+        getBannerMMData(Constants.WALLPAPER, 1);
         getNetData(Constants.NEW, PAGE);
     }
 
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // TODO: 为Banner图获取网络图片
-    private void getBannerMMData(String url,int page){
+    private void getBannerMMData(String url, int page) {
         GirlHelper.GirlHelper(url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onNext(List<ImageBean> beanList) {
-                        adapter.setNewData(beanList);
+                        imageAdapter.setNewData(beanList);
                     }
                 });
     }
@@ -179,20 +178,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //都没获取到，用默认颜色
                     color = Color.rgb(229, 67, 124);//#E5437C
                 }
-                //设置幕布颜色
-                binding.collapsingtollbar.setContentScrimColor(color);
-                //设置模块文字颜色
-                binding.textModel1.setTextColor(color);
+                setColor(color);
             }
         });
     }
 
-    // TODO: 图片列表
+    private void setColor(int color) {
+        //幕布颜色
+        binding.collapsingtollbar.setContentScrimColor(color);
+        //文字颜色
+        binding.textModel1.setTextColor(color);
+        //分类标题
+        binding.textType1.setBackgroundColor(color);
+        binding.textType2.setBackgroundColor(color);
+        binding.textType3.setBackgroundColor(color);
+        binding.textType4.setBackgroundColor(color);
+        binding.textType5.setBackgroundColor(color);
+        binding.textType6.setBackgroundColor(color);
+        binding.textType7.setBackgroundColor(color);
+        binding.textType8.setBackgroundColor(color);
+        binding.textType9.setBackgroundColor(color);
+        binding.textType10.setBackgroundColor(color);
+    }
+
     private void initRecyclerView(RecyclerView recyclerView) {
-        adapter = new HomeAdapter(this);
+        imageAdapter = new HomeImageAdapter(this);
         mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(imageAdapter);
         recyclerView.setNestedScrollingEnabled(false);
     }
 
@@ -203,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
-                ToastUtil.show("弹出菜单，未实现");
+                getBannerMMData(Constants.WALLPAPER, 1);
                 break;
         }
     }
@@ -236,4 +249,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }, 260);
         }
     };
+
 }

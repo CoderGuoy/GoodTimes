@@ -6,22 +6,18 @@
     <string name="navigation_header4">Data</string>
     <string name="navigation_header5">5</string>
 
-    <string name="home_model_1">最新美图</string>
-    <string name="home_model_2">美女</string>
-    <string name="home_model_3">动漫</string>
-    <string name="home_model_4">创意</string>
-    <string name="home_model_5">爱情</string>
-    <string name="home_model_6">卡通</string>
-    <string name="home_model_7">可爱</string>
-    <string name="home_model_8">明星</string>
-    <string name="home_model_9">游戏</string>
-    <string name="home_model_10">车模</string>
-    <string name="home_model_11">体育</string>
-    <string name="home_model_12">节日</string>
-    <string name="home_model_13">影视</string>
-    <string name="home_model_14">建筑</string>
-    <string name="home_model_15">动物</string>
-    <string name="home_model_16">植物</string>
+    <string name="home_model_1">性感\n美女</string>
+    <string name="home_model_2">少女\n萝莉</string>
+    <string name="home_model_3">美乳\n香臀</string>
+    <string name="home_model_4">丝袜\n美腿</string>
+    <string name="home_model_5">性感\n特写</string>
+    <string name="home_model_6">欧美\n女神</string>
+    <string name="home_model_7">女神\n集合</string>
+    <string name="home_model_8">肌肉\n猛男</string>
+    <string name="home_model_9">魅力\n型男</string>
+    <string name="home_model_10">花美\n鲜肉</string>
+
+    <string name="home_text_1">最新美图</string>
 
     <string name="Error_Timeout">网络连接超时，请重试</string>
     <string name="Error_Faile">加载失败,点击重试</string>

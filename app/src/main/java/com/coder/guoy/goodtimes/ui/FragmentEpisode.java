@@ -10,7 +10,6 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.EpisodeBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseFragment;
 import com.coder.guoy.goodtimes.databinding.Fragment2Binding;
-import com.coder.guoy.goodtimes.ui.adapter.EpisodeAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

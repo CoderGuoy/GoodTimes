@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui.adapter;
+package com.coder.guoy.goodtimes.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
