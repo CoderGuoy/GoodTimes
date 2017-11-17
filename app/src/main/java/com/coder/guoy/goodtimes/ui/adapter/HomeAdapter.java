@@ -11,12 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
-import com.coder.guoy.goodtimes.databinding.ItemHomePageBinding;
-import com.coder.guoy.goodtimes.progress.GlideImageView;
+import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
@@ -26,15 +26,15 @@ import java.util.List;
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年11月10日
- * @Descrpiton:
+ * @Descrpiton:首页
  */
-public class PageAdapter extends RecyclerView.Adapter {
+public class HomeAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
-    private ItemHomePageBinding binding;
+    private ItemHomeBinding binding;
 
-    public PageAdapter(Context context) {
+    public HomeAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
@@ -66,7 +66,7 @@ public class PageAdapter extends RecyclerView.Adapter {
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
-        public GlideImageView imageView;
+        public ImageView imageView;
         public TextView textTitle;
         public CardView cardView;
 
@@ -80,7 +80,7 @@ public class PageAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home_page, parent, false);
+        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home, parent, false);
         return new NormalViewHolder(binding.getRoot());
     }
 
@@ -90,7 +90,6 @@ public class PageAdapter extends RecyclerView.Adapter {
         //设置图片
         if (mList.get(position).getImageUrl() != null) {
             GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
-//            GlideUtils.progressImage(mList.get(position).getImageUrl(), vh.imageView, vh.progressView);
         }
         //设置标题
         if (mList.get(position).getImgaeTitle() != null) {

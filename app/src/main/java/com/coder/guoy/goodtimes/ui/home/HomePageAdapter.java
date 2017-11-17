@@ -11,12 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
-import com.coder.guoy.goodtimes.databinding.ItemHomePageBinding;
-import com.coder.guoy.goodtimes.progress.GlideImageView;
+import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
@@ -32,7 +32,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
-    private ItemHomePageBinding binding;
+    private ItemHomeBinding binding;
 
     public HomePageAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -66,7 +66,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
-        public GlideImageView imageView;
+        public ImageView imageView;
         public TextView textTitle;
         public CardView cardView;
 
@@ -80,7 +80,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home_page, parent, false);
+        binding = DataBindingUtil.inflate(mInflater, R.layout.item_home, parent, false);
         return new NormalViewHolder(binding.getRoot());
     }
 

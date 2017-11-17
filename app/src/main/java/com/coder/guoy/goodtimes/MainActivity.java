@@ -24,8 +24,8 @@ import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.AnimatedActivity;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
+import com.coder.guoy.goodtimes.ui.adapter.HomeAdapter;
 import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
-import com.coder.guoy.goodtimes.ui.girl.GirlAdapter;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -40,7 +40,7 @@ import rx.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
     private GridLayoutManager mLayoutManager;
-    private GirlAdapter adapter;
+    private HomeAdapter adapter;
     private int color;
     private int PAGE = 1;
 
@@ -189,57 +189,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // TODO: 图片列表
     private void initRecyclerView(RecyclerView recyclerView) {
-        adapter = new GirlAdapter(this);
+        adapter = new HomeAdapter(this);
         mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(mOnScrollListener);
         recyclerView.setNestedScrollingEnabled(false);
-    }
-
-    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
-        private int lastVisibleItem;
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-        }
-
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            if (newState == RecyclerView.SCROLL_STATE_IDLE && adapter.isFadeTips() == false
-                    && lastVisibleItem + 1 == adapter.getItemCount()) {
-                PAGE++;
-                upNetData(Constants.NEW, PAGE);
-            }
-        }
-    };
-
-    private void upNetData(String url, int page) {
-        GirlHelper.GirlHelper(url, page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<ImageBean>>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<ImageBean> beanList) {
-                        if (beanList.size() > 0 && beanList != null) {
-                            adapter.addData(beanList, true);
-                        } else {
-                            adapter.addData(null, false);
-                        }
-                    }
-                });
     }
 
     @Override

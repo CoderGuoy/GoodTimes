@@ -21,7 +21,6 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemFooterBinding;
 import com.coder.guoy.goodtimes.databinding.ItemGirlBinding;
-import com.coder.guoy.goodtimes.progress.GlideImageView;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
@@ -111,7 +110,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
 
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
-        public GlideImageView imageView;
+        public ImageView imageView;
         public TextView textTitle;
         public CardView cardView;
 
