@@ -21,9 +21,8 @@ import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.ui.AnimatedActivity;
 import com.coder.guoy.goodtimes.ui.DataActivity;
-import com.coder.guoy.goodtimes.ui.HomeImageAdapter;
+import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
@@ -188,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.collapsingtollbar.setContentScrimColor(color);
         //文字颜色
         binding.textModel1.setTextColor(color);
+        binding.textLeft.setBackgroundColor(color);
+        binding.textMore.setBackgroundColor(color);
         //分类标题
         binding.textType1.setBackgroundColor(color);
         binding.textType2.setBackgroundColor(color);
@@ -242,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, DataActivity.class));
                             break;
                         case R.id.ll_nav_5:
-                            startActivity(new Intent(MainActivity.this, AnimatedActivity.class));
                             break;
                     }
                 }

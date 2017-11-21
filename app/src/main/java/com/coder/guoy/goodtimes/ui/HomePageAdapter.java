@@ -25,7 +25,7 @@ import java.util.List;
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年10月30日
- * @Descrpiton:
+ * @Descrpiton:首页分类
  */
 public class HomePageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;

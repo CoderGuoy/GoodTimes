@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.ui.home;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
+import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.List;
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年11月10日
- * @Descrpiton:首页
+ * @Descrpiton:首页图片
  */
 public class HomeImageAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
