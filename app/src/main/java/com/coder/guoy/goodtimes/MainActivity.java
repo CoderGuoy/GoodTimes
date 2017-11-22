@@ -14,11 +14,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.coder.guoy.goodtimes.api.ApiHelper;
 import com.coder.guoy.goodtimes.api.GirlHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
-import com.coder.guoy.goodtimes.cache.CacheActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
@@ -26,6 +26,7 @@ import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.ImageTypeAcitvity;
+import com.coder.guoy.goodtimes.utils.DisplayUtil;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.cardviewType10.setOnClickListener(this);
         binding.cardviewMore.setOnClickListener(this);
         initRecyclerView(binding.recyclerviewModel1);
+        initDrawerlayout();
     }
 
     // TODO: 透明状态栏
@@ -105,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         GlideUtils.setImage(imageUrl, binding.imageHome);
                         downloadPic(imageUrl);
-                        initDrawerlayout(imageUrl);
                     }
                 });
     }
@@ -134,10 +135,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // TODO: 初始化侧拉菜单
-    private void initDrawerlayout(String url) {
+    private void initDrawerlayout() {
+        //设置侧拉菜单占屏幕的2/3
+        int screenWidth = DisplayUtil.getScreenWidth();
+        int screen = screenWidth / 2;
+        ViewGroup.LayoutParams layoutParams = binding.navigationview.getLayoutParams();
+        layoutParams.width = screen;
+        binding.navigationview.setLayoutParams(layoutParams);
+
         View headerView = binding.navigationview.getHeaderView(0);
         NavigationHeaderBinding bind = DataBindingUtil.bind(headerView);
-        GlideUtils.setImage(url, bind.imageHead);
         bind.llNav1.setOnClickListener(listener);
         bind.llNav2.setOnClickListener(listener);
         bind.llNav3.setOnClickListener(listener);
@@ -286,7 +293,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     switch (v.getId()) {
                         case R.id.ll_nav_1:
-                            startActivity(new Intent(MainActivity.this, CacheActivity.class));
                             break;
                         case R.id.ll_nav_2:
                             break;

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">美图看看</string>
-    <string name="navigation_header1">Cache</string>
-    <string name="navigation_header2">Tablayout</string>
+    <string name="navigation_header1">1</string>
+    <string name="navigation_header2">2</string>
     <string name="navigation_header3">Progress</string>
     <string name="navigation_header4">Data</string>
     <string name="navigation_header5">5</string>
@@ -17,6 +17,7 @@
     <string name="home_model_9">魅力\n型男</string>
     <string name="home_model_10">花美\n鲜肉</string>
 
+    <string name="Logo_text">最新、最热、高清美图</string>
     <string name="home_text_1">最新美图</string>
     <string name="home_more">更多</string>
     <string name="home_checkmore">查看更多美图</string>
@@ -26,7 +27,6 @@
     <string name="NO_MORE">没有更多数据了</string>
     <string name="NO_DATA">暂无数据</string>
     <string name="Loading">努力加载中...</string>
-    <string name="Logo_text">最新、最热、高清美图</string>
     <string name="pleasewait">敬请期待</string>
     <string name="pleaseanother">美图木有了，看看别的吧</string>
 

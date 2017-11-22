@@ -14,6 +14,11 @@
     <color name="color_eeeeee">#eeeeee</color>
     <!--主题颜色-->
     <color name="colorTheme">#1E222A</color>
+    <color name="colorLogo50">#80E5437C</color>
+    <color name="colorLogo60">#9AE5437C</color>
+    <color name="colorLogo70">#B3E5437C</color>
+    <color name="colorLogo80">#CCE5437C</color>
+    <color name="colorLogo90">#E5E5437C</color>
     <color name="colorLogo">#E5437C</color>
     <!--页面背景的颜色-->
     <color name="colorPageBg">#f2f4f5</color>

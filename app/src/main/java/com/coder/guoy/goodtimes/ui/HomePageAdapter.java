@@ -49,21 +49,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void addData(List data) {
-        mList.addAll(data);
-        notifyDataSetChanged();
-    }
-
-    public void removeAll(List data) {
-        mList.removeAll(data);
-        notifyDataSetChanged();
-    }
-
-    public void removeItems(List mList) {
-        this.mList = mList;
-        notifyDataSetChanged();
-    }
-
     private class NormalViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         public TextView textTitle;
@@ -89,7 +74,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         //设置图片
         if (mList.get(position).getImageUrl() != null) {
             GlideUtils.setImage(mList.get(position).getImageUrl(), vh.imageView);
-//            GlideUtils.progressImage(mList.get(position).getImageUrl(), vh.imageView, vh.progressView);
         }
         //设置标题
         if (mList.get(position).getImgaeTitle() != null) {

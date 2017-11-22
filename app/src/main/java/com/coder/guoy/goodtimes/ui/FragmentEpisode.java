@@ -25,7 +25,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-
 public class FragmentEpisode extends MvvmBaseFragment<Fragment2Binding> {
     private List<EpisodeBean> mList = new ArrayList<>();
     private LinearLayoutManager mLayoutManager;
