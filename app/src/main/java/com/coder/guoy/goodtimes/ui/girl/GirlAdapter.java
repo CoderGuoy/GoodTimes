@@ -147,7 +147,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if ((holder instanceof NormalViewHolder)) {
+        if (holder instanceof NormalViewHolder) {
             final NormalViewHolder vh = (NormalViewHolder) holder;
             //设置图片
             if (mList.get(position).getImageUrl() != null) {

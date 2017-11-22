@@ -1,5 +1,6 @@
 package com.coder.guoy.goodtimes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -22,9 +23,10 @@ import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.DataActivity;
-import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
+import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
+import com.coder.guoy.goodtimes.ui.home.ImageTypeAcitvity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -55,6 +57,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         binding.flTitleMenu.setOnClickListener(this);
         binding.imageMenu.setOnClickListener(this);
+        binding.cardviewType1.setOnClickListener(this);
+        binding.cardviewType2.setOnClickListener(this);
+        binding.cardviewType3.setOnClickListener(this);
+        binding.cardviewType4.setOnClickListener(this);
+        binding.cardviewType5.setOnClickListener(this);
+        binding.cardviewType6.setOnClickListener(this);
+        binding.cardviewType7.setOnClickListener(this);
+        binding.cardviewType8.setOnClickListener(this);
+        binding.cardviewType9.setOnClickListener(this);
+        binding.cardviewType10.setOnClickListener(this);
+        binding.cardviewMore.setOnClickListener(this);
         initRecyclerView(binding.recyclerviewModel1);
     }
 
@@ -219,7 +232,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.image_menu:// 右侧功能菜单
                 getBannerMMData(Constants.WALLPAPER, 1);
                 break;
+            case R.id.cardview_type1:
+                startImageType(this,Constants.XINGGAN,"性感美女");
+                break;
+            case R.id.cardview_type2:
+                startImageType(this,Constants.SHAONV,"少女萝莉");
+                break;
+            case R.id.cardview_type3:
+                startImageType(this,Constants.MRXT,"美乳香臀");
+                break;
+            case R.id.cardview_type4:
+                startImageType(this,Constants.SWMT,"丝袜美腿");
+                break;
+            case R.id.cardview_type5:
+                startImageType(this,Constants.XGTX,"性感特写");
+                break;
+            case R.id.cardview_type6:
+                startImageType(this,Constants.OUMEI,"欧美女神");
+                break;
+            case R.id.cardview_type7:
+                startImageType(this,Constants.COLLECTION,"女神集合");
+                break;
+            case R.id.cardview_type8:
+                startImageType(this,Constants.JRMN,"肌肉猛男");
+                break;
+            case R.id.cardview_type9:
+                startImageType(this,Constants.MLXN,"魅力型男");
+                break;
+            case R.id.cardview_type10:
+                startImageType(this,Constants.HMXR,"花美鲜肉");
+                break;
         }
+    }
+
+    public void startImageType(Context context, String url, String title) {
+        Intent intent = new Intent(context, ImageTypeAcitvity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", color);
+        context.startActivity(intent);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {

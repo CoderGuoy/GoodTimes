@@ -33,6 +33,8 @@
         <activity android:name=".ui.DataActivity"/>
         <activity android:name=".ui.AnimatedActivity">
         </activity>
+        <activity android:name=".ui.home.ImageTypeAcitvity">
+        </activity>
     </application>
 
 </manifest>
