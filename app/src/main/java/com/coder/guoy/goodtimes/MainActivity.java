@@ -24,7 +24,6 @@ import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.DataActivity;
 import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
-import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.ImageTypeAcitvity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         transparentStatusBar();
         initView();
-        getBannerMMData(Constants.WALLPAPER, 1);
-        getNetData(Constants.NEW, PAGE);
+        getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
+        getNetData(Constants.MM_URL, Constants.NEW, PAGE);
     }
 
     private void initView() {
@@ -80,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // TODO: 为Banner图获取网络图片
-    private void getBannerMMData(String url, int page) {
-        GirlHelper.GirlHelper(url, page)
+    private void getBannerMMData(String baseUrl, String url, int page) {
+        GirlHelper.ImageHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -112,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //TODO: 获取网络数据
-    private void getNetData(String url, int page) {
-        GirlHelper.GirlHelper(url, page)
+    private void getNetData(String baseUrl, String url, int page) {
+        GirlHelper.ImageHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -191,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     color = Color.rgb(229, 67, 124);//#E5437C
                 }
                 setColor(color);
+                imageAdapter.setColor(color);
             }
         });
     }
@@ -230,43 +230,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
-                getBannerMMData(Constants.WALLPAPER, 1);
+                getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
                 break;
             case R.id.cardview_type1:
-                startImageType(this,Constants.XINGGAN,"性感美女");
+                startImageType(this, Constants.MM_URL, Constants.XINGGAN, "性感美女");
                 break;
             case R.id.cardview_type2:
-                startImageType(this,Constants.SHAONV,"少女萝莉");
+                startImageType(this, Constants.MM_URL, Constants.SHAONV, "少女萝莉");
                 break;
             case R.id.cardview_type3:
-                startImageType(this,Constants.MRXT,"美乳香臀");
+                startImageType(this, Constants.MM_URL, Constants.MRXT, "美乳香臀");
                 break;
             case R.id.cardview_type4:
-                startImageType(this,Constants.SWMT,"丝袜美腿");
+                startImageType(this, Constants.MM_URL, Constants.SWMT, "丝袜美腿");
                 break;
             case R.id.cardview_type5:
-                startImageType(this,Constants.XGTX,"性感特写");
+                startImageType(this, Constants.MM_URL, Constants.XGTX, "性感特写");
                 break;
             case R.id.cardview_type6:
-                startImageType(this,Constants.OUMEI,"欧美女神");
+                startImageType(this, Constants.MM_URL, Constants.OUMEI, "欧美女神");
                 break;
             case R.id.cardview_type7:
-                startImageType(this,Constants.COLLECTION,"女神集合");
+                startImageType(this, Constants.MM_URL, Constants.COLLECTION, "女神集合");
                 break;
             case R.id.cardview_type8:
-                startImageType(this,Constants.JRMN,"肌肉猛男");
+                startImageType(this, Constants.GG_URL, Constants.JRMN, "肌肉猛男");
                 break;
             case R.id.cardview_type9:
-                startImageType(this,Constants.MLXN,"魅力型男");
+                startImageType(this, Constants.GG_URL, Constants.MLXN, "魅力型男");
                 break;
             case R.id.cardview_type10:
-                startImageType(this,Constants.HMXR,"花美鲜肉");
+                startImageType(this, Constants.GG_URL, Constants.HMXR, "花美鲜肉");
+                break;
+            case R.id.cardview_more:
+                startImageType(this, Constants.MM_URL, Constants.NEW, "最新美图");
                 break;
         }
     }
 
-    public void startImageType(Context context, String url, String title) {
+    public void startImageType(Context context, String baseUrl, String url, String title) {
         Intent intent = new Intent(context, ImageTypeAcitvity.class);
+        intent.putExtra("baseUrl", baseUrl);
         intent.putExtra("url", url);
         intent.putExtra("title", title);
         intent.putExtra("color", color);
@@ -285,7 +289,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, CacheActivity.class));
                             break;
                         case R.id.ll_nav_2:
-                            startActivity(new Intent(MainActivity.this, GirlActivity.class));
                             break;
                         case R.id.ll_nav_3:
                             startActivity(new Intent(MainActivity.this, ProgressImageAcitivty.class));

@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,12 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
 import com.coder.guoy.goodtimes.databinding.ItemHomefooterBinding;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
-import com.coder.guoy.goodtimes.ui.girl.GirlActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
     private ItemHomefooterBinding footBinding;
     private int normalType = 0;     // 第一种ViewType，正常的item
     private int footType = 1;       // 第二种ViewType，底部的提示View
+    private int color = Color.rgb(229, 67, 124);//默认Logo色
 
     public HomeImageAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -88,6 +90,9 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public void setColor(int color){
+        this.color = color;
+    }
 
     private class NormalViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
@@ -152,7 +157,11 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
             fvh.footLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, GirlActivity.class);
+                    Intent intent = new Intent(mContext, ImageTypeAcitvity.class);
+                    intent.putExtra("baseUrl", Constants.MM_URL);
+                    intent.putExtra("url", Constants.NEW);
+                    intent.putExtra("title", "最新美图");
+                    intent.putExtra("color", color);
                     mContext.startActivity(intent);
                 }
             });

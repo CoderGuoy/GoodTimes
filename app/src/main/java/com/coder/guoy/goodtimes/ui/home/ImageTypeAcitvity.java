@@ -11,7 +11,6 @@ import com.coder.guoy.goodtimes.api.GirlHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityImageTypeBinding;
-import com.coder.guoy.goodtimes.ui.girl.GirlAdapter;
 import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -54,7 +53,8 @@ public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding
     @Override
     protected void getData() {
         super.getData();
-        getNetData(getIntent().getStringExtra("url"), PAGE);
+        getNetData(getIntent().getStringExtra("baseUrl"),
+                getIntent().getStringExtra("url"), PAGE);
     }
 
     // TODO: 初始化RecyclerView的Adapter
@@ -66,8 +66,8 @@ public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding
         bindingView.recyclerviewImage.addOnScrollListener(mOnScrollListener);
     }
 
-    private void getNetData(String url, int page) {
-        GirlHelper.GirlHelper(url, page)
+    private void getNetData(String baseUrl, String url, int page) {
+        GirlHelper.ImageHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -103,13 +103,14 @@ public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding
             if (newState == RecyclerView.SCROLL_STATE_IDLE && adapter.isFadeTips() == false
                     && lastVisibleItem + 1 == adapter.getItemCount()) {
                 PAGE++;
-                upNetData(getIntent().getStringExtra("url"), PAGE);
+                upNetData(getIntent().getStringExtra("baseUrl"),
+                        getIntent().getStringExtra("url"), PAGE);
             }
         }
     };
 
-    private void upNetData(String url, int page) {
-        GirlHelper.GirlHelper(url, page)
+    private void upNetData(String baseUrl, String url, int page) {
+        GirlHelper.ImageHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -135,7 +136,7 @@ public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;

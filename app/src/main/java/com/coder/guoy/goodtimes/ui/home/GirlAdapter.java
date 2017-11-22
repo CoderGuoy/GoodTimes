@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui.girl;
+package com.coder.guoy.goodtimes.ui.home;
 
 import android.app.Activity;
 import android.app.ActivityOptions;

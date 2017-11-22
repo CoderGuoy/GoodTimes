@@ -1,6 +1,5 @@
 package com.coder.guoy.goodtimes.api;
 
-import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 
 import org.jsoup.Jsoup;
@@ -23,13 +22,13 @@ import rx.Subscriber;
  */
 public class GirlHelper {
 
-    public static Observable GirlHelper(final String url, final int page) {
+    public static Observable<List<ImageBean>> ImageHelper(final String baseUrl,final String url, final int page) {
         return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
                 List<ImageBean> list = new ArrayList<>();
                 try {
-                    Document document = Jsoup.connect(Constants.MM_URL + url + page).get();
+                    Document document = Jsoup.connect(baseUrl + url + page).get();
                     Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
                     for (Element imageList : imageLists) {
                         String linkUrl = imageList.select("a").first().attr("href");
