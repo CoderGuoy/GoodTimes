@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initDrawerlayout() {
         //设置侧拉菜单占屏幕的2/3
         int screenWidth = DisplayUtil.getScreenWidth();
-        int screen = screenWidth / 2;
+        int screen = screenWidth / 3 * 2;
         ViewGroup.LayoutParams layoutParams = binding.navigationview.getLayoutParams();
         layoutParams.width = screen;
         binding.navigationview.setLayoutParams(layoutParams);
@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             break;
                         case R.id.ll_nav_2:
                             startFulisheActivity(MainActivity.this, Constants.FL_URl,
-                                    Constants.KLNS_URl, getString(R.string.navigation_header2));
+                                    Constants.TGW_URl, getString(R.string.navigation_header2));
                             break;
                         case R.id.ll_nav_3:
                             startFulisheActivity(MainActivity.this, Constants.FL_URl,
@@ -314,11 +314,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             break;
                         case R.id.ll_nav_4:
                             startFulisheActivity(MainActivity.this, Constants.FL_URl,
-                                    Constants.MTS_URl, getString(R.string.navigation_header4));
+                                    Constants.AS_URl, getString(R.string.navigation_header4));
                             break;
                         case R.id.ll_nav_5:
                             startFulisheActivity(MainActivity.this, Constants.FL_URl,
-                                    Constants.YWG_URl, getString(R.string.navigation_header5));
+                                    Constants.TNL_URl, getString(R.string.navigation_header5));
                             break;
                     }
                 }
