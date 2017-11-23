@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemFooterBinding;
-import com.coder.guoy.goodtimes.databinding.ItemGirlBinding;
+import com.coder.guoy.goodtimes.databinding.ItemImageMoreBinding;
 import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
@@ -31,13 +31,13 @@ import java.util.List;
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年10月30日
- * @Descrpiton:
+ * @Descrpiton:带加载更多的图片适配器
  */
-public class GirlAdapter extends RecyclerView.Adapter {
+public class ImageMoreAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
-    private ItemGirlBinding binding;
+    private ItemImageMoreBinding binding;
     private ItemFooterBinding footBinding;
     private Animatable animationDrawable;
     private int normalType = 0;     // 第一种ViewType，正常的item
@@ -46,7 +46,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
     private boolean hasMore = true;   // 变量，是否有更多数据
     private boolean fadeTips = false; // 变量，是否隐藏了底部的提示
 
-    public GirlAdapter(Context context) {
+    public ImageMoreAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
@@ -137,7 +137,7 @@ public class GirlAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == normalType) {
-            binding = DataBindingUtil.inflate(mInflater, R.layout.item_girl, parent, false);
+            binding = DataBindingUtil.inflate(mInflater, R.layout.item_image_more, parent, false);
             return new NormalViewHolder(binding.getRoot());
         } else {
             footBinding = DataBindingUtil.inflate(mInflater, R.layout.item_footer, parent, false);

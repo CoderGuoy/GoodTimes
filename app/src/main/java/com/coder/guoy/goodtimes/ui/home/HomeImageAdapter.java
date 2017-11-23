@@ -157,7 +157,7 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
             fvh.footLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, ImageTypeAcitvity.class);
+                    Intent intent = new Intent(mContext, MeinvAcitvity.class);
                     intent.putExtra("baseUrl", Constants.MM_URL);
                     intent.putExtra("url", Constants.NEW);
                     intent.putExtra("title", "最新美图");

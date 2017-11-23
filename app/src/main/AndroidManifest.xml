@@ -27,14 +27,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ImageDeatilActivity"/>
-        <activity android:name=".ui.girl.GirlActivity"/>
-        <activity android:name=".cache.CacheActivity"/>
         <activity android:name=".ui.ProgressImageAcitivty"/>
         <activity android:name=".ui.DataActivity"/>
-        <activity android:name=".ui.AnimatedActivity">
-        </activity>
-        <activity android:name=".ui.home.ImageTypeAcitvity">
-        </activity>
+        <activity android:name=".ui.home.MeinvAcitvity"/>
+        <activity android:name=".ui.home.FulisheAcitvity"/>
     </application>
 
 </manifest>

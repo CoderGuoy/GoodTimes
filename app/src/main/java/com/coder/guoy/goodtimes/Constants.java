@@ -7,8 +7,12 @@ import java.io.File;
 public class Constants {
     //https://www.meitulu.com/
     //http://www.182fl.com/		福利社
-    //https://www.zhuangbi.info/hot
     public static final String WMPIC_URl = "http://www.wmpic.me/";
+    //================= 福利社 =====================
+    public static final String FL_URl = "http://www.182fl.com/";
+    //头条女神
+    public static final String TTNS_URl = "?cate=16";
+
     //=================   zol  =====================
     //手机壁纸
     public static final String ZOL_URl = "http://sj.zol.com.cn/";
@@ -44,7 +48,7 @@ public class Constants {
     public static final String ZMBZ_JSBZ = BASE_URl + "wallpaper_194_0_0_1.html";
     //桌面壁纸-汽车壁纸
     public static final String ZMBZ_QCBZ = BASE_URl + "wallpaper_195_0_0_1.html";
-    //=================福利=====================
+    //=================美女=====================
     //美女
     public static final String MM_URL = "http://m.xxxiao.com/";
     //男神

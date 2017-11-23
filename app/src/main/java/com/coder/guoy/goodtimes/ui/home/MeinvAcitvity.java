@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.coder.guoy.goodtimes.R;
-import com.coder.guoy.goodtimes.api.GirlHelper;
+import com.coder.guoy.goodtimes.api.ImageHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityImageTypeBinding;
@@ -19,10 +19,15 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> implements View.OnClickListener {
+/**
+ * @Version:V1.0
+ * @Author:CoderGuoy
+ * @CreateTime:2017年11月20日
+ * @Descrpiton:首页美女分类
+ */
+public class MeinvAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> implements View.OnClickListener {
     private GridLayoutManager mLayoutManager;
-    private GirlAdapter adapter;
+    private ImageMoreAdapter adapter;
     private int PAGE = 1;
 
     @Override
@@ -59,15 +64,15 @@ public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding
 
     // TODO: 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new GirlAdapter(ImageTypeAcitvity.this);
-        mLayoutManager = new GridLayoutManager(ImageTypeAcitvity.this, 2);
+        adapter = new ImageMoreAdapter(MeinvAcitvity.this);
+        mLayoutManager = new GridLayoutManager(MeinvAcitvity.this, 2);
         bindingView.recyclerviewImage.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewImage.setAdapter(adapter);
         bindingView.recyclerviewImage.addOnScrollListener(mOnScrollListener);
     }
 
     private void getNetData(String baseUrl, String url, int page) {
-        GirlHelper.ImageHelper(baseUrl, url, page)
+        ImageHelper.ImageHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -110,7 +115,7 @@ public class ImageTypeAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding
     };
 
     private void upNetData(String baseUrl, String url, int page) {
-        GirlHelper.ImageHelper(baseUrl, url, page)
+        ImageHelper.ImageHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {

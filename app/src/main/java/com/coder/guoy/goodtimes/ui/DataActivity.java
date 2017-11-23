@@ -9,19 +9,12 @@ import android.util.Log;
 
 import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
+import com.coder.guoy.goodtimes.api.ImageHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.Fragment4Binding;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,13 +23,11 @@ import rx.schedulers.Schedulers;
  * @Version:
  * @Author:
  * @CreateTime:
- * @Descrpiton:图片详情页
+ * @Descrpiton:
  */
 public class DataActivity extends AppCompatActivity {
     private Fragment4Binding bindingView;
     private long startTime = 0;
-    private String zol = "photo-list-padding";
-    private String wmpic = "item_box";
     private HomePageAdapter adapter;
 
     @Override
@@ -45,44 +36,13 @@ public class DataActivity extends AppCompatActivity {
         bindingView = DataBindingUtil.setContentView(this, R.layout.fragment_4);
         initRecyclerView(bindingView.recyclerviewModel2);
 
-        getNetData(Constants.WMPIC_URl + "meinv/", zol);
+        getNetData(Constants.FL_URl, Constants.TTNS_URl, 1);
     }
 
     //TODO: 获取网络数据
-    private void getNetData(final String url, final String classType) {
+    private void getNetData(final String baseUrl, final String url, final int page) {
         startTime = System.currentTimeMillis();
-        Observable<List<ImageBean>> observable = Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
-            @Override
-            public void call(Subscriber<? super List<ImageBean>> subscriber) {
-                List<ImageBean> list = new ArrayList<>();
-                try {
-                    Document document = Jsoup.connect(url).get();
-                    Elements li = document.getElementsByClass(classType);
-                    for (Element imageList : li) {
-                        //详细页连接
-                        String linkUrl = imageList.select("a").attr("href");
-                        if (!linkUrl.startsWith(Constants.ZOL_URl)) {
-                            linkUrl = Constants.ZOL_URl + linkUrl.substring(1);
-                        }
-                        //图片标题
-                        String imageTitle = imageList.select("img").attr("title");
-
-                        //原图
-                        Document document2 = Jsoup.connect(linkUrl).get();
-                        Elements main_cont2 = document2.getElementsByClass("photo");
-                        String imgUrl = main_cont2.select("img").first().attr("src");
-
-                        list.add(new ImageBean(linkUrl, imgUrl,imageTitle));
-                    }
-                    subscriber.onNext(list);
-                    subscriber.onCompleted();
-                } catch (IOException e) {
-                    subscriber.onError(e);
-                }
-            }
-        });
-
-        observable
+        ImageHelper.NvShenHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
