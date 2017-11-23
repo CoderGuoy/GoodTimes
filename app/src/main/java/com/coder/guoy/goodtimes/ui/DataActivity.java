@@ -28,7 +28,7 @@ import rx.schedulers.Schedulers;
 public class DataActivity extends AppCompatActivity {
     private Fragment4Binding bindingView;
     private long startTime = 0;
-    private HomePageAdapter adapter;
+    private DataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class DataActivity extends AppCompatActivity {
      * @param recyclerView 对应的控件
      */
     private void initRecyclerView(RecyclerView recyclerView) {
-        adapter = new HomePageAdapter(this);
+        adapter = new DataAdapter(this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);

@@ -10,8 +10,89 @@ public class Constants {
     public static final String WMPIC_URl = "http://www.wmpic.me/";
     //================= 福利社 =====================
     public static final String FL_URl = "http://www.182fl.com/";
+
+    //推女神
+    public static final String TNS_URl = "?cate=2";
+    //蜜桃社
+    public static final String MTS_URl = "?cate=3";
+    //尤物馆
+    public static final String YWG_URl = "?cate=4";
+    //爱蜜社
+    public static final String AMS_URl = "?cate=5";
+    //魅妍社
+    public static final String MYS_URl = "?cate=12";
+    //尤果网
+    public static final String TGW_URl = "?cate=6";
+    //菠萝社
+    public static final String BLS_URl = "?cate=9";
+    //推女郎
+    public static final String TNL_URl = "?cate=10";
+    //美媛馆
+    public static final String MYG_URl = "?cate=11";
+    //嗲囡囡
+    public static final String DNN_URl = "?cate=20";
+    //美腿宝贝
+    public static final String MTBB_URl = "?cate=14";
+    //DDY
+    public static final String DDY_URl = "?cate=15";
     //头条女神
     public static final String TTNS_URl = "?cate=16";
+    //模范学院
+    public static final String MFXY_URl = "?cate=17";
+    //影私荟
+    public static final String YSH_URl = "?cate=18";
+    //V女郎
+    public static final String VNL_URl = "?cate=19";
+    //星乐园
+    public static final String XLY_URl = "?cate=21";
+    //爱秀
+    public static final String AX_URl = "?cate=22";
+    //花の颜
+    public static final String HDY_URl = "?cate=23";
+    //爱丝
+    public static final String AS_URl = "?cate=24";
+    //兔几盟
+    public static final String TJM_URl = "?cate=25";
+    //顽味生活
+    public static final String WWSH_URl = "?cate=26";
+    //激萌文化
+    public static final String JMWH_URl = "?cate=27";
+    //优星馆
+    public static final String YXG_URl = "?cate=28";
+    //秀人网
+    public static final String XRW_URl = "?cate=29";
+    //飞图网
+    public static final String FTW_URl = "?cate=30";
+    //爱尤物
+    public static final String AYW_URl = "?cate=31";
+    //青豆客
+    public static final String QDK_URl = "?cate=32";
+    //村长の宝物
+    public static final String CZBW_URl = "?cate=33";
+    //糖果画报
+    public static final String TGHB_URl = "?cate=34";
+    //御女郎
+    public static final String YNL_URl = "?cate=35";
+    //尤蜜荟
+    public static final String YMH_URl = "?cate=36";
+    //异思趣向
+    public static final String YSQX_URl = "?cate=37";
+    //薄荷叶
+    public static final String BHY_URl = "?cate=38";
+    //51MODO
+    public static final String MODO_URl = "?cate=39";
+    //猫萌榜
+    public static final String MMB_URl = "?cate=40";
+    //果团
+    public static final String GT_URl = "?cate=41";
+    //克拉女神
+    public static final String KLNS_URl = "?cate=42";
+    //花漾
+    public static final String HY_URl = "?cate=43";
+    //中国腿模
+    public static final String ZGTM_URl = "?cate=44";
+
+
 
     //=================   zol  =====================
     //手机壁纸

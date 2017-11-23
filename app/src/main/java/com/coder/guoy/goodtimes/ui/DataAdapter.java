@@ -27,13 +27,13 @@ import java.util.List;
  * @CreateTime:2017年10月30日
  * @Descrpiton:首页分类
  */
-public class HomePageAdapter extends RecyclerView.Adapter {
+public class DataAdapter extends RecyclerView.Adapter {
     private List<ImageBean> mList;
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemHomeBinding binding;
 
-    public HomePageAdapter(Context context) {
+    public DataAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
@@ -41,7 +41,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     // 获取条目数量
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size() > 9 ? 9 : mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     public void setNewData(List data) {

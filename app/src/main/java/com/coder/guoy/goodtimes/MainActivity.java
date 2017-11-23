@@ -22,8 +22,6 @@ import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.ui.DataActivity;
-import com.coder.guoy.goodtimes.ui.ProgressImageAcitivty;
 import com.coder.guoy.goodtimes.ui.home.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.MeinvAcitvity;
@@ -284,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("color", color);
         context.startActivity(intent);
     }
+
     public void startFulisheActivity(Context context, String baseUrl, String url, String title) {
         Intent intent = new Intent(context, FulisheAcitvity.class);
         intent.putExtra("baseUrl", baseUrl);
@@ -306,14 +305,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     Constants.TTNS_URl, getString(R.string.navigation_header1));
                             break;
                         case R.id.ll_nav_2:
+                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                                    Constants.KLNS_URl, getString(R.string.navigation_header2));
                             break;
                         case R.id.ll_nav_3:
-                            startActivity(new Intent(MainActivity.this, ProgressImageAcitivty.class));
+                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                                    Constants.TNS_URl, getString(R.string.navigation_header3));
                             break;
                         case R.id.ll_nav_4:
-                            startActivity(new Intent(MainActivity.this, DataActivity.class));
+                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                                    Constants.MTS_URl, getString(R.string.navigation_header4));
                             break;
                         case R.id.ll_nav_5:
+                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                                    Constants.YWG_URl, getString(R.string.navigation_header5));
                             break;
                     }
                 }
