@@ -53,15 +53,7 @@
             <!--菜单布局-->
             <LinearLayout
                 android:id="@+id/ll_nav_1"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ripple_one_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                style="@style/Draw_Navi_Style">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -69,10 +61,10 @@
                     android:src="@drawable/vector_android_blue_24dp"/>
 
                 <TextView
+                    android:text="@string/navigation_header1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:text="@string/navigation_header1"
                     android:textColor="@color/colorContent"
                     android:textSize="15sp"/>
 
@@ -80,14 +72,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_nav_2"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                style="@style/Draw_Navi_Style">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -106,14 +91,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_nav_3"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                style="@style/Draw_Navi_Style">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -132,14 +110,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_nav_4"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                style="@style/Draw_Navi_Style">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -155,22 +126,9 @@
                     android:textSize="15sp"/>
             </LinearLayout>
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="0.3dp"
-                android:background="@color/colorNavLine"/>
-
             <LinearLayout
                 android:id="@+id/ll_nav_5"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                style="@style/Draw_Navi_Style">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -182,6 +140,50 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:text="@string/navigation_header5"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorNavLine"/>
+
+            <LinearLayout
+                android:id="@+id/ll_nav_6"
+                style="@style/Draw_Navi_Style">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/vector_android_blue_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/navigation_header6"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nav_7"
+                style="@style/Draw_Navi_Style">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/vector_android_blue_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/navigation_header7"
                     android:textColor="@color/colorContent"
                     android:textSize="15sp"/>
 

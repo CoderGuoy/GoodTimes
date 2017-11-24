@@ -188,9 +188,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                Palette.Swatch mutedSwatch = palette.getMutedSwatch();
                 if (vibrantSwatch != null) {
                     //获取有活力的 颜色
                     color = vibrantSwatch.getRgb();
+                } else if (mutedSwatch != null) {
+                    //获取有柔和的 颜色
+                    color = mutedSwatch.getRgb();
                 } else {
                     //都没获取到，用默认颜色
                     color = Color.rgb(229, 67, 124);//#E5437C
