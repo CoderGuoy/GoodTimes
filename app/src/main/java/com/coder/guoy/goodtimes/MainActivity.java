@@ -22,7 +22,8 @@ import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.ui.home.FulisheAcitvity;
+import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
+import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.MeinvAcitvity;
 import com.coder.guoy.goodtimes.utils.DisplayUtil;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private HomeImageAdapter imageAdapter;//图片列表
     private int color;
     private int PAGE = 1;
+    private NavigationHeaderBinding bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.i("Banner_imageUrl", imageUrl);
                         }
                         GlideUtils.setImage(imageUrl, binding.imageHome);
+                        GlideUtils.setImage(imageUrl,bind.imageHead);
                         downloadPic(imageUrl);
                     }
                 });
@@ -143,12 +146,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.navigationview.setLayoutParams(layoutParams);
 
         View headerView = binding.navigationview.getHeaderView(0);
-        NavigationHeaderBinding bind = DataBindingUtil.bind(headerView);
+        bind = DataBindingUtil.bind(headerView);
         bind.llNav1.setOnClickListener(listener);
         bind.llNav2.setOnClickListener(listener);
         bind.llNav3.setOnClickListener(listener);
         bind.llNav4.setOnClickListener(listener);
         bind.llNav5.setOnClickListener(listener);
+        bind.llNav6.setOnClickListener(listener);
+        bind.llNav7.setOnClickListener(listener);
+        bind.llNav8.setOnClickListener(listener);
+        bind.llNav9.setOnClickListener(listener);
     }
 
     // TODO: 将输入流解码为位图
@@ -223,6 +230,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.textType8.setBackgroundColor(color);
         binding.textType9.setBackgroundColor(color);
         binding.textType10.setBackgroundColor(color);
+        //侧拉菜单
+//        bind.layoutHeader1.setBackgroundColor(color);
+//        bind.layoutHeader2.setBackgroundColor(color);
+        bind.imageNav1.setBackgroundColor(color);
+        bind.imageNav2.setBackgroundColor(color);
+        bind.imageNav3.setBackgroundColor(color);
+        bind.imageNav4.setBackgroundColor(color);
+        bind.imageNav5.setBackgroundColor(color);
+        bind.imageNav6.setBackgroundColor(color);
+//        bind.imageNav7.setBackgroundColor(color);
+        bind.imageNav8.setBackgroundColor(color);
+        bind.imageNav9.setBackgroundColor(color);
+        bind.textNav1.setTextColor(color);
+        bind.textNav2.setTextColor(color);
+        bind.textNav3.setTextColor(color);
+        bind.textNav4.setTextColor(color);
+        bind.textNav5.setTextColor(color);
+        bind.textNav6.setTextColor(color);
+//        bind.textNav7.setTextColor(color);
+        bind.textNav8.setTextColor(color);
+        bind.textNav9.setTextColor(color);
     }
 
     private void initRecyclerView(RecyclerView recyclerView) {
@@ -323,6 +351,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.ll_nav_5:
                             startFulisheActivity(MainActivity.this, Constants.FL_URl,
                                     Constants.TNL_URl, getString(R.string.navigation_header5));
+                            break;
+                        case R.id.ll_nav_6:
+                            startActivity(new Intent(MainActivity.this, MoneyActivity.class));
+                            break;
+                        case R.id.ll_nav_7:
+                            break;
+                        case R.id.ll_nav_8:
+                            break;
+                        case R.id.ll_nav_9:
                             break;
                     }
                 }

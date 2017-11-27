@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.ui.home;
+package com.coder.guoy.goodtimes.ui.navigation;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.coder.guoy.goodtimes.api.ImageHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityImageTypeBinding;
+import com.coder.guoy.goodtimes.ui.home.ImageMoreAdapter;
 import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 

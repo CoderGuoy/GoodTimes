@@ -5,8 +5,10 @@
     <string name="navigation_header3">推女神</string>
     <string name="navigation_header4">爱丝</string>
     <string name="navigation_header5">推女郎</string>
-    <string name="navigation_header6">6</string>
-    <string name="navigation_header7">7</string>
+    <string name="navigation_header6">打赏一下</string>
+    <string name="navigation_header7">给个好评</string>
+    <string name="navigation_header8">设置</string>
+    <string name="navigation_header9">关于我们</string>
 
     <string name="home_model_1">性感\n美女</string>
     <string name="home_model_2">少女\n萝莉</string>

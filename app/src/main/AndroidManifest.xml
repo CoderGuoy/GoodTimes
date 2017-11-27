@@ -30,7 +30,13 @@
         <activity android:name=".ui.ProgressImageAcitivty"/>
         <activity android:name=".ui.DataActivity"/>
         <activity android:name=".ui.home.MeinvAcitvity"/>
-        <activity android:name=".ui.home.FulisheAcitvity"/>
+        <activity android:name=".ui.navigation.FulisheAcitvity"/>
+        <activity android:name=".ui.navigation.MoneyActivity">
+        </activity>
+        <activity android:name=".ui.navigation.SettingActivity">
+        </activity>
+        <activity android:name=".ui.navigation.AboutMeActivity">
+        </activity>
     </application>
 
 </manifest>
