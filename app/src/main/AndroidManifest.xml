@@ -37,6 +37,8 @@
         </activity>
         <activity android:name=".ui.navigation.AboutMeActivity">
         </activity>
+        <activity android:name=".ui.EQZActivity">
+        </activity>
     </application>
 
 </manifest>

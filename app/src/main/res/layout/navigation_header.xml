@@ -126,8 +126,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_nav_7"
-                style="@style/Draw_Navi_Style"
-                android:visibility="gone">
+                style="@style/Draw_Navi_Style">
 
                 <ImageView
                     android:id="@+id/image_nav7"

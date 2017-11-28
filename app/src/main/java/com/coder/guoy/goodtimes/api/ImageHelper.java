@@ -89,4 +89,41 @@ public class ImageHelper {
             }
         });
     }
+
+    /**
+     *
+     *
+     * @param baseUrl
+     * @param url
+     * @param page
+     * @return
+     */
+    public static Observable<List<ImageBean>> Helper(final String baseUrl, final String url,
+                                                        final int page) {
+        return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
+            @Override
+            public void call(Subscriber<? super List<ImageBean>> subscriber) {
+                List<ImageBean> list = new ArrayList<>();
+                try {
+                    Document document = Jsoup.connect(baseUrl + url + page + ".htm").get();
+                    Elements imageLists = document.getElementsByClass("TypeList");
+                    Elements li = imageLists.select("li");
+                    for (Element imageList : li) {
+                        String linkUrl = imageList.select("a").first().attr("href");
+                        Document detail = Jsoup.connect(linkUrl).get();
+                        Elements detailImage = detail.getElementsByClass("ImageBody");
+                        //图片地址
+                        String imgUrl = detailImage.select("img").first().attr("src");
+                        //图片标题
+                        String imgaeTitle = detailImage.select("img").first().attr("alt");
+                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                    }
+                    subscriber.onNext(list);
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
 }

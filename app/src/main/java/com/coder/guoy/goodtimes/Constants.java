@@ -7,7 +7,13 @@ import java.io.File;
 public class Constants {
     //https://www.meitulu.com/
     //http://www.182fl.com/		福利社
+    //http://www.mm2mm.com/
     public static final String WMPIC_URl = "http://www.wmpic.me/";
+
+    //================= 优美   ======================
+    public static final String URl = "http://www.umei.cc/";
+    public static final String KTMH_URl = "bizhitupian/shoujibizhi/";
+
     //================= 福利社 =====================
     public static final String FL_URl = "http://www.182fl.com/";
 
@@ -90,7 +96,6 @@ public class Constants {
     public static final String GT_URl = "?cate=41";
     //花漾
     public static final String HY_URl = "?cate=43";
-
 
 
     //=================   zol  =====================

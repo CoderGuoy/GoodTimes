@@ -22,6 +22,7 @@ import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
+import com.coder.guoy.goodtimes.ui.EQZActivity;
 import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
 import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
@@ -231,15 +232,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.textType9.setBackgroundColor(color);
         binding.textType10.setBackgroundColor(color);
         //侧拉菜单
-//        bind.layoutHeader1.setBackgroundColor(color);
-//        bind.layoutHeader2.setBackgroundColor(color);
         bind.imageNav1.setBackgroundColor(color);
         bind.imageNav2.setBackgroundColor(color);
         bind.imageNav3.setBackgroundColor(color);
         bind.imageNav4.setBackgroundColor(color);
         bind.imageNav5.setBackgroundColor(color);
         bind.imageNav6.setBackgroundColor(color);
-//        bind.imageNav7.setBackgroundColor(color);
+        bind.imageNav7.setBackgroundColor(color);
         bind.imageNav8.setBackgroundColor(color);
         bind.imageNav9.setBackgroundColor(color);
         bind.textNav1.setTextColor(color);
@@ -248,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.textNav4.setTextColor(color);
         bind.textNav5.setTextColor(color);
         bind.textNav6.setTextColor(color);
-//        bind.textNav7.setTextColor(color);
+        bind.textNav7.setTextColor(color);
         bind.textNav8.setTextColor(color);
         bind.textNav9.setTextColor(color);
     }
@@ -324,6 +323,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context.startActivity(intent);
     }
 
+    public void startEQZActivity(Context context, String baseUrl, String url, String title) {
+        Intent intent = new Intent(context, EQZActivity.class);
+        intent.putExtra("baseUrl", baseUrl);
+        intent.putExtra("url", url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", color);
+        context.startActivity(intent);
+    }
+
     private PerfectClickListener listener = new PerfectClickListener() {
         @Override
         protected void onNoDoubleClick(final View v) {
@@ -360,6 +368,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.ll_nav_8:
                             break;
                         case R.id.ll_nav_9:
+                            startEQZActivity(MainActivity.this,Constants.URl,
+                                    Constants.KTMH_URl,"卡通漫画");
                             break;
                     }
                 }
