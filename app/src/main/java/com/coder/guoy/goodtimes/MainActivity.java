@@ -22,11 +22,10 @@ import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.ui.EQZActivity;
-import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
-import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.MeinvAcitvity;
+import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
+import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
 import com.coder.guoy.goodtimes.utils.DisplayUtil;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.i("Banner_imageUrl", imageUrl);
                         }
                         GlideUtils.setImage(imageUrl, binding.imageHome);
-                        GlideUtils.setImage(imageUrl,bind.imageHead);
+                        GlideUtils.setImage(imageUrl, bind.imageHead);
                         downloadPic(imageUrl);
                     }
                 });
@@ -260,6 +259,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setNestedScrollingEnabled(false);
     }
 
+    public void startActivity(Context context, Class<?> cls, String baseUrl, String url, String title) {
+        Intent intent = new Intent(context, cls);
+        intent.putExtra("baseUrl", baseUrl);
+        intent.putExtra("url", url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", color);
+        context.startActivity(intent);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -270,66 +278,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
                 break;
             case R.id.cardview_type1:
-                startMeinvActivity(this, Constants.MM_URL, Constants.XINGGAN, "性感美女");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.XINGGAN, "性感美女");
                 break;
             case R.id.cardview_type2:
-                startMeinvActivity(this, Constants.MM_URL, Constants.SHAONV, "少女萝莉");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.SHAONV, "少女萝莉");
                 break;
             case R.id.cardview_type3:
-                startMeinvActivity(this, Constants.MM_URL, Constants.MRXT, "美乳香臀");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.MRXT, "美乳香臀");
                 break;
             case R.id.cardview_type4:
-                startMeinvActivity(this, Constants.MM_URL, Constants.SWMT, "丝袜美腿");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.SWMT, "丝袜美腿");
                 break;
             case R.id.cardview_type5:
-                startMeinvActivity(this, Constants.MM_URL, Constants.XGTX, "性感特写");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.XGTX, "性感特写");
                 break;
             case R.id.cardview_type6:
-                startMeinvActivity(this, Constants.MM_URL, Constants.OUMEI, "欧美女神");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.OUMEI, "欧美女神");
                 break;
             case R.id.cardview_type7:
-                startMeinvActivity(this, Constants.MM_URL, Constants.COLLECTION, "女神集合");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.COLLECTION, "女神集合");
                 break;
             case R.id.cardview_type8:
-                startMeinvActivity(this, Constants.GG_URL, Constants.JRMN, "肌肉猛男");
+                startActivity(this, MeinvAcitvity.class, Constants.GG_URL, Constants.JRMN, "肌肉猛男");
                 break;
             case R.id.cardview_type9:
-                startMeinvActivity(this, Constants.GG_URL, Constants.MLXN, "魅力型男");
+                startActivity(this, MeinvAcitvity.class, Constants.GG_URL, Constants.MLXN, "魅力型男");
                 break;
             case R.id.cardview_type10:
-                startMeinvActivity(this, Constants.GG_URL, Constants.HMXR, "花美鲜肉");
+                startActivity(this, MeinvAcitvity.class, Constants.GG_URL, Constants.HMXR, "花美鲜肉");
                 break;
             case R.id.cardview_more:
-                startMeinvActivity(this, Constants.MM_URL, Constants.NEW, "最新美图");
+                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.NEW, "最新美图");
                 break;
         }
-    }
-
-    public void startMeinvActivity(Context context, String baseUrl, String url, String title) {
-        Intent intent = new Intent(context, MeinvAcitvity.class);
-        intent.putExtra("baseUrl", baseUrl);
-        intent.putExtra("url", url);
-        intent.putExtra("title", title);
-        intent.putExtra("color", color);
-        context.startActivity(intent);
-    }
-
-    public void startFulisheActivity(Context context, String baseUrl, String url, String title) {
-        Intent intent = new Intent(context, FulisheAcitvity.class);
-        intent.putExtra("baseUrl", baseUrl);
-        intent.putExtra("url", url);
-        intent.putExtra("title", title);
-        intent.putExtra("color", color);
-        context.startActivity(intent);
-    }
-
-    public void startEQZActivity(Context context, String baseUrl, String url, String title) {
-        Intent intent = new Intent(context, EQZActivity.class);
-        intent.putExtra("baseUrl", baseUrl);
-        intent.putExtra("url", url);
-        intent.putExtra("title", title);
-        intent.putExtra("color", color);
-        context.startActivity(intent);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
@@ -341,23 +322,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     switch (v.getId()) {
                         case R.id.ll_nav_1:
-                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                            startActivity(MainActivity.this,FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.TTNS_URl, getString(R.string.navigation_header1));
                             break;
                         case R.id.ll_nav_2:
-                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
                                     Constants.TGW_URl, getString(R.string.navigation_header2));
                             break;
                         case R.id.ll_nav_3:
-                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
                                     Constants.TNS_URl, getString(R.string.navigation_header3));
                             break;
                         case R.id.ll_nav_4:
-                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
                                     Constants.AS_URl, getString(R.string.navigation_header4));
                             break;
                         case R.id.ll_nav_5:
-                            startFulisheActivity(MainActivity.this, Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
                                     Constants.TNL_URl, getString(R.string.navigation_header5));
                             break;
                         case R.id.ll_nav_6:
@@ -368,13 +349,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.ll_nav_8:
                             break;
                         case R.id.ll_nav_9:
-                            startEQZActivity(MainActivity.this,Constants.URl,
-                                    Constants.KTMH_URl,"卡通漫画");
                             break;
                     }
                 }
             }, 260);
         }
     };
-
 }
