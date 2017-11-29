@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,12 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.coder.guoy.goodtimes.api.ApiHelper;
 import com.coder.guoy.goodtimes.api.ImageHelper;
@@ -39,11 +44,13 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
+    private NavigationHeaderBinding bind;
     private GridLayoutManager mLayoutManager;
     private HomeImageAdapter imageAdapter;//图片列表
     private int color;
     private int PAGE = 1;
-    private NavigationHeaderBinding bind;
+    private PopupWindow popupWindow;
+    private TextView popup1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
         getNetData(Constants.MM_URL, Constants.NEW, PAGE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLayoutManager = null;
+        imageAdapter = null;
+        popupWindow.dismiss();
+        popupWindow = null;
     }
 
     private void initView() {
@@ -71,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.cardviewMore.setOnClickListener(this);
         initRecyclerView(binding.recyclerviewModel1);
         initDrawerlayout();
+        initPopupWindow();
     }
 
     // TODO: 透明状态栏
@@ -158,6 +175,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.llNav9.setOnClickListener(listener);
     }
 
+    // TODO: 初始化popupWindow
+    private void initPopupWindow() {
+        View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popup_home, null);
+        popupWindow = new PopupWindow(getApplicationContext());
+        popupWindow.setContentView(contentView);
+        popupWindow.setWidth(DisplayUtil.getScreenWidth() / 2);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        //popupWindow外部点击消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setOutsideTouchable(true);
+        popup1 = contentView.findViewById(R.id.popup_1);
+        popup1.setOnClickListener(this);
+    }
+
     // TODO: 将输入流解码为位图
     private void downloadPic(String url) {
         //截取解析的URL地址，拼接后再使用
@@ -212,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    // TODO: 设置颜色
     private void setColor(int color) {
         //幕布颜色
         binding.collapsingtollbar.setContentScrimColor(color);
@@ -219,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.textModel1.setTextColor(color);
         binding.textLeft.setBackgroundColor(color);
         binding.textMore.setBackgroundColor(color);
+        //popupWindow
+        popup1.setTextColor(color);
         //分类标题
         binding.textType1.setBackgroundColor(color);
         binding.textType2.setBackgroundColor(color);
@@ -259,6 +293,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setNestedScrollingEnabled(false);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (popupWindow.isShowing() == true) {
+                popupWindow.dismiss();
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return true;
+    }
+
     public void startActivity(Context context, Class<?> cls, String baseUrl, String url, String title) {
         Intent intent = new Intent(context, cls);
         intent.putExtra("baseUrl", baseUrl);
@@ -275,7 +322,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
+                popupWindow.showAsDropDown(binding.imageMenu, 0, -(binding.imageMenu.getHeight()));
+                break;
+            case R.id.popup_1:
                 getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
+                popupWindow.dismiss();
                 break;
             case R.id.cardview_type1:
                 startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.XINGGAN, "性感美女");
@@ -322,23 +373,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void run() {
                     switch (v.getId()) {
                         case R.id.ll_nav_1:
-                            startActivity(MainActivity.this,FulisheAcitvity.class, Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.TTNS_URl, getString(R.string.navigation_header1));
                             break;
                         case R.id.ll_nav_2:
-                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.TGW_URl, getString(R.string.navigation_header2));
                             break;
                         case R.id.ll_nav_3:
-                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.TNS_URl, getString(R.string.navigation_header3));
                             break;
                         case R.id.ll_nav_4:
-                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.AS_URl, getString(R.string.navigation_header4));
                             break;
                         case R.id.ll_nav_5:
-                            startActivity(MainActivity.this, FulisheAcitvity.class,Constants.FL_URl,
+                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.TNL_URl, getString(R.string.navigation_header5));
                             break;
                         case R.id.ll_nav_6:
@@ -355,4 +406,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }, 260);
         }
     };
+
 }
