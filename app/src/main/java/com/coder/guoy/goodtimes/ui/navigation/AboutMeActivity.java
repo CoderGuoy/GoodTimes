@@ -1,20 +1,35 @@
 package com.coder.guoy.goodtimes.ui.navigation;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.coder.guoy.goodtimes.R;
+import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
+import com.coder.guoy.goodtimes.databinding.ActivityAboutMeBinding;
+import com.coder.guoy.goodtimes.utils.SystemUtil;
+
 /**
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年11月27日
  * @Descrpiton:关于我们
  */
-public class AboutMeActivity extends AppCompatActivity {
+public class AboutMeActivity extends MvvmBaseActivity<ActivityAboutMeBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
+        initView();
+    }
+
+    @Override
+    protected void getData() {
+        super.getData();
+        showContentView();
+    }
+
+    private void initView() {
+        bindingView.textTitle.setText("关于我们");
+        bindingView.textVerson.setText("本版号" + SystemUtil.getAppVersionName(getApplicationContext()));
     }
 }

@@ -1,9 +1,10 @@
 package com.coder.guoy.goodtimes.api;
 
 
+import com.coder.guoy.goodtimes.App;
 import com.coder.guoy.goodtimes.BuildConfig;
 import com.coder.guoy.goodtimes.Constants;
-import com.coder.guoy.goodtimes.utils.SystemUtil;
+import com.coder.guoy.goodtimes.utils.NetUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,13 +59,13 @@ public class ApiHelper {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!SystemUtil.isNetworkConnected()) {
+                if (!NetUtils.isNetworkConnected(App.getInstance().getApplicationContext())) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
                 Response response = chain.proceed(request);
-                if (SystemUtil.isNetworkConnected()) {
+                if (NetUtils.isNetworkConnected(App.getInstance().getApplicationContext())) {
                     int maxAge = 0;
                     // 有网络时, 不缓存, 最大保存时长为0
                     response.newBuilder()

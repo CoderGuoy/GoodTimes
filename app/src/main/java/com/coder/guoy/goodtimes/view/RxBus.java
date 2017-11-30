@@ -1,4 +1,4 @@
-package com.coder.guoy.goodtimes.utils;
+package com.coder.guoy.goodtimes.view;
 
 import rx.Observable;
 import rx.functions.Func1;

@@ -31,6 +31,7 @@ import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.MeinvAcitvity;
+import com.coder.guoy.goodtimes.ui.navigation.AboutMeActivity;
 import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
 import com.coder.guoy.goodtimes.ui.navigation.SettingActivity;
@@ -421,9 +422,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.ll_nav_7:
                             break;
                         case R.id.ll_nav_8:
+                            startActivity(new Intent(MainActivity.this, SettingActivity.class));
                             break;
                         case R.id.ll_nav_9:
-                            startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                            startActivity(new Intent(MainActivity.this, AboutMeActivity.class));
                             break;
                     }
                 }

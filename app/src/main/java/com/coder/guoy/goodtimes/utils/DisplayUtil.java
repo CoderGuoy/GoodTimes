@@ -7,7 +7,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.coder.guoy.goodtimes.App;
-
+/**
+ * @Version:
+ * @Author:
+ * @CreateTime:
+ * @Descrpiton:屏幕分辨率
+ */
 public class DisplayUtil {
 
     private static WindowManager windowManager;
