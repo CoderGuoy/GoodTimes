@@ -101,6 +101,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
+    private void initRecyclerView(RecyclerView recyclerView) {
+        imageAdapter = new HomeImageAdapter(this);
+        mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(imageAdapter);
+        recyclerView.setNestedScrollingEnabled(false);
+    }
+
+    // TODO: 初始化侧拉菜单
+    private void initDrawerlayout() {
+        //设置侧拉菜单占屏幕的2/3
+        int screenWidth = DisplayUtil.getScreenWidth();
+        int screen = screenWidth / 3 * 2;
+        ViewGroup.LayoutParams layoutParams = binding.navigationview.getLayoutParams();
+        layoutParams.width = screen;
+        binding.navigationview.setLayoutParams(layoutParams);
+
+        View headerView = binding.navigationview.getHeaderView(0);
+        bind = DataBindingUtil.bind(headerView);
+        bind.llNav1.setOnClickListener(listener);
+        bind.llNav2.setOnClickListener(listener);
+        bind.llNav3.setOnClickListener(listener);
+        bind.llNav4.setOnClickListener(listener);
+        bind.llNav5.setOnClickListener(listener);
+        bind.llNav6.setOnClickListener(listener);
+        bind.llNav7.setOnClickListener(listener);
+        bind.llNav8.setOnClickListener(listener);
+        bind.llNav9.setOnClickListener(listener);
+    }
+
+    // TODO: 初始化popupWindow
+    private void initPopupWindow() {
+        View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popup_home, null);
+        popupWindow = new PopupWindow(getApplicationContext());
+        popupWindow.setContentView(contentView);
+        popupWindow.setWidth(DisplayUtil.getScreenWidth() / 2);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        //popupWindow外部点击消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setOutsideTouchable(true);
+        popup1 = contentView.findViewById(R.id.popup_1);
+        popup1.setOnClickListener(this);
+    }
+
     // TODO: 为Banner图获取网络图片
     private void getBannerMMData(String baseUrl, String url, int page) {
         ImageHelper.ImageHelper(baseUrl, url, page)
@@ -154,42 +198,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         imageAdapter.setNewData(beanList);
                     }
                 });
-    }
-
-    // TODO: 初始化侧拉菜单
-    private void initDrawerlayout() {
-        //设置侧拉菜单占屏幕的2/3
-        int screenWidth = DisplayUtil.getScreenWidth();
-        int screen = screenWidth / 3 * 2;
-        ViewGroup.LayoutParams layoutParams = binding.navigationview.getLayoutParams();
-        layoutParams.width = screen;
-        binding.navigationview.setLayoutParams(layoutParams);
-
-        View headerView = binding.navigationview.getHeaderView(0);
-        bind = DataBindingUtil.bind(headerView);
-        bind.llNav1.setOnClickListener(listener);
-        bind.llNav2.setOnClickListener(listener);
-        bind.llNav3.setOnClickListener(listener);
-        bind.llNav4.setOnClickListener(listener);
-        bind.llNav5.setOnClickListener(listener);
-        bind.llNav6.setOnClickListener(listener);
-        bind.llNav7.setOnClickListener(listener);
-        bind.llNav8.setOnClickListener(listener);
-        bind.llNav9.setOnClickListener(listener);
-    }
-
-    // TODO: 初始化popupWindow
-    private void initPopupWindow() {
-        View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popup_home, null);
-        popupWindow = new PopupWindow(getApplicationContext());
-        popupWindow.setContentView(contentView);
-        popupWindow.setWidth(DisplayUtil.getScreenWidth() / 2);
-        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        //popupWindow外部点击消失
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
-        popupWindow.setOutsideTouchable(true);
-        popup1 = contentView.findViewById(R.id.popup_1);
-        popup1.setOnClickListener(this);
     }
 
     // TODO: 将输入流解码为位图
@@ -288,14 +296,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.textNav9.setTextColor(color);
     }
 
-    private void initRecyclerView(RecyclerView recyclerView) {
-        imageAdapter = new HomeImageAdapter(this);
-        mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(imageAdapter);
-        recyclerView.setNestedScrollingEnabled(false);
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -313,16 +313,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // TODO: 退出的dialog
     private void doExit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Title")
-                .setMessage("message")
+        builder.setTitle("真的要走么")
                 .setIcon(R.drawable.vector_logo_icon)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("过会儿再来", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setNegativeButton("再看会儿", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

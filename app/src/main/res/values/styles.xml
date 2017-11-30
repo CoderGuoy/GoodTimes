@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LogoSplashActivity" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/window_background</item>
+    </style>
+
     <!--首页标题-->
     <style name="Home_TextStyle">
         <item name="android:layout_width">wrap_content</item>

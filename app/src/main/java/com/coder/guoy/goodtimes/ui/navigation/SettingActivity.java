@@ -1,9 +1,11 @@
 package com.coder.guoy.goodtimes.ui.navigation;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
@@ -32,9 +34,22 @@ public class SettingActivity extends MvvmBaseActivity<ActivitySettingBinding> im
 
     @Override
     public void onClick(View v) {
-        Animator animator = ViewAnimationUtils.createCircularReveal(bindingView.image,
-                0,0,0,100000);
-        animator.setDuration(5000);
+        Log.i("wid", "" + bindingView.image.getWidth());
+        ObjectAnimator animator = ObjectAnimator.ofFloat(bindingView.image,
+                "translationX", (bindingView.image.getWidth()), 0);
+        animator.setDuration(2000);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                bindingView.image.setVisibility(View.VISIBLE);
+            }
+        });
         animator.start();
     }
 }

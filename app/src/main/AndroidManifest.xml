@@ -19,26 +19,43 @@
         android:roundIcon="@drawable/vector_logo_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".LogoSplashActivity"
+            android:theme="@style/LogoSplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ImageDeatilActivity"/>
-        <activity android:name=".ui.ProgressImageAcitivty"/>
-        <activity android:name=".ui.DataActivity"/>
-        <activity android:name=".ui.home.MeinvAcitvity"/>
-        <activity android:name=".ui.navigation.FulisheAcitvity"/>
-        <activity android:name=".ui.navigation.MoneyActivity">
-        </activity>
-        <activity android:name=".ui.navigation.SettingActivity">
-        </activity>
-        <activity android:name=".ui.navigation.AboutMeActivity">
-        </activity>
-        <activity android:name=".ui.EQZActivity">
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.ImageDeatilActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.ProgressImageAcitivty"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.DataActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.home.MeinvAcitvity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.navigation.FulisheAcitvity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.navigation.MoneyActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.navigation.SettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.navigation.AboutMeActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
