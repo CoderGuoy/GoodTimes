@@ -1,6 +1,7 @@
 package com.coder.guoy.goodtimes;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +33,7 @@ import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
 import com.coder.guoy.goodtimes.ui.home.MeinvAcitvity;
 import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
+import com.coder.guoy.goodtimes.ui.navigation.SettingActivity;
 import com.coder.guoy.goodtimes.utils.DisplayUtil;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
@@ -300,10 +303,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 popupWindow.dismiss();
                 return false;
             } else {
-                return true;
+                doExit();
+                return false;
             }
         }
         return true;
+    }
+
+    // TODO: 退出的dialog
+    private void doExit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Title")
+                .setMessage("message")
+                .setIcon(R.drawable.vector_logo_icon)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
     public void startActivity(Context context, Class<?> cls, String baseUrl, String url, String title) {
@@ -400,6 +424,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.ll_nav_8:
                             break;
                         case R.id.ll_nav_9:
+                            startActivity(new Intent(MainActivity.this, SettingActivity.class));
                             break;
                     }
                 }
