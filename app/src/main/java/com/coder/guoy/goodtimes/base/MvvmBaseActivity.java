@@ -19,9 +19,7 @@ import android.widget.RelativeLayout;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.databinding.ActivityBaseMvvmBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
-import com.coder.guoy.goodtimes.utils.CommonUtils;
 import com.coder.guoy.goodtimes.utils.NetUtils;
-import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 
 import rx.Subscription;
 
@@ -30,7 +28,10 @@ import rx.Subscription;
  * @Version:1.0
  * @Author:Guoy
  * @CreateTime:2017年4月7日
- * @Descrpiton:MVVM模式的BaseActivity
+ * @Description:MVVM模式的BaseActivity
+ *
+ * @UpDataTime:2017年12月1日
+ * @Description:StateBar为透明（无StateBar），需要继承的Activity手动设置
  */
 
 public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
@@ -57,10 +58,7 @@ public class MvvmBaseActivity<SV extends ViewDataBinding> extends AppCompatActiv
         RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
-//        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 
-        // 设置透明状态栏
-        StatusBarUtils.setColor(this, CommonUtils.getColor(R.color.colorLogo), 0);
         // 加载动画
         imgProgress = findViewById(R.id.img_progress);
         refresh = findViewById(R.id.ll_error_refresh);

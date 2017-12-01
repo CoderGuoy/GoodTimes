@@ -11,7 +11,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +25,7 @@ import android.widget.TextView;
 import com.coder.guoy.goodtimes.api.ApiHelper;
 import com.coder.guoy.goodtimes.api.ImageHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
+import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
@@ -46,8 +46,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private ActivityMainBinding binding;
+public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implements View.OnClickListener {
     private NavigationHeaderBinding bind;
     private GridLayoutManager mLayoutManager;
     private HomeImageAdapter imageAdapter;//图片列表
@@ -59,9 +58,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         transparentStatusBar();
         initView();
+    }
+
+    @Override
+    protected void getData() {
+        super.getData();
         getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
         getNetData(Constants.MM_URL, Constants.NEW, PAGE);
     }
@@ -76,20 +80,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        binding.flTitleMenu.setOnClickListener(this);
-        binding.imageMenu.setOnClickListener(this);
-        binding.cardviewType1.setOnClickListener(this);
-        binding.cardviewType2.setOnClickListener(this);
-        binding.cardviewType3.setOnClickListener(this);
-        binding.cardviewType4.setOnClickListener(this);
-        binding.cardviewType5.setOnClickListener(this);
-        binding.cardviewType6.setOnClickListener(this);
-        binding.cardviewType7.setOnClickListener(this);
-        binding.cardviewType8.setOnClickListener(this);
-        binding.cardviewType9.setOnClickListener(this);
-        binding.cardviewType10.setOnClickListener(this);
-        binding.cardviewMore.setOnClickListener(this);
-        initRecyclerView(binding.recyclerviewModel1);
+        bindingView.flTitleMenu.setOnClickListener(this);
+        bindingView.imageMenu.setOnClickListener(this);
+        bindingView.cardviewType1.setOnClickListener(this);
+        bindingView.cardviewType2.setOnClickListener(this);
+        bindingView.cardviewType3.setOnClickListener(this);
+        bindingView.cardviewType4.setOnClickListener(this);
+        bindingView.cardviewType5.setOnClickListener(this);
+        bindingView.cardviewType6.setOnClickListener(this);
+        bindingView.cardviewType7.setOnClickListener(this);
+        bindingView.cardviewType8.setOnClickListener(this);
+        bindingView.cardviewType9.setOnClickListener(this);
+        bindingView.cardviewType10.setOnClickListener(this);
+        bindingView.cardviewMore.setOnClickListener(this);
+        initRecyclerView(bindingView.recyclerviewModel1);
         initDrawerlayout();
         initPopupWindow();
     }
@@ -115,11 +119,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //设置侧拉菜单占屏幕的2/3
         int screenWidth = DisplayUtil.getScreenWidth();
         int screen = screenWidth / 3 * 2;
-        ViewGroup.LayoutParams layoutParams = binding.navigationview.getLayoutParams();
+        ViewGroup.LayoutParams layoutParams = bindingView.navigationview.getLayoutParams();
         layoutParams.width = screen;
-        binding.navigationview.setLayoutParams(layoutParams);
+        bindingView.navigationview.setLayoutParams(layoutParams);
 
-        View headerView = binding.navigationview.getHeaderView(0);
+        View headerView = bindingView.navigationview.getHeaderView(0);
         bind = DataBindingUtil.bind(headerView);
         bind.llNav1.setOnClickListener(listener);
         bind.llNav2.setOnClickListener(listener);
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             imageUrl = beanList.get(position).getImageUrl();
                             Log.i("Banner_imageUrl", imageUrl);
                         }
-                        GlideUtils.setImage(imageUrl, binding.imageHome);
+                        GlideUtils.setImage(imageUrl, bindingView.imageHome);
                         GlideUtils.setImage(imageUrl, bind.imageHead);
                         downloadPic(imageUrl);
                     }
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new Subscriber<List<ImageBean>>() {
                     @Override
                     public void onCompleted() {
-
+                        showContentView();
                     }
 
                     @Override
@@ -258,24 +262,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // TODO: 设置颜色
     private void setColor(int color) {
         //幕布颜色
-        binding.collapsingtollbar.setContentScrimColor(color);
+        bindingView.collapsingtollbar.setContentScrimColor(color);
         //文字颜色
-        binding.textModel1.setTextColor(color);
-        binding.textLeft.setBackgroundColor(color);
-        binding.textMore.setBackgroundColor(color);
+        bindingView.textModel1.setTextColor(color);
+        bindingView.textLeft.setBackgroundColor(color);
+        bindingView.textMore.setBackgroundColor(color);
         //popupWindow
         popup1.setTextColor(color);
         //分类标题
-        binding.textType1.setBackgroundColor(color);
-        binding.textType2.setBackgroundColor(color);
-        binding.textType3.setBackgroundColor(color);
-        binding.textType4.setBackgroundColor(color);
-        binding.textType5.setBackgroundColor(color);
-        binding.textType6.setBackgroundColor(color);
-        binding.textType7.setBackgroundColor(color);
-        binding.textType8.setBackgroundColor(color);
-        binding.textType9.setBackgroundColor(color);
-        binding.textType10.setBackgroundColor(color);
+        bindingView.textType1.setBackgroundColor(color);
+        bindingView.textType2.setBackgroundColor(color);
+        bindingView.textType3.setBackgroundColor(color);
+        bindingView.textType4.setBackgroundColor(color);
+        bindingView.textType5.setBackgroundColor(color);
+        bindingView.textType6.setBackgroundColor(color);
+        bindingView.textType7.setBackgroundColor(color);
+        bindingView.textType8.setBackgroundColor(color);
+        bindingView.textType9.setBackgroundColor(color);
+        bindingView.textType10.setBackgroundColor(color);
         //侧拉菜单
         bind.imageNav1.setBackgroundColor(color);
         bind.imageNav2.setBackgroundColor(color);
@@ -343,10 +347,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fl_title_menu:// 开启菜单
-                binding.drawerlayout.openDrawer(GravityCompat.START);
+                bindingView.drawerlayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_menu:// 右侧功能菜单
-                popupWindow.showAsDropDown(binding.imageMenu, 0, -(binding.imageMenu.getHeight()));
+                popupWindow.showAsDropDown(bindingView.imageMenu, 0, -(bindingView.imageMenu.getHeight()));
                 break;
             case R.id.popup_1:
                 getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
@@ -391,8 +395,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private PerfectClickListener listener = new PerfectClickListener() {
         @Override
         protected void onNoDoubleClick(final View v) {
-            binding.drawerlayout.closeDrawer(GravityCompat.START);
-            binding.drawerlayout.postDelayed(new Runnable() {
+            bindingView.drawerlayout.closeDrawer(GravityCompat.START);
+            bindingView.drawerlayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     switch (v.getId()) {
@@ -416,16 +420,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
                                     Constants.TNL_URl, getString(R.string.navigation_header5));
                             break;
-                        case R.id.ll_nav_6:
-                            startActivity(new Intent(MainActivity.this, MoneyActivity.class));
+                        case R.id.ll_nav_6://打赏
+                            startActivity(MainActivity.this,MoneyActivity.class,"","","打赏一下");
                             break;
                         case R.id.ll_nav_7:
                             break;
-                        case R.id.ll_nav_8:
-                            startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                        case R.id.ll_nav_8://设置
+                            startActivity(MainActivity.this,SettingActivity.class,"","","设置");
                             break;
-                        case R.id.ll_nav_9:
-                            startActivity(new Intent(MainActivity.this, AboutMeActivity.class));
+                        case R.id.ll_nav_9://关于
+                            startActivity(MainActivity.this,AboutMeActivity.class,"","","关于我们");
                             break;
                     }
                 }

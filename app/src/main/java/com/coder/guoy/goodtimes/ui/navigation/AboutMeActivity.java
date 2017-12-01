@@ -1,10 +1,12 @@
 package com.coder.guoy.goodtimes.ui.navigation;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityAboutMeBinding;
+import com.coder.guoy.goodtimes.utils.StatusBarUtils;
 import com.coder.guoy.goodtimes.utils.SystemUtil;
 
 /**
@@ -19,6 +21,8 @@ public class AboutMeActivity extends MvvmBaseActivity<ActivityAboutMeBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
+        StatusBarUtils.setColor(this, Color.rgb(229, 67, 124),
+                0);
         initView();
     }
 
