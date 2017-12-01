@@ -4,10 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
@@ -25,7 +22,6 @@ public class ImageDeatilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_deatil);
         transparentStatusBar();
-        setLayoutAnimation();
         initView();
     }
 
@@ -38,18 +34,6 @@ public class ImageDeatilActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(option);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
-
-    /**
-     * 转场动画
-     */
-    private void setLayoutAnimation() {
-        LinearLayout layout = findViewById(R.id.activity_image_deatil);
-        AlphaAnimation alpha = new AlphaAnimation(0, 1);
-        alpha.setDuration(300);
-        LayoutAnimationController controller = new LayoutAnimationController(alpha, 0.3f);
-        controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
-        layout.setLayoutAnimation(controller);
     }
 
     private void initView() {
