@@ -2,6 +2,7 @@ package com.coder.guoy.goodtimes.ui.navigation;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
@@ -14,7 +15,7 @@ import com.coder.guoy.goodtimes.utils.StatusBarUtils;
  * @CreateTime:2017年11月27日
  * @Descrpiton:打赏
  */
-public class MoneyActivity extends MvvmBaseActivity<ActivityMoneyBinding> {
+public class MoneyActivity extends MvvmBaseActivity<ActivityMoneyBinding> implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,12 @@ public class MoneyActivity extends MvvmBaseActivity<ActivityMoneyBinding> {
     }
 
     private void initView() {
+        bindingView.textTitle.setText(getIntent().getStringExtra("title"));
+        bindingView.toolbar.setBackgroundColor(getIntent().getIntExtra("color",
+                Color.rgb(229, 67, 124)));
         StatusBarUtils.setColor(this, getIntent().getIntExtra("color",
                 Color.rgb(229, 67, 124)), 0);
+        bindingView.back.setOnClickListener(this);
     }
 
     @Override
@@ -34,4 +39,12 @@ public class MoneyActivity extends MvvmBaseActivity<ActivityMoneyBinding> {
         showContentView();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back:
+                finish();
+                break;
+        }
+    }
 }

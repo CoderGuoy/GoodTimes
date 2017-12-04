@@ -134,6 +134,7 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
         bind.llNav7.setOnClickListener(listener);
         bind.llNav8.setOnClickListener(listener);
         bind.llNav9.setOnClickListener(listener);
+        bind.llNav7.setVisibility(View.GONE);
     }
 
     // TODO: 初始化popupWindow
