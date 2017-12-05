@@ -39,7 +39,7 @@ public class AboutMeActivity extends MvvmBaseActivity<ActivityAboutMeBinding> im
                 Color.rgb(229, 67, 124)));
         StatusBarUtils.setColor(this, getIntent().getIntExtra("color",
                 Color.rgb(229, 67, 124)), 0);
-        bindingView.textVerson.setText("本版号" + SystemUtil.getAppVersionName(getApplicationContext()));
+        bindingView.textVerson.setText("版本号" + SystemUtil.getAppVersionName(getApplicationContext()));
         bindingView.back.setOnClickListener(this);
     }
 

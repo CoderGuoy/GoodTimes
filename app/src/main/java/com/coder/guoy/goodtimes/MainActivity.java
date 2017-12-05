@@ -305,7 +305,8 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (popupWindow.isShowing() == true) {
+            if (popupWindow.isShowing() == true || bindingView.drawerlayout.isDrawerOpen(GravityCompat.START)) {
+                bindingView.drawerlayout.closeDrawer(GravityCompat.START);
                 popupWindow.dismiss();
                 return false;
             } else {
@@ -422,15 +423,15 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
                                     Constants.TNL_URl, getString(R.string.navigation_header5));
                             break;
                         case R.id.ll_nav_6://打赏
-                            startActivity(MainActivity.this,MoneyActivity.class,"","","打赏一下");
+                            startActivity(MainActivity.this, MoneyActivity.class, "", "", "打赏一下");
                             break;
                         case R.id.ll_nav_7:
                             break;
                         case R.id.ll_nav_8://设置
-                            startActivity(MainActivity.this,SettingActivity.class,"","","设置");
+                            startActivity(MainActivity.this, SettingActivity.class, "", "", "设置");
                             break;
                         case R.id.ll_nav_9://关于
-                            startActivity(MainActivity.this,AboutMeActivity.class,"","","关于我们");
+                            startActivity(MainActivity.this, AboutMeActivity.class, "", "", "关于我们");
                             break;
                     }
                 }
