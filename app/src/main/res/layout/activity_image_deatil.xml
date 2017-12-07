@@ -7,12 +7,13 @@
         android:id="@+id/activity_image_deatil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorTheme">
+        android:background="@color/transparent80">
 
         <ImageView
             android:id="@+id/imageview_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:scaleType="fitCenter"
             android:transitionName="shareimage">
         </ImageView>

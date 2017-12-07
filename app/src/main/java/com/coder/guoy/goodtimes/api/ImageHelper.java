@@ -89,4 +89,38 @@ public class ImageHelper {
             }
         });
     }
+
+    /**
+     * 美女图片列表
+     *
+     * @param url
+     * @return
+     */
+    public static Observable<List<ImageBean>> ImageDetailHelper(final String url) {
+        return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
+            @Override
+            public void call(Subscriber<? super List<ImageBean>> subscriber) {
+                List<ImageBean> list = new ArrayList<>();
+                try {
+                    Document document = Jsoup.connect(url).get();
+                    Elements content = document.getElementsByClass("entry-content");
+                    Document document1 = Jsoup.parse(content.toString());
+                    Elements gallery = document1.getElementsByClass("rgg-imagegrid gallery");
+                    Elements imageLists = gallery.select("a");
+                    for (Element imageList : imageLists) {
+                        //图片地址
+                        String imgUrl = imageList.select("a").first().attr("href");
+                        String linkUrl = "";
+                        String imgaeTitle = "";
+                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                    }
+                    subscriber.onNext(list);
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
+
 }

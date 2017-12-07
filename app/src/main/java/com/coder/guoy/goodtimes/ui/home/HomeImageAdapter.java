@@ -147,6 +147,7 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
                     Intent intent = new Intent(mContext, ImageDeatilActivity.class);
                     Bundle options = ActivityOptions.makeSceneTransitionAnimation(
                             (Activity) mContext, vh.imageView, "shareimage").toBundle();
+                    intent.putExtra("linkUrl",mList.get(position).getLinkUrl());
                     intent.putExtra("imageUrl", mList.get(position).getImageUrl());
                     intent.putExtra("imageTitle", mList.get(position).getImgaeTitle());
                     mContext.startActivity(intent, options);
