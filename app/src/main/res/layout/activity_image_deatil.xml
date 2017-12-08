@@ -7,15 +7,36 @@
         android:id="@+id/activity_image_deatil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent80">
+        android:background="@color/transparent80"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageview_detail"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:transitionName="shareimage">
-        </ImageView>
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="shareimage">
+
+            </android.support.v4.view.ViewPager>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </FrameLayout>
+
     </LinearLayout>
 </layout>
