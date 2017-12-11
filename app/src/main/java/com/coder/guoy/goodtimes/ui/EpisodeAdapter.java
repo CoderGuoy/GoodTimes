@@ -71,10 +71,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NormalViewHolder vh = (NormalViewHolder) holder;
-//        if (position == 0) {
-//            vh.cardView.setVisibility(View.GONE);
-//        } else {
-//            vh.cardView.setVisibility(View.VISIBLE);
         //头像
         GlideUtils.setImage(notNull(mList.get(position).getImageIcon()), vh.imageIcon);
         //作者

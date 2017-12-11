@@ -36,16 +36,7 @@
             android:name=".ui.home.ImageDeatilActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.ProgressImageAcitivty"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.DataActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".ui.home.ImageAcitvity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.navigation.FulisheAcitvity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.navigation.MoneyActivity"

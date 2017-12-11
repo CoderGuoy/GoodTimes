@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 
 import com.coder.guoy.goodtimes.Constants;
 
@@ -41,7 +40,7 @@ public class SystemUtil {
      * @param url
      * @param bitmap
      */
-    public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap, View container, boolean isShare) {
+    public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap, boolean isShare) {
         String fileName = url.substring(url.lastIndexOf("/"), url.lastIndexOf(".")) + ".png";
         File fileDir = new File(Constants.PATH_DATA);
         if (!fileDir.exists()) {
