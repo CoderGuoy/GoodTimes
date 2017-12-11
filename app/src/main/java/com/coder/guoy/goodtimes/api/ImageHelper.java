@@ -96,7 +96,7 @@ public class ImageHelper {
      * @param url
      * @return
      */
-    public static Observable<List<ImageBean>> ImageDetailHelper(final String url) {
+    public static Observable<List<ImageBean>> MeinvImageDetailHelper(final String url) {
         return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {

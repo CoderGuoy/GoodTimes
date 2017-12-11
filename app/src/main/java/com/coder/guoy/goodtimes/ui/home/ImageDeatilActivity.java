@@ -1,20 +1,21 @@
-package com.coder.guoy.goodtimes.ui;
+package com.coder.guoy.goodtimes.ui.home;
 
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.ImageHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.base.MvvmBaseActivity;
 import com.coder.guoy.goodtimes.databinding.ActivityImageDeatilBinding;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
+import com.coder.guoy.goodtimes.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +54,19 @@ public class ImageDeatilActivity extends MvvmBaseActivity<ActivityImageDeatilBin
     @Override
     protected void getData() {
         super.getData();
-        getNetData();
+        switch (getIntent().getIntExtra("activityType", Constants.MV_TYPE)) {
+            case Constants.MV_TYPE:
+                getMeinvNetData();
+                break;
+            case Constants.FLS_TYPE:
+                ToastUtil.show("FulisheAcitvity");
+                showContentView();
+                break;
+        }
     }
 
-    private void getNetData() {
-        ImageHelper.ImageDetailHelper(getIntent().getStringExtra("linkUrl"))
+    private void getMeinvNetData() {
+        ImageHelper.MeinvImageDetailHelper(getIntent().getStringExtra("linkUrl"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -73,7 +82,7 @@ public class ImageDeatilActivity extends MvvmBaseActivity<ActivityImageDeatilBin
 
                     @Override
                     public void onNext(List<ImageBean> imageBeans) {
-                        bindingView.textPage.setText(1+"/"+imageBeans.size());
+                        bindingView.textPage.setText(1 + "/" + imageBeans.size());
                         imageList = imageBeans;
                         for (int i = 0; i < imageBeans.size(); i++) {
                             adapter.setData(imageBeans);
@@ -90,7 +99,7 @@ public class ImageDeatilActivity extends MvvmBaseActivity<ActivityImageDeatilBin
     @Override
     public void onPageSelected(int position) {
         int page = position + 1;
-        bindingView.textPage.setText(page+"/"+imageList.size());
+        bindingView.textPage.setText(page + "/" + imageList.size());
     }
 
     @Override

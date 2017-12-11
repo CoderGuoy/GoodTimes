@@ -30,9 +30,8 @@ import com.coder.guoy.goodtimes.databinding.ActivityMainBinding;
 import com.coder.guoy.goodtimes.databinding.NavigationHeaderBinding;
 import com.coder.guoy.goodtimes.linstener.PerfectClickListener;
 import com.coder.guoy.goodtimes.ui.home.HomeImageAdapter;
-import com.coder.guoy.goodtimes.ui.home.MeinvAcitvity;
+import com.coder.guoy.goodtimes.ui.home.ImageAcitvity;
 import com.coder.guoy.goodtimes.ui.navigation.AboutMeActivity;
-import com.coder.guoy.goodtimes.ui.navigation.FulisheAcitvity;
 import com.coder.guoy.goodtimes.ui.navigation.MoneyActivity;
 import com.coder.guoy.goodtimes.ui.navigation.SettingActivity;
 import com.coder.guoy.goodtimes.utils.DisplayUtil;
@@ -336,11 +335,13 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
                 }).show();
     }
 
-    public void startActivity(Context context, Class<?> cls, String baseUrl, String url, String title) {
+    public void startActivity(Context context, Class<?> cls, String baseUrl, String url,
+                              String title, int activityType) {
         Intent intent = new Intent(context, cls);
         intent.putExtra("baseUrl", baseUrl);
         intent.putExtra("url", url);
         intent.putExtra("title", title);
+        intent.putExtra("activityType", activityType);
         intent.putExtra("color", color);
         context.startActivity(intent);
     }
@@ -354,42 +355,53 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
             case R.id.image_menu:// 右侧功能菜单
                 popupWindow.showAsDropDown(bindingView.imageMenu, 0, -(bindingView.imageMenu.getHeight()));
                 break;
-            case R.id.popup_1:
+            case R.id.popup_1://PopupWindow
                 getBannerMMData(Constants.MM_URL, Constants.WALLPAPER, 1);
                 popupWindow.dismiss();
                 break;
             case R.id.cardview_type1:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.XINGGAN, "性感美女");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.XINGGAN, "性感美女", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type2:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.SHAONV, "少女萝莉");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.SHAONV, "少女萝莉", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type3:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.MRXT, "美乳香臀");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.MRXT, "美乳香臀", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type4:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.SWMT, "丝袜美腿");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.SWMT, "丝袜美腿", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type5:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.XGTX, "性感特写");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.XGTX, "性感特写", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type6:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.OUMEI, "欧美女神");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.OUMEI, "欧美女神", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type7:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.COLLECTION, "女神集合");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.COLLECTION, "女神集合", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type8:
-                startActivity(this, MeinvAcitvity.class, Constants.GG_URL, Constants.JRMN, "肌肉猛男");
+                startActivity(this, ImageAcitvity.class, Constants.GG_URL,
+                        Constants.JRMN, "肌肉猛男", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type9:
-                startActivity(this, MeinvAcitvity.class, Constants.GG_URL, Constants.MLXN, "魅力型男");
+                startActivity(this, ImageAcitvity.class, Constants.GG_URL,
+                        Constants.MLXN, "魅力型男", Constants.MV_TYPE);
                 break;
             case R.id.cardview_type10:
-                startActivity(this, MeinvAcitvity.class, Constants.GG_URL, Constants.HMXR, "花美鲜肉");
+                startActivity(this, ImageAcitvity.class, Constants.GG_URL,
+                        Constants.HMXR, "花美鲜肉", Constants.MV_TYPE);
                 break;
             case R.id.cardview_more:
-                startActivity(this, MeinvAcitvity.class, Constants.MM_URL, Constants.NEW, "最新美图");
+                startActivity(this, ImageAcitvity.class, Constants.MM_URL,
+                        Constants.NEW, "最新美图", Constants.MV_TYPE);
                 break;
         }
     }
@@ -403,35 +415,38 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
                 public void run() {
                     switch (v.getId()) {
                         case R.id.ll_nav_1:
-                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
-                                    Constants.TTNS_URl, getString(R.string.navigation_header1));
+                            startActivity(MainActivity.this, ImageAcitvity.class,
+                                    Constants.FL_URl, Constants.TTNS_URl, getString(R.string.navigation_header1), Constants.FLS_TYPE);
                             break;
                         case R.id.ll_nav_2:
-                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
-                                    Constants.TGW_URl, getString(R.string.navigation_header2));
+                            startActivity(MainActivity.this, ImageAcitvity.class,
+                                    Constants.FL_URl, Constants.TGW_URl, getString(R.string.navigation_header2), Constants.FLS_TYPE);
                             break;
                         case R.id.ll_nav_3:
-                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
-                                    Constants.TNS_URl, getString(R.string.navigation_header3));
+                            startActivity(MainActivity.this, ImageAcitvity.class,
+                                    Constants.FL_URl, Constants.TNS_URl, getString(R.string.navigation_header3), Constants.FLS_TYPE);
                             break;
                         case R.id.ll_nav_4:
-                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
-                                    Constants.AS_URl, getString(R.string.navigation_header4));
+                            startActivity(MainActivity.this, ImageAcitvity.class,
+                                    Constants.FL_URl, Constants.AS_URl, getString(R.string.navigation_header4), Constants.FLS_TYPE);
                             break;
                         case R.id.ll_nav_5:
-                            startActivity(MainActivity.this, FulisheAcitvity.class, Constants.FL_URl,
-                                    Constants.TNL_URl, getString(R.string.navigation_header5));
+                            startActivity(MainActivity.this, ImageAcitvity.class,
+                                    Constants.FL_URl, Constants.TNL_URl, getString(R.string.navigation_header5), Constants.FLS_TYPE);
                             break;
                         case R.id.ll_nav_6://打赏
-                            startActivity(MainActivity.this, MoneyActivity.class, "", "", "打赏一下");
+                            startActivity(MainActivity.this, MoneyActivity.class,
+                                    "", "", "打赏一下", 0);
                             break;
                         case R.id.ll_nav_7:
                             break;
                         case R.id.ll_nav_8://设置
-                            startActivity(MainActivity.this, SettingActivity.class, "", "", "设置");
+                            startActivity(MainActivity.this, SettingActivity.class,
+                                    "", "", "设置", 0);
                             break;
                         case R.id.ll_nav_9://关于
-                            startActivity(MainActivity.this, AboutMeActivity.class, "", "", "关于我们");
+                            startActivity(MainActivity.this, AboutMeActivity.class,
+                                    "", "", "关于我们", 0);
                             break;
                     }
                 }

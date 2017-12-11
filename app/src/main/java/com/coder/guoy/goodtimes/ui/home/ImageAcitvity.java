@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.coder.guoy.goodtimes.Constants;
 import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.ImageHelper;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
@@ -19,13 +20,14 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
 /**
  * @Version:V1.0
  * @Author:CoderGuoy
  * @CreateTime:2017年11月20日
  * @Descrpiton:首页美女分类
  */
-public class MeinvAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> implements View.OnClickListener {
+public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> implements View.OnClickListener {
     private GridLayoutManager mLayoutManager;
     private ImageMoreAdapter adapter;
     private int PAGE = 1;
@@ -58,21 +60,52 @@ public class MeinvAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
     @Override
     protected void getData() {
         super.getData();
-        getNetData(getIntent().getStringExtra("baseUrl"),
-                getIntent().getStringExtra("url"), PAGE);
+        switch (getIntent().getIntExtra("activityType", Constants.MV_TYPE)) {
+            case Constants.MV_TYPE:
+                getMVNetData(getIntent().getStringExtra("baseUrl"),
+                        getIntent().getStringExtra("url"), PAGE);
+                break;
+            case Constants.FLS_TYPE:
+                getFLSNetData(getIntent().getStringExtra("baseUrl"),
+                        getIntent().getStringExtra("url"), PAGE);
+                break;
+        }
     }
 
     // TODO: 初始化RecyclerView的Adapter
     private void initRecyclerView() {
-        adapter = new ImageMoreAdapter(MeinvAcitvity.this);
-        mLayoutManager = new GridLayoutManager(MeinvAcitvity.this, 2);
+        adapter = new ImageMoreAdapter(ImageAcitvity.this,
+                getIntent().getIntExtra("activityType", Constants.MV_TYPE));
+        mLayoutManager = new GridLayoutManager(ImageAcitvity.this, 2);
         bindingView.recyclerviewImage.setLayoutManager(mLayoutManager);
         bindingView.recyclerviewImage.setAdapter(adapter);
         bindingView.recyclerviewImage.addOnScrollListener(mOnScrollListener);
     }
 
-    private void getNetData(String baseUrl, String url, int page) {
+    private void getMVNetData(String baseUrl, String url, int page) {
         ImageHelper.ImageHelper(baseUrl, url, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ImageBean>>() {
+                    @Override
+                    public void onCompleted() {
+                        showContentView();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtil.show(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+                        adapter.setNewData(beanList);
+                    }
+                });
+    }
+
+    private void getFLSNetData(String baseUrl, String url, int page) {
+        ImageHelper.NvShenHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {

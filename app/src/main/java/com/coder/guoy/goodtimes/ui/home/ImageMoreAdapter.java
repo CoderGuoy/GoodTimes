@@ -21,7 +21,6 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemFooterBinding;
 import com.coder.guoy.goodtimes.databinding.ItemImageMoreBinding;
-import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 import com.coder.guoy.goodtimes.utils.ToastUtil;
 
@@ -40,14 +39,16 @@ public class ImageMoreAdapter extends RecyclerView.Adapter {
     private ItemImageMoreBinding binding;
     private ItemFooterBinding footBinding;
     private Animatable animationDrawable;
+    private int activityType;
     private int normalType = 0;     // 第一种ViewType，正常的item
     private int footType = 1;       // 第二种ViewType，底部的提示View
 
     private boolean hasMore = true;   // 变量，是否有更多数据
     private boolean fadeTips = false; // 变量，是否隐藏了底部的提示
 
-    public ImageMoreAdapter(Context context) {
+    public ImageMoreAdapter(Context context, int activityType) {
         mInflater = LayoutInflater.from(context);
+        this.activityType = activityType;
         mContext = context;
     }
 
@@ -98,6 +99,11 @@ public class ImageMoreAdapter extends RecyclerView.Adapter {
             mList.addAll(data);
         }
         this.hasMore = hasMore;
+        notifyDataSetChanged();
+    }
+
+    public void removeAllData() {
+        mList = null;
         notifyDataSetChanged();
     }
 
@@ -164,9 +170,10 @@ public class ImageMoreAdapter extends RecyclerView.Adapter {
                     Intent intent = new Intent(mContext, ImageDeatilActivity.class);
                     Bundle options = ActivityOptions.makeSceneTransitionAnimation(
                             (Activity) mContext, vh.imageView, "shareimage").toBundle();
-                    intent.putExtra("linkUrl",mList.get(position).getLinkUrl());
+                    intent.putExtra("linkUrl", mList.get(position).getLinkUrl());
                     intent.putExtra("imageUrl", mList.get(position).getImageUrl());
                     intent.putExtra("imageTitle", mList.get(position).getImgaeTitle());
+                    intent.putExtra("activityType", activityType);
                     mContext.startActivity(intent, options);
                 }
             });

@@ -33,7 +33,7 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.ImageDeatilActivity"
+            android:name=".ui.home.ImageDeatilActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.ProgressImageAcitivty"
@@ -42,7 +42,7 @@
             android:name=".ui.DataActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.home.MeinvAcitvity"
+            android:name=".ui.home.ImageAcitvity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.navigation.FulisheAcitvity"

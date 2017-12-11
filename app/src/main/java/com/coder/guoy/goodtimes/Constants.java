@@ -176,4 +176,6 @@ public class Constants {
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "GoodTimes" + File.separator + "Menu";
     //=================  ====================
     public static final int Home_Color = 100;
+    public static final int FLS_TYPE = 301;
+    public static final int MV_TYPE = 302;
 }

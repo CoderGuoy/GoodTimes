@@ -22,7 +22,6 @@ import com.coder.guoy.goodtimes.R;
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 import com.coder.guoy.goodtimes.databinding.ItemHomeBinding;
 import com.coder.guoy.goodtimes.databinding.ItemHomefooterBinding;
-import com.coder.guoy.goodtimes.ui.ImageDeatilActivity;
 import com.coder.guoy.goodtimes.utils.GlideUtils;
 
 import java.util.List;
@@ -158,7 +157,7 @@ public class HomeImageAdapter extends RecyclerView.Adapter {
             fvh.footLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, MeinvAcitvity.class);
+                    Intent intent = new Intent(mContext, ImageAcitvity.class);
                     intent.putExtra("baseUrl", Constants.MM_URL);
                     intent.putExtra("url", Constants.NEW);
                     intent.putExtra("title", "最新美图");
