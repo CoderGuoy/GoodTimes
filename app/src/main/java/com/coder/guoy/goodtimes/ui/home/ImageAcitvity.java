@@ -83,7 +83,7 @@ public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
     }
 
     private void getMVNetData(String baseUrl, String url, int page) {
-        ImageHelper.ImageHelper(baseUrl, url, page)
+        ImageHelper.MeinvHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -105,7 +105,7 @@ public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
     }
 
     private void getFLSNetData(String baseUrl, String url, int page) {
-        ImageHelper.NvShenHelper(baseUrl, url, page)
+        ImageHelper.FLSHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -148,7 +148,7 @@ public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
     };
 
     private void upNetData(String baseUrl, String url, int page) {
-        ImageHelper.ImageHelper(baseUrl, url, page)
+        ImageHelper.MeinvHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {

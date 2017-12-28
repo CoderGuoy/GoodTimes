@@ -7,12 +7,11 @@ import android.os.Parcelable;
  * @Version:
  * @Author:Guoy
  * @CreateTime:2017/10/9
- * @Descrpiton:美眉
+ * @Descrpiton:
  */
 public class ImageBean implements Parcelable {
     private String linkUrl;
     private String imageUrl;
-    private String thumbnailImageUrl;
     private String imgaeTitle;
 
     public ImageBean(String linkUrl, String imageUrl, String imgaeTitle) {
@@ -25,7 +24,6 @@ public class ImageBean implements Parcelable {
         linkUrl = in.readString();
         imageUrl = in.readString();
         imgaeTitle = in.readString();
-        thumbnailImageUrl = in.readString();
     }
 
     public static final Creator<ImageBean> CREATOR = new Creator<ImageBean>() {
@@ -64,13 +62,6 @@ public class ImageBean implements Parcelable {
         this.imgaeTitle = imgaeTitle;
     }
 
-    public String getThumbnailImageUrl() {
-        return thumbnailImageUrl;
-    }
-
-    public void setThumbnailImageUrl(String thumbnailImageUrl) {
-        this.thumbnailImageUrl = thumbnailImageUrl;
-    }
 
     @Override
     public int describeContents() {
@@ -82,6 +73,5 @@ public class ImageBean implements Parcelable {
         dest.writeString(linkUrl);
         dest.writeString(imageUrl);
         dest.writeString(imgaeTitle);
-        dest.writeString(thumbnailImageUrl);
     }
 }

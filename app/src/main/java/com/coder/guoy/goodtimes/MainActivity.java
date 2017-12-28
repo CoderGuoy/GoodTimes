@@ -99,6 +99,7 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
 
     // TODO: 透明状态栏
     private void transparentStatusBar() {
+        
         View decorView = getWindow().getDecorView();
         int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(option);
@@ -152,7 +153,7 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
 
     // TODO: 为Banner图获取网络图片
     private void getBannerMMData(String baseUrl, String url, int page) {
-        ImageHelper.ImageHelper(baseUrl, url, page)
+        ImageHelper.MeinvHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
@@ -184,7 +185,7 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
 
     //TODO: 获取网络数据
     private void getNetData(String baseUrl, String url, int page) {
-        ImageHelper.ImageHelper(baseUrl, url, page)
+        ImageHelper.MeinvHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {

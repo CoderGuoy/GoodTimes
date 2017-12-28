@@ -88,7 +88,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter {
             vh.textComment.setText(comment);
         } else {
             vh.textComment.setVisibility(View.GONE);
-//            }
         }
     }
 

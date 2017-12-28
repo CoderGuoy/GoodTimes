@@ -30,7 +30,7 @@ public class ImageHelper {
      * @param page
      * @return
      */
-    public static Observable<List<ImageBean>> ImageHelper(final String baseUrl, final String url,
+    public static Observable<List<ImageBean>> MeinvHelper(final String baseUrl, final String url,
                                                           final int page) {
         return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
@@ -64,8 +64,8 @@ public class ImageHelper {
      * @param page
      * @return
      */
-    public static Observable<List<ImageBean>> NvShenHelper(final String baseUrl, final String url,
-                                                           final int page) {
+    public static Observable<List<ImageBean>> FLSHelper(final String baseUrl, final String url,
+                                                        final int page) {
         return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
             @Override
             public void call(Subscriber<? super List<ImageBean>> subscriber) {
@@ -91,7 +91,7 @@ public class ImageHelper {
     }
 
     /**
-     * 美女图片列表
+     * 美女图片详情
      *
      * @param url
      * @return
@@ -123,4 +123,40 @@ public class ImageHelper {
         });
     }
 
+    /**
+     * 福利社图片详情
+     *
+     * @param url
+     * @return
+     */
+    public static Observable<List<ImageBean>> FLSImageDetailHelper(final String url) {
+        return Observable.create(new Observable.OnSubscribe<List<ImageBean>>() {
+            @Override
+            public void call(Subscriber<? super List<ImageBean>> subscriber) {
+                List<ImageBean> list = new ArrayList<>();
+                try {
+                    Document document = Jsoup.connect(url + "&page=all").get();
+                    Elements content = document.getElementsByClass("qm-wp");
+                    Document document1 = Jsoup.parse(content.toString());
+                    Elements body = document1.getElementsByClass("art-body");
+                    /**
+                     * select选择器执行过滤时如选择"p",会有无法解析的标签
+                     * p[style] 是带有style属性的P标签，过滤更准确
+                     */
+                    Elements imageLists = body.select("p[style]");
+                    for (Element imageList : imageLists) {
+                        //图片地址
+                        String imgUrl = imageList.select("img").first().attr("src");
+                        String linkUrl = "";
+                        String imgaeTitle = "";
+                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                    }
+                    subscriber.onNext(list);
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
 }
