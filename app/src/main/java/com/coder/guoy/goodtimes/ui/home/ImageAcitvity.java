@@ -82,6 +82,9 @@ public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
         bindingView.recyclerviewImage.addOnScrollListener(mOnScrollListener);
     }
 
+    /**
+     *  获取网络数据
+     */
     private void getMVNetData(String baseUrl, String url, int page) {
         ImageHelper.MeinvHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
@@ -104,6 +107,9 @@ public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
                 });
     }
 
+    /**
+     *  获取网络数据
+     */
     private void getFLSNetData(String baseUrl, String url, int page) {
         ImageHelper.FLSHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
@@ -141,14 +147,53 @@ public class ImageAcitvity extends MvvmBaseActivity<ActivityImageTypeBinding> im
             if (newState == RecyclerView.SCROLL_STATE_IDLE && adapter.isFadeTips() == false
                     && lastVisibleItem + 1 == adapter.getItemCount()) {
                 PAGE++;
-                upNetData(getIntent().getStringExtra("baseUrl"),
-                        getIntent().getStringExtra("url"), PAGE);
+                switch (getIntent().getIntExtra("activityType", Constants.MV_TYPE)) {
+                    case Constants.MV_TYPE:
+                        upMeiNvData(getIntent().getStringExtra("baseUrl"),
+                                getIntent().getStringExtra("url"), PAGE);
+                        break;
+                    case Constants.FLS_TYPE:
+                        upFLSData(getIntent().getStringExtra("baseUrl"),
+                                getIntent().getStringExtra("url"), PAGE);
+                        break;
+                }
             }
         }
     };
 
-    private void upNetData(String baseUrl, String url, int page) {
+    /**
+     *  加载更多
+     */
+    private void upMeiNvData(String baseUrl, String url, int page) {
         ImageHelper.MeinvHelper(baseUrl, url, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ImageBean>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<ImageBean> beanList) {
+                        if (beanList.size() > 0 && beanList != null) {
+                            adapter.addData(beanList, true);
+                        } else {
+                            adapter.addData(null, false);
+                        }
+                    }
+                });
+    }
+
+    /**
+     *  加载更多
+     */
+    private void upFLSData(String baseUrl, String url, int page) {
+        ImageHelper.FLSHelper(baseUrl, url, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ImageBean>>() {
