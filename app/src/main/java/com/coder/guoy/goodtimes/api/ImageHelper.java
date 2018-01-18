@@ -1,5 +1,7 @@
 package com.coder.guoy.goodtimes.api;
 
+import android.util.Log;
+
 import com.coder.guoy.goodtimes.api.bean.ImageBean;
 
 import org.jsoup.Jsoup;
@@ -38,14 +40,15 @@ public class ImageHelper {
                 List<ImageBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(baseUrl + url + page).get();
-                    Elements imageLists = document.getElementsByClass("col-lg-4 col-md-4 three-columns post-box");
+                    Elements imageLists = document.getElementsByClass("entry-thumb");
                     for (Element imageList : imageLists) {
-                        String linkUrl = imageList.select("a").first().attr("href");
+                        String linkUrl = imageList.select("a[href]").first().attr("href");
                         //图片地址
                         String imgUrl = imageList.select("img").first().attr("src");
                         //图片标题
-                        String imgaeTitle = imageList.select(".entry-title").text();
-                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                        String imageTitle = imageList.select("a[href]").attr("title");
+                        Log.i("imagetitle",imageTitle);
+                        list.add(new ImageBean(linkUrl, imgUrl, imageTitle));
                     }
                     subscriber.onNext(list);
                     subscriber.onCompleted();
@@ -74,12 +77,12 @@ public class ImageHelper {
                     Document document = Jsoup.connect(baseUrl + url + "&page=" + page).get();
                     Elements imageLists = document.getElementsByClass("listbox");
                     for (Element imageList : imageLists) {
-                        String linkUrl = imageList.select("a").first().attr("href");
+                        String linkUrl = imageList.select("a[href]").first().attr("href");
                         //图片地址
                         String imgUrl = imageList.select("img").first().attr("src");
                         //图片标题
-                        String imgaeTitle = imageList.select("img").first().attr("alt");
-                        list.add(new ImageBean(linkUrl, imgUrl, imgaeTitle));
+                        String imageTitle = imageList.select("img").first().attr("alt");
+                        list.add(new ImageBean(linkUrl, imgUrl, imageTitle));
                     }
                     subscriber.onNext(list);
                     subscriber.onCompleted();
@@ -103,9 +106,9 @@ public class ImageHelper {
                 List<ImageBean> list = new ArrayList<>();
                 try {
                     Document document = Jsoup.connect(url).get();
-                    Elements content = document.getElementsByClass("entry-content");
+                    Elements content = document.getElementsByClass("site-main");
                     Document document1 = Jsoup.parse(content.toString());
-                    Elements gallery = document1.getElementsByClass("rgg-imagegrid gallery");
+                    Elements gallery = document1.getElementsByClass("rgg-imagegrid captions-title captions-effect-none gallery");
                     Elements imageLists = gallery.select("a");
                     for (Element imageList : imageLists) {
                         //图片地址

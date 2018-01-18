@@ -99,7 +99,6 @@ public class MainActivity extends MvvmBaseActivity<ActivityMainBinding> implemen
 
     // TODO: 透明状态栏
     private void transparentStatusBar() {
-        
         View decorView = getWindow().getDecorView();
         int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(option);
